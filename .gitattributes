@@ -1,0 +1,17 @@
+# References
+
+## https://github.com/alexkaratarakis/gitattributes/blob/c9e0391fd0f045478a3d122979eeb23d2311e21a/.gitattributes
+## https://github.com/alexkaratarakis/gitattributes/blob/bf082e21993dc589d27ac403b2c189f24c6e57a1/Common.gitattributes
+## https://github.com/alexkaratarakis/gitattributes/blob/eeb2ca9a67e5985e1c9e00b3d20ae2842eaa8852/Markdown.gitattributes
+## https://github.com/alexkaratarakis/gitattributes/blob/492d0bc3bb09d37cc36e6f1e346b4b61bd620197/Python.gitattributes
+
+*               text=auto
+
+*.gitattributes  text export-ignore linguist-detectable linguist-language=gitattributes
+*.gitignore      text export-ignore linguist-detectable linguist-language=gitignore
+*.gitkeep        export-ignore
+
+*.md             text diff=markdown linguist-detectable
+*.py             text diff=python linguist-detectable
+*.toml           text diff=toml linguist-detectable
+*.yaml           text diff=yaml linguist-detectable
