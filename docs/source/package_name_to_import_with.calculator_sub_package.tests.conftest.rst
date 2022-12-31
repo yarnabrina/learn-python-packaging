@@ -1,0 +1,7 @@
+package\_name\_to\_import\_with.calculator\_sub\_package.tests.conftest module
+==============================================================================
+
+.. automodule:: package_name_to_import_with.calculator_sub_package.tests.conftest
+   :members:
+   :undoc-members:
+   :show-inheritance:
