@@ -86,7 +86,7 @@ def build(session: nox.Session) -> None:
     session.notify("twine")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["test"])
+@nox.session(python=PYTHON_VERSIONS, tags=["test"])
 def coverage(session: nox.Session) -> None:
     """Run coverage.
 
@@ -266,7 +266,7 @@ def pylint(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["test"])
+@nox.session(python=PYTHON_VERSIONS, tags=["test"])
 def pytest(session: nox.Session) -> None:
     """Run pytest.
 
