@@ -75,7 +75,7 @@ def black(session: nox.Session) -> None:
     session.run("black", "--line-length", "99", "--safe", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION)
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
 def build(session: nox.Session) -> None:
     """Run build."""
     session.install("build")
@@ -325,7 +325,7 @@ def sphinx(session: nox.Session) -> None:
         session.run("sphinx-build", "-b", "html", "source", "build")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION)
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
 def twine(session: nox.Session) -> None:
     """Run twine."""
     session.install("twine")
