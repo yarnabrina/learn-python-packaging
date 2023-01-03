@@ -57,7 +57,7 @@ all = [
   "black",
   "build",
   "codespell",
-  "coverage",
+  "coverage[toml]",
   "docformatter",
   "flake8",
   "isort",
@@ -108,7 +108,7 @@ release = [
   "twine",
 ]
 test = [
-  "coverage",
+  "coverage[toml]",
   "pytest",
 ]
 
@@ -160,6 +160,10 @@ omit = [
 ]
 fail_under = 80
 precision = 2
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+]
 
 
 [tool.docformatter]
