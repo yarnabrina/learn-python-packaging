@@ -160,6 +160,10 @@ omit = [
 ]
 fail_under = 80
 precision = 2
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+]
 
 
 [tool.docformatter]
