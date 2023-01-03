@@ -236,8 +236,6 @@ def pylint(session: nox.Session) -> None:
         "no",
         "--suggestion-mode",
         "yes",
-        "--exit-zero",
-        "no",
         "--recursive",
         "yes",
         "--output-format",
