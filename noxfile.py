@@ -40,7 +40,7 @@ def autoflake(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def bandit(session: nox.Session) -> None:
     """Run bandit.
 
@@ -133,7 +133,7 @@ def docformatter(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def flake8(session: nox.Session) -> None:
     """Run flake8.
 
@@ -181,7 +181,7 @@ def isort(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def mypy(session: nox.Session) -> None:
     """Run mypy.
 
@@ -204,7 +204,7 @@ def mypy(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def pydocstyle(session: nox.Session) -> None:
     """Run pydocstyle.
 
@@ -218,7 +218,7 @@ def pydocstyle(session: nox.Session) -> None:
     session.run("pydocstyle", "--convention", "numpy", SOURCE_DIRECTORY)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def pylint(session: nox.Session) -> None:
     """Run pylint.
 
@@ -335,7 +335,7 @@ def twine(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
 def vulture(session: nox.Session) -> None:
     """Run vulture.
 
