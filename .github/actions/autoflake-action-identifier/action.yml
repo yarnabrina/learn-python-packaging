@@ -1,0 +1,16 @@
+name: autoflake-action-name
+description: autoflake action description
+runs:
+  using: composite
+  steps:
+    - id: nox-step-identifier
+      name: nox step name
+      run: python3 -m pip install nox
+      shell: bash
+    - id: checkout-step-identifier
+      name: checkout step name
+      uses: actions/checkout@v3
+    - id: autoflake-step-identifier
+      name: autoflake step name
+      run: nox --session autoflake
+      shell: bash

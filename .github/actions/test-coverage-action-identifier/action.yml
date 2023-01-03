@@ -1,0 +1,16 @@
+name: test-coverage-action-name
+description: test coverage action description
+runs:
+  using: composite
+  steps:
+    - id: nox-step-identifier
+      name: nox step name
+      run: python3 -m pip install nox
+      shell: bash
+    - id: checkout-step-identifier
+      name: checkout step name
+      uses: actions/checkout@v3
+    - id: test-coverage-step-identifier
+      name: test coverage step name
+      run: nox --tags test
+      shell: bash
