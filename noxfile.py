@@ -13,7 +13,8 @@ SOURCE_DIRECTORY = pathlib.Path("src")
 DIST_DIRECTORY = pathlib.Path("dist")
 DOCS_DIRECTORY = pathlib.Path("docs")
 
-PYTHON_SCRIPTS = SOURCE_DIRECTORY.glob("**/*.py")
+PYTHON_SCRIPT_PATHS = SOURCE_DIRECTORY.glob("**/*.py")
+PYTHON_SCRIPTS = list(map(str, PYTHON_SCRIPT_PATHS))
 
 
 @nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
