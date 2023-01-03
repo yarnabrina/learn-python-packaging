@@ -151,7 +151,7 @@ def flake8(session: nox.Session) -> None:
         "__init__.py:F401",
         "--max-line-length",
         "99",
-        PYTHON_SCRIPTS,
+        *PYTHON_SCRIPTS,
     )
 
 
