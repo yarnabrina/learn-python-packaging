@@ -4,7 +4,7 @@ import typing
 import pytest
 
 
-@pytest.fixture(params=[4, -9], name="first_number")
+@pytest.fixture(params=[4, -9, 1.02, -3.4], name="first_number")
 def fixture_first_number(request: pytest.FixtureRequest) -> float:
     """Define first input for unit tests.
 
@@ -16,7 +16,7 @@ def fixture_first_number(request: pytest.FixtureRequest) -> float:
     return request.param
 
 
-@pytest.fixture(params=[5, 10], name="second_number")
+@pytest.fixture(params=[5, 10, -5.6, 7.89], name="second_number")
 def fixture_second_number(request: pytest.FixtureRequest) -> float:
     """Define second input for unit tests.
 
