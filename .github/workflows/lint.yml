@@ -10,6 +10,8 @@ jobs:
     container:
       image: condaforge/miniforge3:latest
     steps:
+      - name: checkout step name
+        uses: actions/checkout@v3
       - name: run bandit
         uses: .github/actions/bandit-action-identifier
   flake8-job-identifier:
@@ -18,5 +20,7 @@ jobs:
     container:
       image: condaforge/miniforge3:latest
     steps:
+      - name: checkout step name
+        uses: actions/checkout@v3
       - name: run flake8
         uses: .github/actions/flake8-action-identifier

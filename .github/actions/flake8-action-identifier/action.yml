@@ -7,9 +7,6 @@ runs:
       name: nox step name
       run: python3 -m pip install nox
       shell: bash
-    - id: checkout-step-identifier
-      name: checkout step name
-      uses: actions/checkout@v3
     - id: flake8-step-identifier
       name: flake8 step name
       run: nox --session flake8
