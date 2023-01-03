@@ -1,4 +1,5 @@
 """Define user level functions."""
+import collections
 import dataclasses
 import typing
 
@@ -14,14 +15,14 @@ class ArithmeticOperation:
     ----------
     first_number : float
         value of first number
-    operation : typing.Callable[[float, float], float]
+    operation : collections.abc.Callable[[float, float], float]
         type of arithmetic operation
     second_number : float
         value of second number
     """
 
     first_number: float
-    operation: typing.Callable[[float, float], float]
+    operation: collections.abc.Callable[[float, float], float]
     second_number: float
 
     @property
@@ -67,7 +68,7 @@ def validate_number_input(user_input: typing.Any) -> float:
 
 def validate_operator_input(
     user_input: typing.Any,
-) -> typing.Callable[[float, float], float]:
+) -> collections.abc.Callable[[float, float], float]:
     """Validate input is in {"+", "-", "*", "/"} and return corresponding operation.
 
     Parameters
@@ -77,7 +78,7 @@ def validate_operator_input(
 
     Returns
     -------
-    typing.Callable[[float, float], float]
+    collections.abc.Callable[[float, float], float]
         operation function
 
     Raises
