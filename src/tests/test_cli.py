@@ -41,3 +41,30 @@ def test_quotient(capsys: pytest.CaptureFixture) -> None:
         quotient_result, _ = capsys.readouterr()
 
     assert re.match("Result = 0.0", quotient_result)  # nosec B101
+
+
+def test_first_input_failure(capsys: pytest.CaptureFixture) -> None:
+    """Check failure in first user input."""
+    with unittest.mock.patch("sys.argv", ["prog", "one", "+", "1"]):
+        module_that_can_be_invoked_from_cli.console_calculator()
+        _, result_error = capsys.readouterr()
+
+    assert re.match("Error: Supports only real numbers", result_error)  # nosec B101
+
+
+def test_second_input_failure(capsys: pytest.CaptureFixture) -> None:
+    """Check failure in second user input."""
+    with unittest.mock.patch("sys.argv", ["prog", "2", "*", "two"]):
+        module_that_can_be_invoked_from_cli.console_calculator()
+        _, result_error = capsys.readouterr()
+
+    assert re.match("Error: Supports only real numbers", result_error)  # nosec B101
+
+
+def test_operator_input_failure(capsys: pytest.CaptureFixture) -> None:
+    """Check failure in operator input."""
+    with unittest.mock.patch("sys.argv", ["prog", "0", "x", "0"]):
+        module_that_can_be_invoked_from_cli.console_calculator()
+        _, result_error = capsys.readouterr()
+
+    assert re.match("Error: Supports only basic arithmetic", result_error)  # nosec B101

@@ -13,7 +13,8 @@ SOURCE_DIRECTORY = pathlib.Path("src")
 DIST_DIRECTORY = pathlib.Path("dist")
 DOCS_DIRECTORY = pathlib.Path("docs")
 
-PYTHON_SCRIPTS = SOURCE_DIRECTORY.glob("**/*.py")
+PYTHON_SCRIPT_PATHS = SOURCE_DIRECTORY.glob("**/*.py")
+PYTHON_SCRIPTS = list(map(str, PYTHON_SCRIPT_PATHS))
 
 
 @nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
@@ -75,7 +76,7 @@ def black(session: nox.Session) -> None:
     session.run("black", "--line-length", "99", "--safe", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION)
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
 def build(session: nox.Session) -> None:
     """Run build."""
     session.install("build")
@@ -151,7 +152,7 @@ def flake8(session: nox.Session) -> None:
         "__init__.py:F401",
         "--max-line-length",
         "99",
-        PYTHON_SCRIPTS,
+        *PYTHON_SCRIPTS,
     )
 
 
@@ -235,8 +236,6 @@ def pylint(session: nox.Session) -> None:
         "no",
         "--suggestion-mode",
         "yes",
-        "--exit-zero",
-        "no",
         "--recursive",
         "yes",
         "--output-format",
@@ -310,7 +309,7 @@ def pyupgrade(session: nox.Session) -> None:
     session.run("pyupgrade", "--py310-plus", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["doc"])
 def sphinx(session: nox.Session) -> None:
     """Run sphinx.
 
@@ -325,7 +324,7 @@ def sphinx(session: nox.Session) -> None:
         session.run("sphinx-build", "-b", "html", "source", "build")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION)
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
 def twine(session: nox.Session) -> None:
     """Run twine."""
     session.install("twine")
