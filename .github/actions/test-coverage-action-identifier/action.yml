@@ -9,5 +9,5 @@ runs:
       shell: bash
     - id: test-coverage-step-identifier
       name: test coverage step name
-      run: nox --tags test
+      run: nox --session pytest
       shell: bash
