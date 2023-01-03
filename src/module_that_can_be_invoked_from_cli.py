@@ -1,5 +1,6 @@
 """Calculate arithmetic expressions from command line."""
 import argparse
+import sys
 import typing
 
 import package_name_to_import_with
@@ -33,9 +34,9 @@ def console_calculator() -> None:
             user_inputs["first_number"], user_inputs["operator"], user_inputs["second_number"]
         )
     except Exception as error:  # pylint: disable=broad-except
-        print(f"Error: {error}")
+        sys.stderr.write(f"Error: {error}")
     else:
-        print(f"Result = {operation_result}")
+        sys.stdout.write(f"Result = {operation_result}")
 
 
 if __name__ == "__main__":
