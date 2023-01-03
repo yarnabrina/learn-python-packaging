@@ -105,8 +105,6 @@ repos:
           - "no"
           - --suggestion-mode
           - "yes"
-          - --exit-zero
-          - "no"
           - --recursive
           - "yes"
           - --output-format
