@@ -310,7 +310,7 @@ def pyupgrade(session: nox.Session) -> None:
     session.run("pyupgrade", "--py310-plus", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["lint"])
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["doc"])
 def sphinx(session: nox.Session) -> None:
     """Run sphinx.
 
