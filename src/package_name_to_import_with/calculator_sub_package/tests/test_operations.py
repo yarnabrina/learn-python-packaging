@@ -1,4 +1,6 @@
 """Define unit tests for arithmetic operations."""
+import pytest
+
 from package_name_to_import_with import calculator_sub_package
 
 
@@ -17,7 +19,7 @@ def test_successful_addition(
         value of expected sum
     """
     result = calculator_sub_package.add_numbers(first_number, second_number)
-    assert result == expected_sum  # nosec B101
+    assert result == pytest.approx(expected_sum)  # nosec B101
 
 
 def test_successful_subtraction(
@@ -35,7 +37,7 @@ def test_successful_subtraction(
         value of expected sum
     """
     result = calculator_sub_package.subtract_numbers(first_number, second_number)
-    assert result == expected_difference  # nosec B101
+    assert result == pytest.approx(expected_difference)  # nosec B101
 
 
 def test_successful_multiplication(
@@ -53,7 +55,7 @@ def test_successful_multiplication(
         value of expected sum
     """
     result = calculator_sub_package.multiply_numbers(first_number, second_number)
-    assert result == expected_product  # nosec B101
+    assert result == pytest.approx(expected_product)  # nosec B101
 
 
 def test_successful_division(
@@ -71,4 +73,4 @@ def test_successful_division(
         value of expected sum
     """
     result = calculator_sub_package.divide_numbers(first_number, second_number)
-    assert result == expected_quotient  # nosec B101
+    assert result == pytest.approx(expected_quotient)  # nosec B101
