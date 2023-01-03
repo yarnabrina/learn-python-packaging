@@ -150,7 +150,7 @@ repos:
           - --wrap-descriptions
           - "99"
   - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.1.1
+    rev: 6.2.2
     hooks:
       - id: pydocstyle
         args:
