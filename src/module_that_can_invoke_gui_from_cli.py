@@ -45,7 +45,7 @@ def define_gui_window(gui_layout: list[list[PySimpleGUI.Element]]) -> PySimpleGU
     return window
 
 
-def orchestrate_flow(gui_window: PySimpleGUI.Window) -> None:
+def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
     """Control flow of the GUI.
 
     Parameters
@@ -53,25 +53,22 @@ def orchestrate_flow(gui_window: PySimpleGUI.Window) -> None:
     gui_window : PySimpleGUI.Window
         designed GUI
     """
-    try:
-        while True:
-            gui_event, gui_elements = gui_window.read()
+    while True:
+        gui_event, gui_elements = gui_window.read()
 
-            if PySimpleGUI.WINDOW_CLOSED or gui_event == "Close":
-                break
+        if PySimpleGUI.WINDOW_CLOSED or gui_event == "Close":
+            break
 
-            try:
-                operation_result = package_name_to_import_with.calculate_results(
-                    gui_elements["first_number"],
-                    gui_elements["operator"],
-                    gui_elements["second_number"],
-                )
-            except Exception as error:  # pylint: disable=broad-except
-                gui_window["result"].update(error)
-            else:
-                gui_window["result"].update(operation_result)
-    finally:
-        gui_window.close()
+        try:
+            operation_result = package_name_to_import_with.calculate_results(
+                gui_elements["first_number"],
+                gui_elements["operator"],
+                gui_elements["second_number"],
+            )
+        except Exception as error:  # pylint: disable=broad-except
+            gui_window["result"].update(error)
+        else:
+            gui_window["result"].update(operation_result)
 
 
 def gui_calculator() -> None:
@@ -79,7 +76,10 @@ def gui_calculator() -> None:
     gui_layout = define_gui_layout()
     gui_window = define_gui_window(gui_layout)
 
-    orchestrate_flow(gui_window)
+    try:
+        orchestrate_interaction(gui_window)
+    finally:
+        gui_window.close()
 
 
 if __name__ == "__main__":
