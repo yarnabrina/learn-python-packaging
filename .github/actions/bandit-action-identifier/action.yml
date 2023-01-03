@@ -1,0 +1,16 @@
+name: bandit-action-name
+description: bandit action description
+runs:
+  using: composite
+  steps:
+    - id: nox-step-identifier
+      name: nox step name
+      run: python3 -m pip install nox
+      shell: bash
+    - id: checkout-step-identifier
+      name: checkout step name
+      uses: actions/checkout@v3
+    - id: bandit-step-identifier
+      name: bandit step name
+      run: nox --session bandit
+      shell: bash
