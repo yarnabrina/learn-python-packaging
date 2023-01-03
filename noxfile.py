@@ -95,7 +95,7 @@ def coverage(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install("coverage")
+    session.install("coverage[toml]")
 
     session.run(
         "coverage",
@@ -275,7 +275,7 @@ def pytest(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install("coverage", "pytest")
+    session.install("coverage[toml]", "pytest")
 
     session.run(
         "coverage",
