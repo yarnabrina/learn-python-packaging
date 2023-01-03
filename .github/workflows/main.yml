@@ -16,10 +16,10 @@ defaults:
 jobs:
   format-job-identifier:
     name: format job name
-    uses: .github/workflows/format.yml
+    uses: ./.github/workflows/format.yml
   lint-job-identifier:
     name: lint job name
-    uses: .github/workflows/lint.yml
+    uses: ./.github/workflows/lint.yml
   test-coverage-job-identifier:
     name: test coverage job name
-    uses: .github/workflows/test-coverage.yml
+    uses: ./.github/workflows/test-coverage.yml
