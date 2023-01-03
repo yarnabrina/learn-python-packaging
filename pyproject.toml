@@ -57,7 +57,7 @@ all = [
   "black",
   "build",
   "codespell",
-  "coverage",
+  "coverage[toml]",
   "docformatter",
   "flake8",
   "isort",
@@ -108,7 +108,7 @@ release = [
   "twine",
 ]
 test = [
-  "coverage",
+  "coverage[toml]",
   "pytest",
 ]
 
