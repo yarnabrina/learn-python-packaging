@@ -17,16 +17,16 @@ runs:
       shell: bash
     - id: session-all-versions-step-identifier
       name: run provided nox session for all configured python versions
-      if: ${PYTHON_VERSION} == 'none'
-      run: nox --sessions ${SESSION_NAME}
+      if: $PYTHON_VERSION == 'none'
+      run: nox --sessions $SESSION_NAME
       shell: bash
       env:
         SESSION_NAME: ${{ inputs.session-name-input-identifier }}
         PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
     - id: session-single-version-step-identifier
       name: run provided nox session for provided python version
-      if: ${PYTHON_VERSION} != 'none'
-      run: nox --sessions ${SESSION_NAME} --pythons ${PYTHON_VERSION}
+      if: $PYTHON_VERSION != 'none'
+      run: nox --sessions $SESSION_NAME --pythons $PYTHON_VERSION
       shell: bash
       env:
         SESSION_NAME: ${{ inputs.session-name-input-identifier }}
