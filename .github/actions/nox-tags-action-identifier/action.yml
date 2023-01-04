@@ -15,7 +15,7 @@ runs:
       name: install nox
       run: python3 -m pip install nox
       shell: bash
-    - id: tag-step-identifier
+    - id: tag-all-versions-step-identifier
       name: run provided nox tag for all configured python versions
       if: ${PYTHON_VERSION} == 'none'
       run: nox --tags ${TAG_NAME}
@@ -23,7 +23,7 @@ runs:
       env:
         TAG_NAME: ${{ inputs.tag-name-input-identifier }}
         PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
-    - id: tag-step-identifier
+    - id: tag-single-version-step-identifier
       name: run provided nox tag for provided python version
       if: ${PYTHON_VERSION} != 'none'
       run: nox --pythons ${PYTHON_VERSION} --tags ${TAG_NAME}
