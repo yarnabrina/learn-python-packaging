@@ -17,16 +17,16 @@ runs:
       shell: bash
     - id: tag-all-versions-step-identifier
       name: run provided nox tag for all configured python versions
-      if: ${{ PYTHON_VERSION }} == 'none'
-      run: nox --tags ${{ TAG_NAME }}
+      if: ${{env.PYTHON_VERSION}} == 'none'
+      run: nox --tags ${{TAG_NAME}}
       shell: bash
       env:
         TAG_NAME: ${{ inputs.tag-name-input-identifier }}
         PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
     - id: tag-single-version-step-identifier
       name: run provided nox tag for provided python version
-      if: ${{ PYTHON_VERSION }} != 'none'
-      run: nox --pythons ${{ PYTHON_VERSION }} --tags ${{ TAG_NAME }}
+      if: ${{env.PYTHON_VERSION}} != 'none'
+      run: nox --pythons ${{env.PYTHON_VERSION}} --tags ${{TAG_NAME}}
       shell: bash
       env:
         TAG_NAME: ${{ inputs.tag-name-input-identifier }}
