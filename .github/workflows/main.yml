@@ -64,7 +64,7 @@ jobs:
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pytest
-          python-version-input-identifier: 3.10
+          python-version-input-identifier: "3.10"
   test-coverage-3-11-job-identifier:
     name: test coverage 3.11 job name
     runs-on: ubuntu-latest
@@ -77,4 +77,4 @@ jobs:
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pytest
-          python-version-input-identifier: 3.11
+          python-version-input-identifier: "3.11"
