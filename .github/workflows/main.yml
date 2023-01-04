@@ -22,29 +22,59 @@ jobs:
     steps:
       - name: checkout commit
         uses: actions/checkout@v3
-      - name: run autoflake
-        uses: ./.github/actions/autoflake-action-identifier
-      - name: run black
-        uses: ./.github/actions/black-action-identifier
-  lint-job-identifier:
-    name: lint job name
+      - name: run formatters
+        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        with:
+          tag-name-input-identifier: format
+  lint-3-10-job-identifier:
+    name: lint 3.10 job name
     runs-on: ubuntu-latest
     container:
       image: condaforge/miniforge3:latest
     steps:
       - name: checkout commit
         uses: actions/checkout@v3
-      - name: run bandit
-        uses: ./.github/actions/bandit-action-identifier
-      - name: run flake8
-        uses: ./.github/actions/flake8-action-identifier
-  test-coverage-job-identifier:
-    name: test coverage job name
+      - name: run linters
+        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        with:
+          tag-name-input-identifier: lint
+          python-version-input-identifier: 3.10
+  lint-3-11-job-identifier:
+    name: lint 3.11 job name
     runs-on: ubuntu-latest
     container:
       image: condaforge/miniforge3:latest
     steps:
       - name: checkout commit
         uses: actions/checkout@v3
-      - name: run test coverage
-        uses: ./.github/actions/test-coverage-action-identifier
+      - name: run linters
+        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        with:
+          tag-name-input-identifier: lint
+          python-version-input-identifier: 3.11
+  test-coverage-3-10-job-identifier:
+    name: test coverage 3.10 job name
+    runs-on: ubuntu-latest
+    container:
+      image: condaforge/miniforge3:latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: run unit test coverage
+        uses: ./.github/actions/nox-sessions-action-identifier/action.yml
+        with:
+          session-name-input-identifier: pytest
+          python-version-input-identifier: 3.10
+  test-coverage-3-11-job-identifier:
+    name: test coverage 3.11 job name
+    runs-on: ubuntu-latest
+    container:
+      image: condaforge/miniforge3:latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: run unit test coverage
+        uses: ./.github/actions/nox-sessions-action-identifier/action.yml
+        with:
+          session-name-input-identifier: pytest
+          python-version-input-identifier: 3.11
