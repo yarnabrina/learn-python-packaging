@@ -1,0 +1,33 @@
+name: nox-tag-action-name
+description: run nox tag
+inputs:
+  tag-name-input-identifier:
+    description: name of nox tag
+    required: true
+  python-version-input-identifier:
+    description: python version to run tag
+    required: false
+    default: none
+runs:
+  using: composite
+  steps:
+    - id: nox-step-identifier
+      name: install nox
+      run: python3 -m pip install nox
+      shell: bash
+    - id: tag-step-identifier
+      name: run provided nox tag for all configured python versions
+      if: ${PYTHON_VERSION} == 'none'
+      run: nox --tags ${TAG_NAME}
+      shell: bash
+      env:
+        TAG_NAME: ${{ inputs.tag-name-input-identifier }}
+        PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
+    - id: tag-step-identifier
+      name: run provided nox tag for provided python version
+      if: ${PYTHON_VERSION} != 'none'
+      run: nox --pythons ${PYTHON_VERSION} --tags ${TAG_NAME}
+      shell: bash
+      env:
+        TAG_NAME: ${{ inputs.tag-name-input-identifier }}
+        PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
