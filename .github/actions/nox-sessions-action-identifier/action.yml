@@ -15,7 +15,7 @@ runs:
       name: install nox
       run: python3 -m pip install nox
       shell: bash
-    - id: session-step-identifier
+    - id: session-all-versions-step-identifier
       name: run provided nox session for all configured python versions
       if: ${PYTHON_VERSION} == 'none'
       run: nox --sessions ${SESSION_NAME}
@@ -23,7 +23,7 @@ runs:
       env:
         SESSION_NAME: ${{ inputs.session-name-input-identifier }}
         PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
-    - id: session-step-identifier
+    - id: session-single-version-step-identifier
       name: run provided nox session for provided python version
       if: ${PYTHON_VERSION} != 'none'
       run: nox --sessions ${SESSION_NAME} --pythons ${PYTHON_VERSION}

@@ -23,7 +23,7 @@ jobs:
       - name: checkout commit
         uses: actions/checkout@v3
       - name: run formatters
-        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        uses: ./.github/actions/nox-tags-action-identifier
         with:
           tag-name-input-identifier: format
   lint-3-10-job-identifier:
@@ -61,7 +61,7 @@ jobs:
       - name: checkout commit
         uses: actions/checkout@v3
       - name: run unit test coverage
-        uses: ./.github/actions/nox-sessions-action-identifier/action.yml
+        uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pytest
           python-version-input-identifier: 3.10
@@ -74,7 +74,7 @@ jobs:
       - name: checkout commit
         uses: actions/checkout@v3
       - name: run unit test coverage
-        uses: ./.github/actions/nox-sessions-action-identifier/action.yml
+        uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pytest
           python-version-input-identifier: 3.11
