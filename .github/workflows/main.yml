@@ -35,7 +35,7 @@ jobs:
       - name: checkout commit
         uses: actions/checkout@v3
       - name: run linters
-        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        uses: ./.github/actions/nox-tags-action-identifier
         with:
           tag-name-input-identifier: lint
           python-version-input-identifier: 3.10
@@ -48,7 +48,7 @@ jobs:
       - name: checkout commit
         uses: actions/checkout@v3
       - name: run linters
-        uses: ./.github/actions/nox-tags-action-identifier/action.yml
+        uses: ./.github/actions/nox-tags-action-identifier
         with:
           tag-name-input-identifier: lint
           python-version-input-identifier: 3.11
