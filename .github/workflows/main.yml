@@ -1,5 +1,5 @@
-name: format-workflow-name
-run-name: format workflow run name
+name: main-workflow-name
+run-name: main workflow run name
 on:
   pull_request:
     branches:
