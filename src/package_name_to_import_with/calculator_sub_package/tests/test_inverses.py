@@ -13,6 +13,8 @@ def test_successful_additive_inverse(first_number: float) -> None:
         value of input number
     """
     result = calculator_sub_package.get_negative(first_number)
+
+    # pylint: disable=compare-to-zero
     assert calculator_sub_package.add_numbers(result, first_number) == 0  # nosec B101
 
 
