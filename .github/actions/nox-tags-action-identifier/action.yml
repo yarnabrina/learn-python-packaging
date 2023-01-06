@@ -11,16 +11,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - id: debug
-      run: >-
-        echo 1 $PYTHON_VERSION
-        && echo 2 ${PYTHON_VERSION}
-        && echo 5 ${{env.PYTHON_VERSION}}
-        && echo 6 ${{ env.PYTHON_VERSION }}
-      shell: bash
-      env:
-        TAG_NAME: ${{ inputs.tag-name-input-identifier }}
-        PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
     - id: nox-step-identifier
       name: install nox
       run: python3 -m pip install nox
