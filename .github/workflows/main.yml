@@ -38,7 +38,7 @@ jobs:
         uses: ./.github/actions/nox-tags-action-identifier
         with:
           tag-name-input-identifier: lint
-          python-version-input-identifier: 3.10
+          python-version-input-identifier: "3.10"
   lint-3-11-job-identifier:
     name: lint 3.11 job name
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
         uses: ./.github/actions/nox-tags-action-identifier
         with:
           tag-name-input-identifier: lint
-          python-version-input-identifier: 3.11
+          python-version-input-identifier: "3.11"
   test-coverage-3-10-job-identifier:
     name: test coverage 3.10 job name
     runs-on: ubuntu-latest
