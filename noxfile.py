@@ -1,10 +1,8 @@
 """Configure nox."""
+import functools
 import pathlib
 
 import nox
-
-nox.options.default_venv_backend = "conda"
-nox.options.reuse_existing_virtualenvs = True
 
 PYTHON_DEFAULT_VERSION = "3.10"
 PYTHON_VERSIONS = ["3.10", "3.11"]
@@ -16,8 +14,17 @@ DOCS_DIRECTORY = pathlib.Path("docs")
 PYTHON_SCRIPT_PATHS = SOURCE_DIRECTORY.glob("**/*.py")
 PYTHON_SCRIPTS = list(map(str, PYTHON_SCRIPT_PATHS))
 
+GENERAL_SESSION_DECORATOR = functools.partial(nox.session, venv_backend="conda", reuse_venv=True)
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
+FORMAT_SESSION_DECORATOR = functools.partial(
+    GENERAL_SESSION_DECORATOR, python=PYTHON_DEFAULT_VERSION, tags=["format"]
+)
+LINT_SESSION_DECORATOR = functools.partial(
+    GENERAL_SESSION_DECORATOR, python=PYTHON_VERSIONS, tags=["lint"]
+)
+
+
+@FORMAT_SESSION_DECORATOR
 def autoflake(session: nox.Session) -> None:
     """Run autoflake.
 
@@ -40,7 +47,7 @@ def autoflake(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def bandit(session: nox.Session) -> None:
     """Run bandit.
 
@@ -62,7 +69,7 @@ def bandit(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
+@FORMAT_SESSION_DECORATOR
 def black(session: nox.Session) -> None:
     """Run black.
 
@@ -86,7 +93,7 @@ def build(session: nox.Session) -> None:
     session.notify("twine")
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["test"])
+@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["test"])
 def coverage(session: nox.Session) -> None:
     """Run coverage.
 
@@ -111,7 +118,7 @@ def coverage(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
+@FORMAT_SESSION_DECORATOR
 def docformatter(session: nox.Session) -> None:
     """Run docformatter.
 
@@ -133,7 +140,7 @@ def docformatter(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def flake8(session: nox.Session) -> None:
     """Run flake8.
 
@@ -156,7 +163,7 @@ def flake8(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
+@FORMAT_SESSION_DECORATOR
 def isort(session: nox.Session) -> None:
     """Run isort.
 
@@ -181,7 +188,7 @@ def isort(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def mypy(session: nox.Session) -> None:
     """Run mypy.
 
@@ -204,7 +211,7 @@ def mypy(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def pydocstyle(session: nox.Session) -> None:
     """Run pydocstyle.
 
@@ -218,7 +225,7 @@ def pydocstyle(session: nox.Session) -> None:
     session.run("pydocstyle", "--convention", "numpy", SOURCE_DIRECTORY)
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def pylint(session: nox.Session) -> None:
     """Run pylint.
 
@@ -297,7 +304,7 @@ def pytest(session: nox.Session) -> None:
     session.notify("coverage")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["format"])
+@FORMAT_SESSION_DECORATOR
 def pyupgrade(session: nox.Session) -> None:
     """Run pyupgrade.
 
@@ -337,7 +344,7 @@ def twine(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["lint"])
+@LINT_SESSION_DECORATOR
 def vulture(session: nox.Session) -> None:
     """Run vulture.
 
