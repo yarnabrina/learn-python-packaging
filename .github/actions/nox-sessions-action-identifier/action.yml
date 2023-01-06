@@ -17,7 +17,7 @@ runs:
       shell: bash
     - id: session-all-versions-step-identifier
       name: run provided nox session for all configured python versions
-      if: ${{env.PYTHON_VERSION}} == 'none'
+      if: env.PYTHON_VERSION == 'none'
       run: nox --sessions ${{env.SESSION_NAME}}
       shell: bash
       env:
@@ -25,7 +25,7 @@ runs:
         PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
     - id: session-single-version-step-identifier
       name: run provided nox session for provided python version
-      if: ${{env.PYTHON_VERSION}} != 'none'
+      if: env.PYTHON_VERSION != 'none'
       run: nox --sessions ${{env.SESSION_NAME}} --pythons ${{env.PYTHON_VERSION}}
       shell: bash
       env:
