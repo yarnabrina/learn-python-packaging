@@ -246,6 +246,8 @@ def pylint(session: nox.Session) -> None:
         "yes",
         "--enable",
         "all",
+        "--disable",
+        "import-error",
         "--logging-format-style",
         "new",
         "--init-import",

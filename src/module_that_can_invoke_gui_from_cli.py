@@ -53,7 +53,7 @@ def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
     gui_window : PySimpleGUI.Window
         designed GUI
     """
-    while True:
+    while True:  # pylint: disable=while-used
         gui_event, gui_elements = gui_window.read()
 
         if PySimpleGUI.WINDOW_CLOSED or gui_event == "Close":
