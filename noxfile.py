@@ -22,6 +22,9 @@ FORMAT_SESSION_DECORATOR = functools.partial(
 LINT_SESSION_DECORATOR = functools.partial(
     GENERAL_SESSION_DECORATOR, python=PYTHON_VERSIONS, tags=["lint"]
 )
+RELEASE_SESSION_DECORATOR = functools.partial(
+    GENERAL_SESSION_DECORATOR, python=PYTHON_DEFAULT_VERSION, tags=["release"]
+)
 
 
 @FORMAT_SESSION_DECORATOR
@@ -83,7 +86,7 @@ def black(session: nox.Session) -> None:
     session.run("black", "--line-length", "99", "--safe", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
+@RELEASE_SESSION_DECORATOR
 def build(session: nox.Session) -> None:
     """Run build."""
     session.install("build")
@@ -93,7 +96,7 @@ def build(session: nox.Session) -> None:
     session.notify("twine")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["test"])
+@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION, tags=["test"])
 def coverage(session: nox.Session) -> None:
     """Run coverage.
 
@@ -275,7 +278,7 @@ def pylint(session: nox.Session) -> None:
     )
 
 
-@nox.session(python=PYTHON_VERSIONS, tags=["test"])
+@GENERAL_SESSION_DECORATOR(python=PYTHON_VERSIONS, tags=["test"])
 def pytest(session: nox.Session) -> None:
     """Run pytest.
 
@@ -318,7 +321,7 @@ def pyupgrade(session: nox.Session) -> None:
     session.run("pyupgrade", "--py310-plus", *PYTHON_SCRIPTS)
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["doc"])
+@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION, tags=["doc"])
 def sphinx(session: nox.Session) -> None:
     """Run sphinx.
 
@@ -333,7 +336,7 @@ def sphinx(session: nox.Session) -> None:
         session.run("sphinx-build", "-b", "html", "source", "build")
 
 
-@nox.session(python=PYTHON_DEFAULT_VERSION, tags=["release"])
+@RELEASE_SESSION_DECORATOR
 def twine(session: nox.Session) -> None:
     """Run twine."""
     session.install("twine")
