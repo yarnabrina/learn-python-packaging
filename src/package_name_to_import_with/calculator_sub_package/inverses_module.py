@@ -57,5 +57,5 @@ def get_reciprocal(input_number: float) -> float:
         multiplicative_inverse = 1 / input_number
     except ZeroDivisionError as error:
         raise ValueError("Multiplicative inverse is not defined for zero") from error
-    else:
-        return multiplicative_inverse
+
+    return multiplicative_inverse
