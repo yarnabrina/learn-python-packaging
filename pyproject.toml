@@ -23,13 +23,6 @@ authors = [
   { name= "Second Author Name", email= "second.author.email@example.com" },
 ]
 requires-python = ">=3.10"
-dependencies = [
-  "PySimpleGUI",
-]
-dynamic=[
-  "readme", # readme = "README.md"
-  "version", # version = "1.0.0"
-]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Flake8",
@@ -49,6 +42,13 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
   "Topic :: Utilities",
   "Typing :: Typed",
+]
+dynamic=[
+  "readme", # readme = "README.md"
+  "version", # version = "1.0.0"
+]
+dependencies = [
+  "PySimpleGUI",
 ]
 [project.optional-dependencies]
 all = [
@@ -113,7 +113,7 @@ test = [
 ]
 
 [project.urls]
-"Bug Tracker" = "https://github.com/yarnabrina/learn-python-packaging/issuess"
+"Bug Tracker" = "https://github.com/yarnabrina/learn-python-packaging/issues"
 "Home Page" = "https://github.com/yarnabrina/learn-python-packaging"
 "Source Code" = "https://github.com/yarnabrina/learn-python-packaging"
 
