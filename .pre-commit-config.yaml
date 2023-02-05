@@ -28,7 +28,7 @@ repos:
         args:
           - --py310-plus
   - repo: https://github.com/pycqa/autoflake
-    rev: v2.0.0
+    rev: v2.0.1
     hooks:
       - id: autoflake
         args:
@@ -39,7 +39,7 @@ repos:
           - --remove-duplicate-keys
           - --remove-unused-variables
   - repo: https://github.com/pycqa/isort
-    rev: 5.11.4
+    rev: 5.12.0
     hooks:
       - id: isort
         args:
@@ -56,7 +56,7 @@ repos:
           - --py
           - "310"
   - repo: https://github.com/psf/black
-    rev: 22.12.0
+    rev: 23.1.0
     hooks:
       - id: black
         args:
@@ -95,7 +95,7 @@ repos:
         exclude: conftest|test_
         files: src
   - repo: https://github.com/PyCQA/pylint
-    rev: v2.15.9
+    rev: v2.16.1
     hooks:
       - id: pylint
         args:
@@ -132,7 +132,7 @@ repos:
           - --ignore-signatures
           - "yes"
   - repo: https://github.com/jendrikseipp/vulture
-    rev: v2.6
+    rev: v2.7
     hooks:
       - id: vulture
         args:
@@ -140,7 +140,7 @@ repos:
           - "100"
         pass_filenames: true
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.1
+    rev: v1.6.0.rc1
     hooks:
       - id: docformatter
         args:
@@ -150,18 +150,18 @@ repos:
           - --wrap-descriptions
           - "99"
   - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.2.2
+    rev: 6.3.0
     hooks:
       - id: pydocstyle
         args:
           - --convention
           - numpy
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.4.1
+    rev: 0.6.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.10.1
+    rev: v0.12.1
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell
