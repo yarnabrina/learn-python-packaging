@@ -3,6 +3,8 @@ import PySimpleGUI
 
 import package_name_to_import_with
 
+CLOSE_BUTTON = "Close"
+
 
 def define_gui_layout() -> list[list[PySimpleGUI.Element]]:
     """Prepare design of the GUI.
@@ -21,7 +23,7 @@ def define_gui_layout() -> list[list[PySimpleGUI.Element]]:
         [PySimpleGUI.Text("Enter second number"), PySimpleGUI.Input(key="second_number")],
         [PySimpleGUI.Button(button_text="Submit")],
         [PySimpleGUI.Text("Operation Result", key="result")],
-        [PySimpleGUI.Button(button_text="Close")],
+        [PySimpleGUI.Button(button_text=CLOSE_BUTTON)],
     ]
 
     return layout
@@ -56,7 +58,7 @@ def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
     while True:  # pylint: disable=while-used
         gui_event, gui_elements = gui_window.read()
 
-        if PySimpleGUI.WINDOW_CLOSED or gui_event == "Close":
+        if PySimpleGUI.WINDOW_CLOSED or gui_event == CLOSE_BUTTON:
             break
 
         try:
