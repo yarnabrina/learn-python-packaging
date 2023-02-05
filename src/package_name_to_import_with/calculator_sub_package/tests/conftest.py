@@ -3,6 +3,8 @@ import typing
 
 import pytest
 
+from package_name_to_import_with.calculator_sub_package.wrapper_module import ArithmeticOperator
+
 
 @pytest.fixture(params=[4, -9, 1.02, -3.4], name="first_number")
 def fixture_first_number(request: pytest.FixtureRequest) -> float:
@@ -34,7 +36,7 @@ def fixture_operator(request: pytest.FixtureRequest) -> typing.Literal["+", "-",
 
     Returns
     -------
-    typing.Literal["+", "-", "*", "/"]
+    typing.Literal[ "+", "-", "*", "/" ]
         value of operator
     """
     return request.param
@@ -130,7 +132,7 @@ def expected_result(
         value of first number
     second_number : float
         value of second number
-    operator : typing.Literal["+", "-", "*", "/"]
+    operator : typing.Literal[ "+", "-", "*", "/" ]
         type of arithmetic operation
 
     Returns
@@ -141,18 +143,18 @@ def expected_result(
     Raises
     ------
     ValueError
-        if ``operator`` not one of "+", "-", "*", "/"
+        if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
     """
-    if operator == "+":
+    if ArithmeticOperator(operator) == ArithmeticOperator.ADDITION:
         return first_number + second_number
 
-    if operator == "-":
+    if ArithmeticOperator(operator) == ArithmeticOperator.SUBTRACTION:
         return first_number - second_number
 
-    if operator == "*":
+    if ArithmeticOperator(operator) == ArithmeticOperator.MULTIPLICATION:
         return first_number * second_number
 
-    if operator == "/":
+    if ArithmeticOperator(operator) == ArithmeticOperator.DIVISION:
         return first_number / second_number
 
     raise ValueError("Unexpected value of operation")

@@ -18,7 +18,7 @@ def test_successful_operation(
     ----------
     first_number : float
         value of first number
-    operator : typing.Literal["+", "-", "*", "/"]
+    operator : typing.Literal[ "+", "-", "*", "/" ]
         type of arithmetic operation
     second_number : float
         value of second number
