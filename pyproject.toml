@@ -208,11 +208,9 @@ convention = "numpy"
 
 
 [tool.pylint.main]
-exit-zero = false
 fail-under = 8.0
-persistent = false
+jobs = 0
 recursive = true
-suggestion-mode = true
 
 [tool.pylint.basic]
 include-naming-hint = true
@@ -230,18 +228,6 @@ enable = [
 
 [tool.pylint.reports]
 output-format = "colorized"
-reports = true
-score = true
-
-[tool.pylint.similarities]
-ignore-comments = true
-ignore-docstrings = true
-ignore-imports = true
-ignore-signatures = true
-
-[tool.pylint.variables]
-allow-global-unused-variables = true
-init-import = false
 
 
 [tool.pyright]
@@ -251,8 +237,6 @@ include = [
 exclude = [
   "**/tests/*.py",
 ]
-typeCheckingMode = "basic"
-useLibraryCodeForTypes = false
 
 
 [tool.pytest.ini_options]
