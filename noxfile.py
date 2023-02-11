@@ -12,7 +12,7 @@ DIST_DIRECTORY = pathlib.Path("dist")
 DOCS_DIRECTORY = pathlib.Path("docs")
 
 PYTHON_SCRIPT_PATHS = SOURCE_DIRECTORY.glob("**/*.py")
-PYTHON_SCRIPTS = list(map(str, PYTHON_SCRIPT_PATHS))
+PYTHON_SCRIPTS = [str(SCRIPT_PATH) for SCRIPT_PATH in PYTHON_SCRIPT_PATHS]
 
 GENERAL_SESSION_DECORATOR = functools.partial(nox.session, venv_backend="conda", reuse_venv=True)
 
