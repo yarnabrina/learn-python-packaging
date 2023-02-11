@@ -116,7 +116,7 @@ def validate_operator_input(
     if processed_user_input == ArithmeticOperator.DIVISION:
         return divide_numbers
 
-    raise NotImplementedError("Supports +, -, *, / only")
+    raise ValueError("Unexpected value of operation")  # pragma: no cover
 
 
 def process_inputs(
