@@ -177,7 +177,7 @@ def mypy(session: nox.Session) -> None:
     """
     session.install("mypy")
 
-    session.run("mypy", str(SOURCE_DIRECTORY))
+    session.run("mypy")
 
 
 @LINT_SESSION_DECORATOR
@@ -275,4 +275,4 @@ def vulture(session: nox.Session) -> None:
     """
     session.install("vulture")
 
-    session.run("vulture", str(SOURCE_DIRECTORY))
+    session.run("vulture")
