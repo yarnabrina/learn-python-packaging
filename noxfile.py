@@ -166,6 +166,20 @@ def flake8(session: nox.Session) -> None:
     )
 
 
+@LINT_SESSION_DECORATOR
+def interrogate(session: nox.Session) -> None:
+    """Run interrogate.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
+    session.install("interrogate")
+
+    session.run("interrogate", "--fail-under", "80", "--ignore-init-method", SOURCE_DIRECTORY)
+
+
 @FORMAT_SESSION_DECORATOR
 def isort(session: nox.Session) -> None:
     """Run isort.
