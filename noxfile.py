@@ -38,16 +38,7 @@ def autoflake(session: nox.Session) -> None:
     """
     session.install("autoflake")
 
-    session.run(
-        "autoflake",
-        "--in-place",
-        "--remove-all-unused-imports",
-        "--expand-star-imports",
-        "--ignore-init-module-imports",
-        "--remove-duplicate-keys",
-        "--remove-unused-variables",
-        *PYTHON_SCRIPTS,
-    )
+    session.run("autoflake", *PYTHON_SCRIPTS)
 
 
 @LINT_SESSION_DECORATOR
@@ -83,7 +74,7 @@ def black(session: nox.Session) -> None:
     """
     session.install("black")
 
-    session.run("black", "--line-length", "99", "--safe", *PYTHON_SCRIPTS)
+    session.run("black", *PYTHON_SCRIPTS)
 
 
 @RELEASE_SESSION_DECORATOR
@@ -91,7 +82,7 @@ def build(session: nox.Session) -> None:
     """Run build."""
     session.install("build")
 
-    session.run("python", "-m", "build", "--no-isolation")
+    session.run("python3", "-m", "build", "--no-isolation")
 
     session.notify("twine")
 
@@ -107,18 +98,7 @@ def coverage(session: nox.Session) -> None:
     """
     session.install("coverage[toml]")
 
-    session.run(
-        "coverage",
-        "report",
-        "--fail-under",
-        "80",
-        "--include",
-        f"{SOURCE_DIRECTORY.name}/**/*.py",
-        "--omit",
-        "**/tests/*.py",
-        "--precision",
-        "2",
-    )
+    session.run("coverage", "report")
 
 
 @FORMAT_SESSION_DECORATOR
@@ -132,15 +112,7 @@ def docformatter(session: nox.Session) -> None:
     """
     session.install("docformatter")
 
-    session.run(
-        "docformatter",
-        "--in-place",
-        "--wrap-summaries",
-        "99",
-        "--wrap-description",
-        "99",
-        *PYTHON_SCRIPTS,
-    )
+    session.run("docformatter", *PYTHON_SCRIPTS)
 
 
 @LINT_SESSION_DECORATOR
@@ -177,7 +149,7 @@ def interrogate(session: nox.Session) -> None:
     """
     session.install("interrogate")
 
-    session.run("interrogate", "--fail-under", "80", "--ignore-init-method", str(SOURCE_DIRECTORY))
+    session.run("interrogate", str(SOURCE_DIRECTORY))
 
 
 @FORMAT_SESSION_DECORATOR
@@ -191,18 +163,7 @@ def isort(session: nox.Session) -> None:
     """
     session.install("isort")
 
-    session.run(
-        "isort",
-        "--overwrite-in-place",
-        "--profile",
-        "black",
-        "--atomic",
-        "--float-to-top",
-        "--line-length",
-        "99",
-        "--remove-redundant-aliases",
-        *PYTHON_SCRIPTS,
-    )
+    session.run("isort", *PYTHON_SCRIPTS)
 
 
 @LINT_SESSION_DECORATOR
@@ -216,16 +177,7 @@ def mypy(session: nox.Session) -> None:
     """
     session.install("mypy")
 
-    session.run(
-        "mypy",
-        "--ignore-missing-imports",
-        "--strict",
-        "--exclude",
-        "conftest",
-        "--exclude",
-        "test_",
-        str(SOURCE_DIRECTORY),
-    )
+    session.run("mypy", str(SOURCE_DIRECTORY))
 
 
 @LINT_SESSION_DECORATOR
@@ -239,7 +191,7 @@ def pydocstyle(session: nox.Session) -> None:
     """
     session.install("pydocstyle")
 
-    session.run("pydocstyle", "--convention", "numpy", str(SOURCE_DIRECTORY))
+    session.run("pydocstyle", str(SOURCE_DIRECTORY))
 
 
 @LINT_SESSION_DECORATOR
@@ -253,45 +205,7 @@ def pylint(session: nox.Session) -> None:
     """
     session.install("pylint")
 
-    session.run(
-        "pylint",
-        "--enable-all-extensions",
-        "--persistent",
-        "no",
-        "--fail-under",
-        "8.0",
-        "--suggestion-mode",
-        "yes",
-        "--recursive",
-        "yes",
-        "--output-format",
-        "colorized",
-        "--reports",
-        "no",
-        "--score",
-        "yes",
-        "--enable",
-        "all",
-        "--disable",
-        "import-error",
-        "--logging-format-style",
-        "new",
-        "--init-import",
-        "no",
-        "--allow-global-unused-variables",
-        "yes",
-        "--max-line-length",
-        "99",
-        "--ignore-comments",
-        "yes",
-        "--ignore-docstrings",
-        "yes",
-        "--ignore-imports",
-        "yes",
-        "--ignore-signatures",
-        "yes",
-        str(SOURCE_DIRECTORY),
-    )
+    session.run("pylint", "--disable", "import-error", str(SOURCE_DIRECTORY))
 
 
 @GENERAL_SESSION_DECORATOR(python=PYTHON_VERSIONS, tags=["test"])
@@ -305,20 +219,7 @@ def pytest(session: nox.Session) -> None:
     """
     session.install(".[test]")
 
-    session.run(
-        "coverage",
-        "run",
-        "--branch",
-        "--include",
-        f"{SOURCE_DIRECTORY.name}/**/*.py",
-        "--omit",
-        "**/tests/*.py",
-        "--module",
-        "pytest",
-        "--doctest-modules",
-        "--doctest-ignore-import-errors",
-        "--doctest-continue-on-failure",
-    )
+    session.run("coverage", "run")
 
     session.notify("coverage")
 
@@ -374,4 +275,4 @@ def vulture(session: nox.Session) -> None:
     """
     session.install("vulture")
 
-    session.run("vulture", "--min-confidence", "100", str(SOURCE_DIRECTORY))
+    session.run("vulture", str(SOURCE_DIRECTORY))
