@@ -3,6 +3,10 @@ import PySimpleGUI
 
 import package_name_to_import_with
 
+FIRST_NUMBER_INPUT = "first_number"
+SECOND_NUMBER_INPUT = "second_number"
+OPERATOR_INPUT = "operator"
+OPERATION_RESULT = "result"
 CLOSE_BUTTON = "Close"
 
 
@@ -15,14 +19,14 @@ def define_gui_layout() -> list[list[PySimpleGUI.Element]]:
         elements of the GUI
     """
     layout = [
-        [PySimpleGUI.Text("Enter first number"), PySimpleGUI.Input(key="first_number")],
+        [PySimpleGUI.Text("Enter first number"), PySimpleGUI.Input(key=FIRST_NUMBER_INPUT)],
         [
             PySimpleGUI.Text("Enter operator"),
-            PySimpleGUI.OptionMenu(["+", "-", "*", "/"], key="operator"),
+            PySimpleGUI.OptionMenu(["+", "-", "*", "/"], key=OPERATOR_INPUT),
         ],
-        [PySimpleGUI.Text("Enter second number"), PySimpleGUI.Input(key="second_number")],
+        [PySimpleGUI.Text("Enter second number"), PySimpleGUI.Input(key=SECOND_NUMBER_INPUT)],
         [PySimpleGUI.Button(button_text="Submit")],
-        [PySimpleGUI.Text("Operation Result", key="result")],
+        [PySimpleGUI.Text("Operation Result", key=OPERATION_RESULT)],
         [PySimpleGUI.Button(button_text=CLOSE_BUTTON)],
     ]
 
@@ -63,14 +67,14 @@ def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
 
         try:
             operation_result = package_name_to_import_with.calculate_results(
-                gui_elements["first_number"],
-                gui_elements["operator"],
-                gui_elements["second_number"],
+                gui_elements[FIRST_NUMBER_INPUT],
+                gui_elements[OPERATOR_INPUT],
+                gui_elements[SECOND_NUMBER_INPUT],
             )
         except Exception as error:  # pylint: disable=broad-except
-            gui_window["result"].update(error)
+            gui_window[OPERATION_RESULT].update(error)
         else:
-            gui_window["result"].update(operation_result)
+            gui_window[OPERATION_RESULT].update(operation_result)
 
 
 def gui_calculator() -> None:
