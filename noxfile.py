@@ -208,6 +208,20 @@ def pylint(session: nox.Session) -> None:
     session.run("pylint", "--disable", "import-error", str(SOURCE_DIRECTORY))
 
 
+@LINT_SESSION_DECORATOR
+def pyright(session: nox.Session) -> None:
+    """Run pyright.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
+    session.install("pyright")
+
+    session.run("pyright")
+
+
 @GENERAL_SESSION_DECORATOR(python=PYTHON_VERSIONS, tags=["test"])
 def pytest(session: nox.Session) -> None:
     """Run pytest.
