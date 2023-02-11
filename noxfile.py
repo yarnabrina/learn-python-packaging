@@ -244,6 +244,8 @@ def pylint(session: nox.Session) -> None:
         "--enable-all-extensions",
         "--persistent",
         "no",
+        "--fail-under",
+        "8.0",
         "--suggestion-mode",
         "yes",
         "--recursive",

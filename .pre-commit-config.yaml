@@ -103,6 +103,8 @@ repos:
           - --enable-all-extensions
           - --persistent
           - "no"
+          - "--fail-under"
+          - "8.0"
           - --suggestion-mode
           - "yes"
           - --recursive
