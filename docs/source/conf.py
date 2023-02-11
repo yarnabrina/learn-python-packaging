@@ -53,6 +53,7 @@ html_output_encoding = "utf-8"
 
 autoclass_content = "class"
 autodoc_inherit_docstrings = True
+autodoc_member_order = "bysource"
 autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
 autodoc_typehints_format = "fully-qualified"
