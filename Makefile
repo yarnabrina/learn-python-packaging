@@ -400,6 +400,7 @@ format: pyupgrade-formatter autoflake-formatter isort-formatter docformatter-for
 ##     find security issues (bandit-linter)
 ##     lint all python scripts (flake8-linter)
 ##     check docstring coverage (interrogate-linter)
+##     check types (mypy-linter)
 ##     check docstring presence and formats (pydocstyle-linter)
 ##     lint all python scripts (pylint-linter)
 ##     check types (pyright-linter)

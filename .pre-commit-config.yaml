@@ -89,8 +89,9 @@ repos:
     rev: v1.0.0
     hooks:
       - id: mypy
+        additional_dependencies:
+          - PySimpleGUI
         args:
-          - --ignore-missing-imports
           - --strict
         exclude: conftest|test_
         files: src
