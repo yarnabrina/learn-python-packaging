@@ -5,7 +5,7 @@ requires = [
 ]
 
 [project]
-name = "package_name_to_install_with"
+name = "package-name-to-install-with"
 description = "A small example package"
 keywords = [
   "development",
