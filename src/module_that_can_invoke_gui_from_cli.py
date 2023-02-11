@@ -72,7 +72,7 @@ def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
                 gui_elements[SECOND_NUMBER_INPUT],
             )
         except Exception as error:  # pylint: disable=broad-except
-            gui_window[OPERATION_RESULT].update(error)
+            gui_window[OPERATION_RESULT].update(str(error))
         else:
             gui_window[OPERATION_RESULT].update(operation_result)
 
