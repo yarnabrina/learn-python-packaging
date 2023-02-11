@@ -28,14 +28,7 @@ endef
 autoflake-formatter: venv
 	source venv/bin/activate
 	$(call check_install_status,autoflake)
-	autoflake \
-	--in-place \
-	--expand-star-imports \
-	--remove-all-unused-imports \
-	--ignore-init-module-imports \
-	--remove-duplicate-keys \
-	--remove-unused-variables \
-	$(PYTHON_SOURCE_SCRIPTS)
+	autoflake $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
 .PHONY: bandit-linter
@@ -52,19 +45,14 @@ bandit-linter: venv
 black-formatter: venv
 	source venv/bin/activate
 	$(call check_install_status,black)
-	black \
-	--line-length 99 \
-	--safe \
-	${PYTHON_SOURCE_DIRECTORY}
+	black ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: build-distribution
 build-distribution: venv
 	source venv/bin/activate
 	$(call check_install_status,build)
-	python \
-	-m build \
-	--outdir ${PYTHON_DIST_DIRECTORY}
+	python3 -m build --outdir ${PYTHON_DIST_DIRECTORY}
 
 .PHONY: clean-coverage
 clean-coverage:
@@ -99,37 +87,21 @@ coverage-run: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
 	$(call check_install_status,pytest)
-	coverage \
-	run \
-	--branch \
-	--include $(PYTHON_SOURCE_SCRIPTS_PATTERN) \
-	--omit ${PYTHON_TEST_SCRIPTS_PATTERN} \
-	--module pytest \
-	--doctest-modules \
-	--doctest-ignore-import-errors \
-	--doctest-continue-on-failure
+	coverage run
 
 .ONESHELL:
 .PHONY: coverage-html
 coverage-html: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
-	coverage \
-	html \
-	--include $(PYTHON_SOURCE_SCRIPTS_PATTERN) \
-	--omit ${PYTHON_TEST_SCRIPTS_PATTERN} \
-	--precision 2
+	coverage html
 
 .ONESHELL:
 .PHONY: docformatter-formatter
 docformatter-formatter: venv
 	source venv/bin/activate
 	$(call check_install_status,docformatter)
-	docformatter \
-	--in-place \
-	--wrap-summaries 99 \
-	--wrap-descriptions 99 \
-	$(PYTHON_SOURCE_SCRIPTS)
+	docformatter $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
 .PHONY: flake8-linter
@@ -147,36 +119,21 @@ flake8-linter: venv
 interrogate-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,interrogate)
-	interrogate \
-	--fail-under 80 \
-	--ignore-init-method \
-	${PYTHON_SOURCE_DIRECTORY}
+	interrogate ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: isort-formatter
 isort-formatter: venv
 	source venv/bin/activate
 	$(call check_install_status,isort)
-	isort \
-	--overwrite-in-place \
-	--profile black \
-	--atomic \
-	--float-to-top \
-	--line-length 99 \
-	--remove-redundant-aliases \
-	${PYTHON_SOURCE_DIRECTORY}
+	isort ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: mypy-linter
 mypy-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,mypy)
-	mypy \
-	--ignore-missing-imports \
-	--strict \
-	--exclude conftest \
-	--exclude test_ \
-	${PYTHON_SOURCE_DIRECTORY}
+	mypy ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pre-commit-install
@@ -202,82 +159,56 @@ pre-commit-run: venv
 pydocstyle-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,pydocstyle)
-	pydocstyle \
-	--convention numpy \
-	${PYTHON_SOURCE_DIRECTORY}
+	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pylint-linter
 pylint-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,pylint)
-	pylint \
-	--enable-all-extensions \
-	--suggestion-mode yes \
-	--output-format colorized \
-	--score yes \
-	--enable all \
-	--logging-format-style new \
-	--init-import no \
-	--allow-global-unused-variables yes \
-	--max-line-length 99 \
-	--ignore-comments yes \
-	--ignore-docstrings yes \
-	--ignore-imports yes \
-	--ignore-signatures yes \
-	${PYTHON_SOURCE_DIRECTORY}
+	pylint ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pyright-linter
 pyright-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,pyright)
-	pyright \
-	${PYTHON_SOURCE_DIRECTORY}
+	pyright ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pyupgrade-formatter
 pyupgrade-formatter: venv
 	source venv/bin/activate
 	$(call check_install_status,pyupgrade)
-	pyupgrade \
-	--py310-plus \
-	$(PYTHON_SOURCE_SCRIPTS)
+	pyupgrade --py310-plus $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
 .PHONY: pytest-doctest
 pytest-doctest: venv
 	source venv/bin/activate
 	$(call check_install_status,pytest)
-	pytest \
-	-k "not test_" \
-	--doctest-modules \
-	--doctest-ignore-import-errors \
-	--doctest-continue-on-failure
+	pytest -k "not test_"
 
 .ONESHELL:
 .PHONY: pytest-failure
 pytest-failure: venv
 	source venv/bin/activate
 	$(call check_install_status,pytest)
-	pytest \
-	-k "failure"
+	pytest -k "failure"
 
 .ONESHELL:
 .PHONY: pytest-others
 pytest-others: venv
 	source venv/bin/activate
 	$(call check_install_status,pytest)
-	pytest \
-	-k "test and not failure and not successful"
+	pytest -k "test and not failure and not successful"
 
 .ONESHELL:
 .PHONY: pytest-successful
 pytest-successful: venv
 	source venv/bin/activate
 	$(call check_install_status,pytest)
-	pytest \
-	-k "successful"
+	pytest -k "successful"
 
 .ONESHELL:
 .PHONY: sphinx-source
@@ -309,48 +240,28 @@ sphinx-build: venv
 twine-check: venv
 	source venv/bin/activate
 	$(call check_install_status,twine)
-	twine \
-	check \
-	--strict \
-	${PYTHON_DIST_DIRECTORY}/*
+	twine check --strict ${PYTHON_DIST_DIRECTORY}/*
 
 .ONESHELL:
 .PHONY: twine-upload
 twine-upload: venv
 	source venv/bin/activate
 	$(call check_install_status,twine)
-	twine \
-	upload \
-	${PYTHON_DIST_DIRECTORY}/*
+	twine upload ${PYTHON_DIST_DIRECTORY}/*
 
 .ONESHELL:
 venv:
-	python3 \
-	-m venv \
-	venv
+	python3 -m venv venv
 	echo "*" > venv/.gitignore
 	source venv/bin/activate
-	python3 \
-	-m pip \
-	install \
-	pip setuptools wheel
-	python3 \
-	-m pip \
-	install \
-	--editable ".[all]"
+	python3 -m pip install --upgrade pip setuptools wheel
+	python3 -m pip install --editable ".[all]"
 
 .ONESHELL:
 venv-upgrade: venv
 	source venv/bin/activate
-	python3 \
-	-m pip \
-	install \
-	--upgrade \
-	pip setuptools wheel
-	python3 \
-	-m pip \
-	install \
-	--upgrade \
+	python3 -m pip install --upgrade pip setuptools wheel
+	python3 -m pip install --upgrade \
 	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.txt \
 	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.dev.txt \
 	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.doc.txt \
@@ -364,9 +275,7 @@ venv-upgrade: venv
 vulture-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,vulture)
-	vulture \
-	--min-confidence 100 \
-	${PYTHON_SOURCE_DIRECTORY}
+	vulture ${PYTHON_SOURCE_DIRECTORY}
 
 ## help
 ##     list all wrapper targets
