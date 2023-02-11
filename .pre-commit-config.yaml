@@ -151,6 +151,14 @@ repos:
           - "99"
           - --wrap-descriptions
           - "99"
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.5.0
+    hooks:
+      - id: interrogate
+        args:
+          - --fail-under
+          - "80"
+          - --ignore-init-method
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.3.0
     hooks:

@@ -60,6 +60,7 @@ all = [
   "coverage[toml]",
   "docformatter",
   "flake8",
+  "interrogate",
   "isort",
   "mypy",
   "nox",
@@ -97,6 +98,7 @@ format = [
 lint = [
   "bandit",
   "flake8",
+  "interrogate",
   "mypy",
   "pydocstyle",
   "pylint",
@@ -172,6 +174,11 @@ wrap-summaries = 99
 wrap-descriptions = 99
 
 
+[tool.interrogate]
+fail-under = 80
+ignore-init-method = true
+
+
 [tool.isort]
 overwrite_in_place = true
 profile = "black"
@@ -189,6 +196,7 @@ convention = "numpy"
 
 [tool.pylint.main]
 exit-zero = false
+fail-under = 8.0
 persistent = false
 recursive = true
 suggestion-mode = true
