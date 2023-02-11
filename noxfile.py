@@ -68,7 +68,7 @@ def bandit(session: nox.Session) -> None:
         "high",
         "--confidence-level",
         "high",
-        SOURCE_DIRECTORY,
+        str(SOURCE_DIRECTORY),
     )
 
 
@@ -177,7 +177,7 @@ def interrogate(session: nox.Session) -> None:
     """
     session.install("interrogate")
 
-    session.run("interrogate", "--fail-under", "80", "--ignore-init-method", SOURCE_DIRECTORY)
+    session.run("interrogate", "--fail-under", "80", "--ignore-init-method", str(SOURCE_DIRECTORY))
 
 
 @FORMAT_SESSION_DECORATOR
@@ -224,7 +224,7 @@ def mypy(session: nox.Session) -> None:
         "conftest",
         "--exclude",
         "test_",
-        SOURCE_DIRECTORY,
+        str(SOURCE_DIRECTORY),
     )
 
 
@@ -239,7 +239,7 @@ def pydocstyle(session: nox.Session) -> None:
     """
     session.install("pydocstyle")
 
-    session.run("pydocstyle", "--convention", "numpy", SOURCE_DIRECTORY)
+    session.run("pydocstyle", "--convention", "numpy", str(SOURCE_DIRECTORY))
 
 
 @LINT_SESSION_DECORATOR
@@ -290,7 +290,7 @@ def pylint(session: nox.Session) -> None:
         "yes",
         "--ignore-signatures",
         "yes",
-        SOURCE_DIRECTORY,
+        str(SOURCE_DIRECTORY),
     )
 
 
@@ -374,4 +374,4 @@ def vulture(session: nox.Session) -> None:
     """
     session.install("vulture")
 
-    session.run("vulture", "--min-confidence", "100", SOURCE_DIRECTORY)
+    session.run("vulture", "--min-confidence", "100", str(SOURCE_DIRECTORY))

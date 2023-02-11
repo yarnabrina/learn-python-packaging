@@ -228,6 +228,14 @@ pylint-linter: venv
 	${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
+.PHONY: pyright-linter
+pyright-linter: venv
+	source venv/bin/activate
+	$(call check_install_status,pyright)
+	pyright \
+	${PYTHON_SOURCE_DIRECTORY}
+
+.ONESHELL:
 .PHONY: pyupgrade-formatter
 pyupgrade-formatter: venv
 	source venv/bin/activate
@@ -394,9 +402,10 @@ format: pyupgrade-formatter autoflake-formatter isort-formatter docformatter-for
 ##     check docstring coverage (interrogate-linter)
 ##     check docstring presence and formats (pydocstyle-linter)
 ##     lint all python scripts (pylint-linter)
+##     check types (pyright-linter)
 ##     find dead code (vulture-linter)
 .PHONY: lint
-lint: bandit-linter flake8-linter interrogate-linter mypy-linter pydocstyle-linter pylint-linter vulture-linter
+lint: bandit-linter flake8-linter interrogate-linter mypy-linter pydocstyle-linter pylint-linter pyright-linter vulture-linter
 
 ## test
 ##     test doctests (pytest-doctest)

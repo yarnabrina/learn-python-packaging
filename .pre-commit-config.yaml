@@ -133,6 +133,14 @@ repos:
           - "yes"
           - --ignore-signatures
           - "yes"
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.293
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          - PySimpleGUI
+        exclude: conftest|test_
+        files: src
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.7
     hooks:

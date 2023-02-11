@@ -1,5 +1,5 @@
 """Define package contents."""
-import collections
+import collections.abc
 import functools
 import gc
 import typing

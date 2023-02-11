@@ -1,5 +1,5 @@
 """Define user level functions."""
-import collections
+import collections.abc
 import dataclasses
 import enum
 import typing
