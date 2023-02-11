@@ -195,12 +195,15 @@ py_version = 310
 
 
 [tool.mypy]
+files = [
+  "src",
+]
+exclude = [
+  "conftest",
+  "test_",
+]
 ignore_missing_imports = true
 strict = true
-exclude = [
-    "conftest",
-    "test_",
-]
 
 
 [tool.pydocstyle]
