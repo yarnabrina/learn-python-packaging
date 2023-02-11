@@ -68,6 +68,7 @@ all = [
   "pydocstyle",
   "pylint",
   "pyproject-fmt",
+  "pyright",
   "pytest",
   "pyupgrade",
   "Sphinx",
@@ -102,6 +103,7 @@ lint = [
   "mypy",
   "pydocstyle",
   "pylint",
+  "pyright",
   "validate-pyproject",
   "vulture",
 ]
@@ -229,6 +231,17 @@ ignore-signatures = true
 [tool.pylint.variables]
 allow-global-unused-variables = true
 init-import = false
+
+
+[tool.pyright]
+include = [
+  "src",
+]
+exclude = [
+  "**/tests/*.py",
+]
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = false
 
 
 [tool.pytest.ini_options]

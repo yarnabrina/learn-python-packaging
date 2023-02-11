@@ -4,5 +4,6 @@ interrogate
 mypy
 pydocstyle
 pylint
+pyright
 validate-pyproject
 vulture
