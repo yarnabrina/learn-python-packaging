@@ -148,6 +148,7 @@ safe = true
 
 [tool.coverage.run]
 branch = true
+command_line = "--module pytest"
 include = [
   "src/**/*.py",
 ]
