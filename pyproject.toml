@@ -13,7 +13,7 @@ keywords = [
   "sample",
   "setuptools",
 ]
-license = { file = "LICENSE.txt" } # license = { text = "AGPL-3.0-or-later" }
+license = { text = "AGPL-3.0-or-later" } # license = { file = "LICENSE.txt" }
 maintainers = [
   { name= "First Maintainer Name", email= "first.maintainer.email@example.com" },
   { name= "Second Maintainer Name", email= "second.maintainer.email@example.com" },
