@@ -1,5 +1,5 @@
 """Configure Sphinx documentation."""
-# pylint: skip-file
+# pylint: disable=invalid-name
 import sys
 
 import package_name_to_import_with
