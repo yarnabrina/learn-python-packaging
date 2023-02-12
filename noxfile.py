@@ -231,7 +231,7 @@ def pytest(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install(".[test]")
+    session.install("-e", ".[test]")
 
     session.run("coverage", "run")
 
@@ -261,7 +261,7 @@ def sphinx(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install(".[doc]")
+    session.install("-e", ".[doc]")
 
     with session.chdir("docs"):
         session.run("sphinx-build", "-b", "html", "source", "build")
