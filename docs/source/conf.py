@@ -1,5 +1,5 @@
 """Configure Sphinx documentation."""
-# pylint: skip-file
+# pylint: disable=invalid-name
 import sys
 
 import package_name_to_import_with
@@ -8,7 +8,7 @@ sys.path.insert(0, "../src")
 
 project = "package_name_to_install_with"
 version = str(package_name_to_import_with.__version__)
-copyright = "2022, First Author, Second Author"
+project_copyright = "2022-2023, First Author, Second Author"
 author = "First Author, Second Author"
 release = "v1.0.0"
 
@@ -53,6 +53,7 @@ html_output_encoding = "utf-8"
 
 autoclass_content = "class"
 autodoc_inherit_docstrings = True
+autodoc_member_order = "bysource"
 autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
 autodoc_typehints_format = "fully-qualified"

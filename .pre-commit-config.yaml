@@ -31,40 +31,14 @@ repos:
     rev: v2.0.1
     hooks:
       - id: autoflake
-        args:
-          - --in-place
-          - --remove-all-unused-imports
-          - --expand-star-imports
-          - --ignore-init-module-imports
-          - --remove-duplicate-keys
-          - --remove-unused-variables
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
-        args:
-          - --overwrite-in-place
-          - --profile
-          - black
-          - --atomic
-          - --float-to-top
-          - --line-length
-          - "99"
-          - --remove-redundant-aliases
-          - --src-path
-          - src
-          - --py
-          - "310"
   - repo: https://github.com/psf/black
     rev: 23.1.0
     hooks:
       - id: black
-        args:
-          - --line-length
-          - "99"
-          - --target-version
-          - py310
-          - --safe
   - repo: https://github.com/pycqa/bandit
     rev: 1.7.4
     hooks:
@@ -86,59 +60,27 @@ repos:
           - --max-line-length
           - "99"
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.991
+    rev: v1.0.0
     hooks:
       - id: mypy
-        args:
-          - --ignore-missing-imports
-          - --strict
-        exclude: conftest|test_
-        files: src
+        pass_filenames: false
   - repo: https://github.com/PyCQA/pylint
     rev: v2.16.1
     hooks:
       - id: pylint
-        args:
-          - --errors-only
-          - --enable-all-extensions
-          - --persistent
-          - "no"
-          - --suggestion-mode
-          - "yes"
-          - --recursive
-          - "yes"
-          - --output-format
-          - colorized
-          - --reports
-          - "no"
-          - --score
-          - "yes"
-          - --enable
-          - all
-          - --logging-format-style
-          - new
-          - --init-import
-          - "no"
-          - --allow-global-unused-variables
-          - "yes"
-          - --max-line-length
-          - "99"
-          - --ignore-comments
-          - "yes"
-          - --ignore-docstrings
-          - "yes"
-          - --ignore-imports
-          - "yes"
-          - --ignore-signatures
-          - "yes"
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.293
+    hooks:
+      - id: pyright
+        pass_filenames: false
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.245
+    hooks:
+      - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.7
     hooks:
       - id: vulture
-        args:
-          - --min-confidence
-          - "100"
-        pass_filenames: true
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.6.0.rc1
     hooks:
@@ -149,15 +91,16 @@ repos:
           - "99"
           - --wrap-descriptions
           - "99"
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.5.0
+    hooks:
+      - id: interrogate
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.3.0
     hooks:
       - id: pydocstyle
-        args:
-          - --convention
-          - numpy
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.6.0
+    rev: 0.8.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject

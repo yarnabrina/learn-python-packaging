@@ -5,7 +5,7 @@ requires = [
 ]
 
 [project]
-name = "package_name_to_install_with"
+name = "package-name-to-install-with"
 description = "A small example package"
 keywords = [
   "development",
@@ -13,7 +13,7 @@ keywords = [
   "sample",
   "setuptools",
 ]
-license = { file = "LICENSE.txt" } # license = { text = "AGPL-3.0-or-later" }
+license = { text = "AGPL-3.0-or-later" } # license = { file = "LICENSE.txt" }
 maintainers = [
   { name= "First Maintainer Name", email= "first.maintainer.email@example.com" },
   { name= "Second Maintainer Name", email= "second.maintainer.email@example.com" },
@@ -60,6 +60,7 @@ all = [
   "coverage[toml]",
   "docformatter",
   "flake8",
+  "interrogate",
   "isort",
   "mypy",
   "nox",
@@ -67,6 +68,7 @@ all = [
   "pydocstyle",
   "pylint",
   "pyproject-fmt",
+  "pyright",
   "pytest",
   "pyupgrade",
   "Sphinx",
@@ -97,9 +99,11 @@ format = [
 lint = [
   "bandit",
   "flake8",
+  "interrogate",
   "mypy",
   "pydocstyle",
   "pylint",
+  "pyright",
   "validate-pyproject",
   "vulture",
 ]
@@ -144,6 +148,7 @@ safe = true
 
 [tool.coverage.run]
 branch = true
+command_line = "--module pytest"
 include = [
   "src/**/*.py",
 ]
@@ -156,6 +161,7 @@ include = [
   "src/**/*.py",
 ]
 omit = [
+  "src/module_that_can_invoke_gui_from_cli.py",
   "**/tests/*.py",
 ]
 fail_under = 80
@@ -172,6 +178,11 @@ wrap-summaries = 99
 wrap-descriptions = 99
 
 
+[tool.interrogate]
+fail-under = 80
+ignore-init-method = true
+
+
 [tool.isort]
 overwrite_in_place = true
 profile = "black"
@@ -183,15 +194,26 @@ src_paths = "src"
 py_version = 310
 
 
+[tool.mypy]
+files = [
+  "src",
+]
+exclude = [
+  "conftest",
+  "test_",
+]
+ignore_missing_imports = true
+strict = true
+
+
 [tool.pydocstyle]
 convention = "numpy"
 
 
 [tool.pylint.main]
-exit-zero = false
-persistent = false
+fail-under = 8.0
+jobs = 0
 recursive = true
-suggestion-mode = true
 
 [tool.pylint.basic]
 include-naming-hint = true
@@ -209,23 +231,75 @@ enable = [
 
 [tool.pylint.reports]
 output-format = "colorized"
-reports = true
-score = true
 
-[tool.pylint.similarities]
-ignore-comments = true
-ignore-docstrings = true
-ignore-imports = true
-ignore-signatures = true
 
-[tool.pylint.variables]
-allow-global-unused-variables = true
-init-import = false
+[tool.pyright]
+include = [
+  "src",
+]
+exclude = [
+  "**/tests/*.py",
+]
+reportMissingImports = false
 
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --doctest-ignore-import-errors --doctest-continue-on-failure"
 console_output_style = "count"
+
+
+[tool.ruff]
+extend-exclude = [
+  "*.pyi",
+]
+fix = true
+format = "grouped"
+ignore = [
+  "ANN401",
+  "D203",
+  "D213",
+  "TRY003",
+]
+ignore-init-module-imports = true
+line-length = 99
+select = [
+  "F",
+  "E",
+  "W",
+  "C90",
+  "I",
+  "N",
+  "D",
+  "UP",
+  "ANN",
+  "S",
+  "B",
+  "A",
+  "C4",
+  "T10",
+  "ISC",
+  "G",
+  "T20",
+  "PT",
+  "Q",
+  "SIM",
+  "TID",
+  "ERA",
+  "PD",
+  "PGH",
+  "PL",
+  "TRY",
+  "RUF",
+]
+src = [
+  "src",
+]
+target-version = "py310"
+
+[tool.ruff.per-file-ignores]
+"**/test_*.py" = [
+  "S101",
+]
 
 
 [tool.setuptools]
