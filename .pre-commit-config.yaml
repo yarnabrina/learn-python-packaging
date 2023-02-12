@@ -73,6 +73,10 @@ repos:
     hooks:
       - id: pyright
         pass_filenames: false
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.245
+    hooks:
+      - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.7
     hooks:

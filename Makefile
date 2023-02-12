@@ -36,6 +36,7 @@ bandit-linter: venv
 	source venv/bin/activate
 	$(call check_install_status,bandit)
 	bandit \
+    --recursive \
 	--severity-level high \
 	--confidence-level high \
 	${PYTHON_SOURCE_DIRECTORY}

@@ -42,7 +42,7 @@ def fixture_operator(request: pytest.FixtureRequest) -> typing.Literal["+", "-",
     return request.param
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_sum(first_number: float, second_number: float) -> float:
     """Define expected sum for unit tests.
 
@@ -61,7 +61,7 @@ def expected_sum(first_number: float, second_number: float) -> float:
     return first_number + second_number
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_difference(first_number: float, second_number: float) -> float:
     """Define expected difference for unit tests.
 
@@ -80,7 +80,7 @@ def expected_difference(first_number: float, second_number: float) -> float:
     return first_number - second_number
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_product(first_number: float, second_number: float) -> float:
     """Define expected product for unit tests.
 
@@ -99,7 +99,7 @@ def expected_product(first_number: float, second_number: float) -> float:
     return first_number * second_number
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_quotient(first_number: float, second_number: float) -> float:
     """Define expected quotient for unit tests.
 
@@ -118,7 +118,7 @@ def expected_quotient(first_number: float, second_number: float) -> float:
     return first_number / second_number
 
 
-@pytest.fixture
+@pytest.fixture()
 def expected_result(
     first_number: float,
     second_number: float,
