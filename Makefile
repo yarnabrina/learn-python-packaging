@@ -23,16 +23,106 @@ define check_install_status =
 	fi
 endef
 
+## help
+##     list all wrapper targets
+##     show documentaions of wrapper targets
+.PHONY: help
+help: Makefile
+	@sed -n 's/^## //p' $<
+
 .ONESHELL:
-.PHONY: autoflake-formatter
-autoflake-formatter: venv
+venv:
+	python3 -m venv venv
+	echo "*" > venv/.gitignore
+	source venv/bin/activate
+	python3 -m pip install --upgrade pip setuptools wheel
+	python3 -m pip install --editable ".[all]"
+
+.ONESHELL:
+.PHONY: pre-commit-install
+pre-commit-install: venv
+	source venv/bin/activate
+	$(call check_install_status,pre-commit)
+	pre-commit install
+
+## setup
+##     create isolated environment with editable package and dependencies (venv)
+##     add pre-commit to git hooks (pre-commit-install)
+.PHONY: setup
+setup: venv pre-commit-install
+
+.ONESHELL:
+venv-upgrade: venv
+	source venv/bin/activate
+	python3 -m pip install --upgrade pip setuptools wheel
+	python3 -m pip install --upgrade \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.dev.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.doc.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.format.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.lint.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.release.txt \
+	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.test.txt
+
+.ONESHELL:
+.PHONY: pre-commit-autoupdate
+pre-commit-autoupdate: venv
+	source venv/bin/activate
+	pre-commit autoupdate
+
+## update
+##     upgrade isolated environment to latest package and dependencies (venv-upgrade)
+##     update versions of pre-commit hooks (pre-commit-autoupdate)
+.PHONY: update
+update: venv-upgrade pre-commit-autoupdate
+
+.ONESHELL:
+.PHONY: autoflake
+autoflake: venv
 	source venv/bin/activate
 	$(call check_install_status,autoflake)
 	autoflake $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
-.PHONY: bandit-linter
-bandit-linter: venv
+.PHONY: black
+black: venv
+	source venv/bin/activate
+	$(call check_install_status,black)
+	black ${PYTHON_SOURCE_DIRECTORY}
+
+.ONESHELL:
+.PHONY: docformatter
+docformatter: venv
+	source venv/bin/activate
+	$(call check_install_status,docformatter)
+	docformatter $(PYTHON_SOURCE_SCRIPTS)
+
+.ONESHELL:
+.PHONY: isort
+isort: venv
+	source venv/bin/activate
+	$(call check_install_status,isort)
+	isort ${PYTHON_SOURCE_DIRECTORY}
+
+.ONESHELL:
+.PHONY: pyupgrade
+pyupgrade: venv
+	source venv/bin/activate
+	$(call check_install_status,pyupgrade)
+	pyupgrade --py310-plus $(PYTHON_SOURCE_SCRIPTS)
+
+## format
+##     change codes for older versions (pyupgrade)
+##     remove pyflake detected issues (autoflake)
+##     sort imports (isort)
+##     format docstrings (docformatter)
+##     format code style (black)
+.PHONY: format
+format: pyupgrade autoflake isort docformatter black
+
+.ONESHELL:
+.PHONY: bandit
+bandit: venv
 	source venv/bin/activate
 	$(call check_install_status,bandit)
 	bandit \
@@ -42,71 +132,8 @@ bandit-linter: venv
 	${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: black-formatter
-black-formatter: venv
-	source venv/bin/activate
-	$(call check_install_status,black)
-	black ${PYTHON_SOURCE_DIRECTORY}
-
-.ONESHELL:
-.PHONY: build-distribution
-build-distribution: venv
-	source venv/bin/activate
-	$(call check_install_status,build)
-	python3 -m build --outdir ${PYTHON_DIST_DIRECTORY}
-
-.PHONY: clean-coverage
-clean-coverage:
-	find . \
-	-type f -name .coverage -delete \
-	-o \
-	-type d -name htmlcov \
-	-exec rm -r "{}" +
-
-.PHONY: clean-mypy_cache
-clean-mypy_cache:
-	find . \
-	-type d -name .mypy_cache \
-	-exec rm -r "{}" +
-
-.PHONY: clean-pycache
-clean-pycache:
-	find . \
-	-type f -name '*.py[co]' -delete \
-	-o \
-	-type d -name __pycache__ -delete
-
-.PHONY: clean-pytest_cache
-clean-pytest_cache:
-	find . \
-	-type d -name .pytest_cache \
-	-exec rm -r "{}" +
-
-.ONESHELL:
-.PHONY: coverage-run
-coverage-run: venv
-	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,pytest)
-	coverage run
-
-.ONESHELL:
-.PHONY: coverage-html
-coverage-html: venv
-	source venv/bin/activate
-	$(call check_install_status,coverage)
-	coverage html
-
-.ONESHELL:
-.PHONY: docformatter-formatter
-docformatter-formatter: venv
-	source venv/bin/activate
-	$(call check_install_status,docformatter)
-	docformatter $(PYTHON_SOURCE_SCRIPTS)
-
-.ONESHELL:
-.PHONY: flake8-linter
-flake8-linter: venv
+.PHONY: flake8
+flake8: venv
 	source venv/bin/activate
 	$(call check_install_status,flake8)
 	flake8 \
@@ -116,72 +143,42 @@ flake8-linter: venv
 	${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: interrogate-linter
-interrogate-linter: venv
+.PHONY: interrogate
+interrogate: venv
 	source venv/bin/activate
 	$(call check_install_status,interrogate)
 	interrogate ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: isort-formatter
-isort-formatter: venv
-	source venv/bin/activate
-	$(call check_install_status,isort)
-	isort ${PYTHON_SOURCE_DIRECTORY}
-
-.ONESHELL:
-.PHONY: mypy-linter
-mypy-linter: venv
-	source venv/bin/activate
-	$(call check_install_status,mypy)
-	mypy ${PYTHON_SOURCE_DIRECTORY}
-
-.ONESHELL:
-.PHONY: pre-commit-install
-pre-commit-install: venv
-	source venv/bin/activate
-	$(call check_install_status,pre-commit)
-	pre-commit install
-
-.ONESHELL:
-.PHONY: pre-commit-autoupdate
-pre-commit-autoupdate: venv
-	source venv/bin/activate
-	pre-commit autoupdate
-
-.ONESHELL:
-.PHONY: pre-commit-run
-pre-commit-run: venv
-	source venv/bin/activate
-	pre-commit run --all-files
-
-.ONESHELL:
-.PHONY: pydocstyle-linter
-pydocstyle-linter: venv
+.PHONY: pydocstyle
+pydocstyle: venv
 	source venv/bin/activate
 	$(call check_install_status,pydocstyle)
 	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: pylint-linter
-pylint-linter: venv
+.PHONY: pylint
+pylint: venv
 	source venv/bin/activate
 	$(call check_install_status,pylint)
 	pylint ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: pyright-linter
-pyright-linter: venv
+.PHONY: vulture
+vulture: venv
 	source venv/bin/activate
-	$(call check_install_status,pyright)
-	pyright ${PYTHON_SOURCE_DIRECTORY}
+	$(call check_install_status,vulture)
+	vulture
 
-.ONESHELL:
-.PHONY: pyupgrade-formatter
-pyupgrade-formatter: venv
-	source venv/bin/activate
-	$(call check_install_status,pyupgrade)
-	pyupgrade --py310-plus $(PYTHON_SOURCE_SCRIPTS)
+## lint
+##     find security issues (bandit)
+##     lint all python scripts (flake8)
+##     check docstring coverage (interrogate)
+##     check docstring presence and formats (pydocstyle)
+##     lint all python scripts (pylint)
+##     find dead code (vulture)
+.PHONY: lint
+lint: bandit flake8 interrogate pydocstyle pylint vulture
 
 .ONESHELL:
 .PHONY: pytest-doctest
@@ -211,6 +208,43 @@ pytest-successful: venv
 	$(call check_install_status,pytest)
 	pytest -k "successful"
 
+## test
+##     test doctests (pytest-doctest)
+##     test successful operations (pytest-successful)
+##     test failed operations (pytest-failure)
+##     test other unit tests (pytest-others)
+.PHONY: test
+test: pytest-doctest pytest-successful pytest-failure pytest-others
+
+.ONESHELL:
+.PHONY: coverage-erase
+coverage-erase: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage erase
+
+.ONESHELL:
+.PHONY: coverage-html
+coverage-html: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage html
+
+.ONESHELL:
+.PHONY: coverage-run
+coverage-run: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	$(call check_install_status,pytest)
+	coverage run
+
+## coverage
+##     test all doctests and unit tests (coverage-run)
+##     create test coverage report (coverage-html)
+##     delete collected coverage data (coverage-erase)
+.PHONY: coverage
+coverage: coverage-run coverage-html coverage-erase
+
 .ONESHELL:
 .PHONY: sphinx-source
 sphinx-source: venv
@@ -236,6 +270,19 @@ sphinx-build: venv
 	${PYTHON_DOCS_DIRECTORY}/source \
 	${PYTHON_DOCS_DIRECTORY}/build
 
+## docs
+##     prepare documentation sources with directives (sphinx-source)
+##     create HTML documentation from source files (sphinx-build)
+.PHONY: docs
+docs: sphinx-source sphinx-build
+
+.ONESHELL:
+.PHONY: build
+build: venv
+	source venv/bin/activate
+	$(call check_install_status,build)
+	python3 -m build --outdir ${PYTHON_DIST_DIRECTORY}
+
 .ONESHELL:
 .PHONY: twine-check
 twine-check: venv
@@ -250,99 +297,39 @@ twine-upload: venv
 	$(call check_install_status,twine)
 	twine upload ${PYTHON_DIST_DIRECTORY}/*
 
-.ONESHELL:
-venv:
-	python3 -m venv venv
-	echo "*" > venv/.gitignore
-	source venv/bin/activate
-	python3 -m pip install --upgrade pip setuptools wheel
-	python3 -m pip install --editable ".[all]"
-
-.ONESHELL:
-venv-upgrade: venv
-	source venv/bin/activate
-	python3 -m pip install --upgrade pip setuptools wheel
-	python3 -m pip install --upgrade \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.dev.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.doc.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.format.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.lint.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.release.txt \
-	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.test.txt
-
-.ONESHELL:
-.PHONY: vulture-linter
-vulture-linter: venv
-	source venv/bin/activate
-	$(call check_install_status,vulture)
-	vulture ${PYTHON_SOURCE_DIRECTORY}
-
-## help
-##     list all wrapper targets
-##     show documentaions of wrapper targets
-.PHONY: help
-help: Makefile
-	@sed -n 's/^## //p' $<
-
-## setup
-##     create isolated environment with editable package and dependencies (venv)
-##     add pre-commit to git hooks (pre-commit-install)
-.PHONY: setup
-setup: venv pre-commit-install
-
-## update
-##     upgrade isolated environment to latest package and dependencies (venv-upgrade)
-##     update versions of pre-commit hooks (pre-commit-autoupdate)
-.PHONY: update
-update: venv-upgrade pre-commit-autoupdate
-
-## format
-##     change codes for older versions (pyupgrade-formatter)
-##     remove pyflake detected issues (autoflake-formatter)
-##     sort imports (isort-formatter)
-##     format docstrings (docformatter-formatter)
-##     format code style (black-formatter)
-.PHONY: format
-format: pyupgrade-formatter autoflake-formatter isort-formatter docformatter-formatter black-formatter
-
-## lint
-##     find security issues (bandit-linter)
-##     lint all python scripts (flake8-linter)
-##     check docstring coverage (interrogate-linter)
-##     check types (mypy-linter)
-##     check docstring presence and formats (pydocstyle-linter)
-##     lint all python scripts (pylint-linter)
-##     check types (pyright-linter)
-##     find dead code (vulture-linter)
-.PHONY: lint
-lint: bandit-linter flake8-linter interrogate-linter mypy-linter pydocstyle-linter pylint-linter pyright-linter vulture-linter
-
-## test
-##     test doctests (pytest-doctest)
-##     test successful operations (pytest-successful)
-##     test failed operations (pytest-failure)
-##     test other unit tests (pytest-others)
-.PHONY: test
-test: pytest-doctest pytest-successful pytest-failure pytest-others
-
-## coverage
-##     test all doctests and unit tests (coverage-run)
-##     create test coverage report (coverage-html)
-.PHONY: coverage
-coverage: coverage-run coverage-html
-
-## docs
-##     prepare documentation sources with directives (sphinx-source)
-##     create HTML documentation from source files (sphinx-build)
-.PHONY: docs
-docs: sphinx-source sphinx-build
-
 ## release
-##     prepare documentation sources with directives (sphinx-source)
-##     create HTML documentation from source files (sphinx-build)
+##     create distribution files (build)
+##     check package description (twine-check)
+##     upload distribution files (twine-upload)
 .PHONY: release
-release: build-distribution twine-check twine-upload
+release: build twine-check twine-upload
+
+.PHONY: clean-coverage
+clean-coverage:
+	find . \
+	-type f -name .coverage -delete \
+	-o \
+	-type d -name htmlcov \
+	-exec rm -r "{}" +
+
+.PHONY: clean-mypy_cache
+clean-mypy_cache:
+	find . \
+	-type d -name .mypy_cache \
+	-exec rm -r "{}" +
+
+.PHONY: clean-pycache
+clean-pycache:
+	find . \
+	-type f -name '*.py[co]' -delete \
+	-o \
+	-type d -name __pycache__ -delete
+
+.PHONY: clean-pytest_cache
+clean-pytest_cache:
+	find . \
+	-type d -name .pytest_cache \
+	-exec rm -r "{}" +
 
 ## cleanup
 ##     delete all pycache directories and other cache files (clean-pycache)
@@ -351,3 +338,39 @@ release: build-distribution twine-check twine-upload
 ##     delete all coverage results (clean-coverage)
 .PHONY: cleanup
 cleanup: clean-pycache clean-mypy_cache clean-pytest_cache clean-coverage
+
+.ONESHELL:
+.PHONY: mypy
+mypy: venv
+	source venv/bin/activate
+	$(call check_install_status,mypy)
+	mypy
+
+.ONESHELL:
+.PHONY: mypy-stubgen
+mypy-stubgen: venv
+	source venv/bin/activate
+	$(call check_install_status,mypy)
+	stubgen \
+	--output typing-stubs-for-package-name-to-install-with \
+	--package package_name_to_import_with \
+	--module module_that_can_be_imported_directly \
+	--module module_that_can_be_invoked_from_cli \
+	--module module_that_can_invoke_gui_from_cli
+
+.ONESHELL:
+.PHONY: pyright
+pyright: venv
+	source venv/bin/activate
+	$(call check_install_status,pyright)
+	pyright
+
+.ONESHELL:
+.PHONY: pyright-stubs
+pyright-stubs: venv
+	source venv/bin/activate
+	$(call check_install_status,pyright)
+	pyright --createstub package_name_to_import_with
+	pyright --createstub module_that_can_be_imported_directly
+	pyright --createstub module_that_can_be_invoked_from_cli
+	pyright --createstub module_that_can_invoke_gui_from_cli
