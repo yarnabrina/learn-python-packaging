@@ -8,7 +8,7 @@ sys.path.insert(0, "../src")
 
 project = "package_name_to_install_with"
 version = str(package_name_to_import_with.__version__)
-copyright = "2022, First Author, Second Author"
+project_copyright = "2022-2023, First Author, Second Author"
 author = "First Author, Second Author"
 release = "v1.0.0"
 
