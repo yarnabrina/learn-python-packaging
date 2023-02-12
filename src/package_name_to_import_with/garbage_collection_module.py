@@ -1,13 +1,15 @@
 """Define package contents."""
-import collections.abc
 import functools
 import gc
 import typing
 
+if typing.TYPE_CHECKING:
+    import collections.abc
+
 
 def define_garbage_collection_decorator(
-    function_to_be_decorated: collections.abc.Callable[..., typing.Any]
-) -> collections.abc.Callable[..., typing.Any]:  # pragma: no cover
+    function_to_be_decorated: "collections.abc.Callable[..., typing.Any]",
+) -> "collections.abc.Callable[..., typing.Any]":  # pragma: no cover
     """Perform forcefully garbage collection after execution of provided function.
 
     Parameters
