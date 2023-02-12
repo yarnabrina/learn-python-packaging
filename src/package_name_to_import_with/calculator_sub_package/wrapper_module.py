@@ -1,5 +1,5 @@
 """Define user level functions."""
-import collections
+import collections.abc
 import dataclasses
 import enum
 import typing
@@ -37,7 +37,7 @@ class ArithmeticOperation:
     second_number: float
 
     @property
-    def result(self) -> float:
+    def result(self: "ArithmeticOperation") -> float:
         """Store result of arithmetic operation.
 
         Returns
@@ -116,7 +116,7 @@ def validate_operator_input(
     if processed_user_input == ArithmeticOperator.DIVISION:
         return divide_numbers
 
-    raise NotImplementedError("Supports +, -, *, / only")
+    raise ValueError("Unexpected value of operation")  # pragma: no cover
 
 
 def process_inputs(

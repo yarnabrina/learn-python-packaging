@@ -1,5 +1,5 @@
 """Define package contents."""
-import collections
+import collections.abc
 import functools
 import gc
 import typing
@@ -7,7 +7,7 @@ import typing
 
 def define_garbage_collection_decorator(
     function_to_be_decorated: collections.abc.Callable[..., typing.Any]
-) -> collections.abc.Callable[..., typing.Any]:  # pragma: no cover
+) -> "collections.abc.Callable[..., typing.Any]":  # pragma: no cover
     """Perform forcefully garbage collection after execution of provided function.
 
     Parameters

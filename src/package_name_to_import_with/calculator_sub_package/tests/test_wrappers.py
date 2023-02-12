@@ -30,7 +30,7 @@ def test_successful_operation(
 
 
 @pytest.mark.parametrize(
-    "first_input,operator,second_input,error",
+    ("first_input", "operator", "second_input", "error"),
     [
         ("not_number", "+", 3, "Supports only real numbers"),
         ("not_number", "-", 6, "Supports only real numbers"),
