@@ -1,15 +1,11 @@
 """Define user level functions."""
-from __future__ import annotations
-
+import collections.abc
 import dataclasses
 import enum
 import typing
 
 from .operations_module import add_numbers, multiply_numbers
 from .utility_module import divide_numbers, subtract_numbers
-
-if typing.TYPE_CHECKING:
-    import collections.abc
 
 
 @enum.unique
@@ -41,7 +37,7 @@ class ArithmeticOperation:
     second_number: float
 
     @property
-    def result(self: typing.Self) -> float:
+    def result(self: "ArithmeticOperation") -> float:
         """Store result of arithmetic operation.
 
         Returns

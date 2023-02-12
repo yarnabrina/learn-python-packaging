@@ -169,7 +169,6 @@ precision = 2
 exclude_lines = [
   "pragma: no cover",
   "if __name__ == .__main__.:",
-  "if typing.TYPE_CHECKING:",
 ]
 
 
@@ -250,6 +249,9 @@ console_output_style = "count"
 
 
 [tool.ruff]
+extend-exclude = [
+  "*.pyi",
+]
 fix = true
 format = "grouped"
 ignore = [
@@ -278,12 +280,10 @@ select = [
   "ISC",
   "G",
   "T20",
-  "PYI",
   "PT",
   "Q",
   "SIM",
   "TID",
-  "TCH",
   "ERA",
   "PD",
   "PGH",
