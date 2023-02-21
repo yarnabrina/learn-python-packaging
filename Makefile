@@ -272,9 +272,9 @@ sphinx-source: venv
 .PHONY: sphinx-build
 sphinx-build: venv
 	source venv/bin/activate
+	$(call check_install_status,furo)
 	$(call check_install_status,Sphinx)
 	$(call check_install_status,sphinx-copybutton)
-	$(call check_install_status,sphinx-rtd-theme)
 	sphinx-build \
 	-b html \
 	${PYTHON_DOCS_DIRECTORY}/source \

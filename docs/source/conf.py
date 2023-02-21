@@ -6,7 +6,7 @@ import package_name_to_import_with
 
 sys.path.insert(0, "../src")
 
-project = "package_name_to_install_with"
+project = "package-name-to-install-with"
 version = str(package_name_to_import_with.__version__)
 project_copyright = "2022-2023, First Author, Second Author"
 author = "First Author, Second Author"
@@ -30,18 +30,12 @@ add_function_parentheses = False
 add_module_names = False
 trim_doctest_flags = True
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
 html_theme_options = {
-    "collapse_navigation": False,
-    "sticky_navigation": True,
-    "navigation_depth": -1,
-    "includehidden": False,
-    "titles_only": True,
-    "display_version": True,
-    "logo_only": False,
-    "prev_next_buttons_location": "both",
-    "style_external_links": True,
+    "top_of_page_button": None,
+    "announcement": "<strong>all</strong> page <em>banner</em>",
 }
+html_title = f"Title of {project}'s Documentation at Release {release}"
 
 html_last_updated_fmt = "%B %d, %Y"
 html_use_index = True
