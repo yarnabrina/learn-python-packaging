@@ -68,11 +68,6 @@ repos:
     rev: v2.16.2
     hooks:
       - id: pylint
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.294
-    hooks:
-      - id: pyright
-        pass_filenames: false
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.0.247
     hooks:
