@@ -35,19 +35,28 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/psf/black
     rev: 23.1.0
     hooks:
       - id: black
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/pycqa/bandit
     rev: 1.7.4
     hooks:
       - id: bandit
         args:
+          - --recursive
           - --severity-level
           - high
           - --confidence-level
           - high
+          - src
+        pass_filenames: false
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
     hooks:
@@ -59,6 +68,8 @@ repos:
           - __init__.py:F401
           - --max-line-length
           - "99"
+          - src
+        pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.0.1
     hooks:
@@ -69,13 +80,14 @@ repos:
     hooks:
       - id: pylint
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.247
+    rev: v0.0.249
     hooks:
       - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.7
     hooks:
       - id: vulture
+        pass_filenames: false
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.5.1
     hooks:
@@ -102,10 +114,16 @@ repos:
     rev: 1.5.0
     hooks:
       - id: interrogate
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.3.0
     hooks:
       - id: pydocstyle
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: 0.9.1
     hooks:
