@@ -105,7 +105,7 @@ blacken-docs: venv
 docformatter: venv
 	source venv/bin/activate
 	$(call check_install_status,docformatter)
-	docformatter $(PYTHON_SOURCE_SCRIPTS)
+	docformatter ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: isort

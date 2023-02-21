@@ -87,10 +87,13 @@ repos:
       - id: docformatter
         args:
           - --in-place
+          - --recursive
           - --wrap-summaries
           - "99"
           - --wrap-descriptions
           - "99"
+          - src
+        pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
     rev: "1.13.0"
     hooks:
