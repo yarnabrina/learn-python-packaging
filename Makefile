@@ -241,6 +241,13 @@ coverage-html: venv
 	coverage html
 
 .ONESHELL:
+.PHONY: coverage-report
+coverage-report: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage report
+
+.ONESHELL:
 .PHONY: coverage-run
 coverage-run: venv
 	source venv/bin/activate
@@ -248,12 +255,19 @@ coverage-run: venv
 	$(call check_install_status,pytest)
 	coverage run
 
+.ONESHELL:
+.PHONY: coverage-xml
+coverage-xml: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage xml
+
 ## coverage
 ##     test all doctests and unit tests (coverage-run)
 ##     create test coverage report (coverage-html)
 ##     delete collected coverage data (coverage-erase)
 .PHONY: coverage
-coverage: coverage-run coverage-html coverage-erase
+coverage: coverage-run coverage-report coverage-html coverage-xml coverage-erase
 
 .ONESHELL:
 .PHONY: sphinx-source

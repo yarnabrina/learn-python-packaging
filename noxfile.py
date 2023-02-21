@@ -113,6 +113,8 @@ def coverage(session: nox.Session) -> None:
     session.install("coverage[toml]")
 
     session.run("coverage", "report")
+    session.run("coverage", "html")
+    session.run("coverage", "xml")
 
 
 @FORMAT_SESSION_DECORATOR
