@@ -18,15 +18,17 @@ def add_numbers(first_number: float, second_number: float) -> float:
 
     Examples
     --------
-    >>> from package_name_to_import_with.calculator_sub_package import add_numbers
-    >>> add_numbers(1, 2)
-    3
-    >>> add_numbers(1, -2)
-    -1
-    >>> add_numbers(-1, 2)
-    1
-    >>> add_numbers(-1, -2)
-    -3
+    .. code-block:: pycon
+
+        >>> from package_name_to_import_with.calculator_sub_package import add_numbers
+        >>> add_numbers(1, 2)
+        3
+        >>> add_numbers(1, -2)
+        -1
+        >>> add_numbers(-1, 2)
+        1
+        >>> add_numbers(-1, -2)
+        -3
     """
     sum_of_two_numbers = first_number + second_number
 
@@ -50,15 +52,17 @@ def multiply_numbers(first_number: float, second_number: float) -> float:
 
     Examples
     --------
-    >>> from package_name_to_import_with.calculator_sub_package import multiply_numbers
-    >>> multiply_numbers(1, 2)
-    2
-    >>> multiply_numbers(1, -2)
-    -2
-    >>> multiply_numbers(-1, 2)
-    -2
-    >>> multiply_numbers(-1, -2)
-    2
+    .. code-block:: pycon
+
+        >>> from package_name_to_import_with.calculator_sub_package import multiply_numbers
+        >>> multiply_numbers(1, 2)
+        2
+        >>> multiply_numbers(1, -2)
+        -2
+        >>> multiply_numbers(-1, 2)
+        -2
+        >>> multiply_numbers(-1, -2)
+        2
     """
     product_of_two_numbers = first_number * second_number
 

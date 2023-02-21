@@ -91,6 +91,15 @@ repos:
           - "99"
           - --wrap-descriptions
           - "99"
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: "1.13.0"
+    hooks:
+      - id: blacken-docs
+        args:
+          - --line-length
+          - "87"
+          - --target-version
+          - py310
   - repo: https://github.com/econchick/interrogate
     rev: 1.5.0
     hooks:

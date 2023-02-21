@@ -77,6 +77,20 @@ def black(session: nox.Session) -> None:
     session.run("black", *PYTHON_SCRIPTS)
 
 
+@FORMAT_SESSION_DECORATOR
+def blacken_docs(session: nox.Session) -> None:
+    """Run blacken-docs.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
+    session.install("blacken-docs")
+
+    session.run("blacken-docs", *PYTHON_SCRIPTS)
+
+
 @RELEASE_SESSION_DECORATOR
 def build(session: nox.Session) -> None:
     """Run build."""

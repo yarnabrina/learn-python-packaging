@@ -20,15 +20,17 @@ def subtract_numbers(first_number: float, second_number: float) -> float:
 
     Examples
     --------
-    >>> from package_name_to_import_with.calculator_sub_package import subtract_numbers
-    >>> subtract_numbers(1, 2)
-    -1
-    >>> subtract_numbers(1, -2)
-    3
-    >>> subtract_numbers(-1, 2)
-    -3
-    >>> subtract_numbers(-1, -2)
-    1
+    .. code-block:: pycon
+
+        >>> from package_name_to_import_with.calculator_sub_package import subtract_numbers
+        >>> subtract_numbers(1, 2)
+        -1
+        >>> subtract_numbers(1, -2)
+        3
+        >>> subtract_numbers(-1, 2)
+        -3
+        >>> subtract_numbers(-1, -2)
+        1
     """
     difference_of_two_numbers = add_numbers(first_number, get_negative(second_number))
 
@@ -52,15 +54,17 @@ def divide_numbers(first_number: float, second_number: float) -> float:
 
     Examples
     --------
-    >>> from package_name_to_import_with.calculator_sub_package import divide_numbers
-    >>> divide_numbers(1, 2)
-    0.5
-    >>> divide_numbers(1, -2)
-    -0.5
-    >>> divide_numbers(-1, 2)
-    -0.5
-    >>> divide_numbers(-1, -2)
-    0.5
+    .. code-block:: pycon
+
+        >>> from package_name_to_import_with.calculator_sub_package import divide_numbers
+        >>> divide_numbers(1, 2)
+        0.5
+        >>> divide_numbers(1, -2)
+        -0.5
+        >>> divide_numbers(-1, 2)
+        -0.5
+        >>> divide_numbers(-1, -2)
+        0.5
     """
     quotient_of_two_numbers = multiply_numbers(first_number, get_reciprocal(second_number))
 

@@ -91,6 +91,16 @@ black: venv
 	black ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
+.PHONY: blacken-docs
+blacken-docs: venv
+	source venv/bin/activate
+	$(call check_install_status,blacken-docs)
+	blacken-docs \
+	--line-length 87 \
+	--target-version py310 \
+	$(PYTHON_SOURCE_SCRIPTS)
+
+.ONESHELL:
 .PHONY: docformatter
 docformatter: venv
 	source venv/bin/activate
@@ -118,7 +128,7 @@ pyupgrade: venv
 ##     format docstrings (docformatter)
 ##     format code style (black)
 .PHONY: format
-format: pyupgrade autoflake isort docformatter black
+format: pyupgrade autoflake isort docformatter blacken-docs black
 
 .ONESHELL:
 .PHONY: bandit
