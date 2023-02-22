@@ -376,7 +376,6 @@ mypy-stubgen: venv
 	source venv/bin/activate
 	$(call check_install_status,mypy)
 	stubgen \
-	--output typing-stubs-for-package-name-to-install-with \
 	--package package_name_to_import_with \
 	--module module_that_can_be_imported_directly \
 	--module module_that_can_be_invoked_from_cli \
