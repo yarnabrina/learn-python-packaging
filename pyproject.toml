@@ -70,6 +70,7 @@ all = [
   "pydocstyle",
   "pylint",
   "pyproject-fmt",
+  "pyright",
   "pytest",
   "pyupgrade",
   "Sphinx",
@@ -104,6 +105,7 @@ lint = [
   "mypy",
   "pydocstyle",
   "pylint",
+  "pyright",
   "validate-pyproject",
   "vulture",
 ]
@@ -268,6 +270,15 @@ enable = [
 
 [tool.pylint.reports]
 output-format = "colorized"
+
+[tool.pyright]
+include = [
+  "src",
+]
+exclude = [
+  "**/tests/*.py",
+]
+reportMissingImports = false
 
 [tool.ruff]
 extend-exclude = [
