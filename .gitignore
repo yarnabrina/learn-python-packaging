@@ -266,4 +266,6 @@ $RECYCLE.BIN/
 # Custom
 coverage_html_report/
 coverage_xml_report.xml
+out/
 pytest_junit_report.xml
+typings/
