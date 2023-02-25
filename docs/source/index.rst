@@ -1,5 +1,5 @@
-Welcome to package_name_to_install_with's documentation!
-========================================================
+Welcome to the documentation of package-name-to-install-with!
+=============================================================
 
 **Date**: |today|
 

@@ -262,3 +262,11 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos,windows,visualstudiocode,python
+
+# Custom
+coverage_data
+coverage_html_report/
+coverage_xml_report.xml
+out/
+pytest_junit_report.xml
+typings/

@@ -168,15 +168,17 @@ def calculate_results(
 
     Examples
     --------
-    >>> from package_name_to_import_with import calculate_results
-    >>> calculate_results(1, "+", 2)
-    3.0
-    >>> calculate_results(1, "-", 2)
-    -1.0
-    >>> calculate_results(1, "*", 2)
-    2.0
-    >>> calculate_results(1, "/", 2)
-    0.5
+    .. code-block:: pycon
+
+        >>> from package_name_to_import_with import calculate_results
+        >>> calculate_results(1, "+", 2)
+        3.0
+        >>> calculate_results(1, "-", 2)
+        -1.0
+        >>> calculate_results(1, "*", 2)
+        2.0
+        >>> calculate_results(1, "/", 2)
+        0.5
     """
     arithmetic_expression = process_inputs(first_input, operator, second_input)
 

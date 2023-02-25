@@ -91,11 +91,21 @@ black: venv
 	black ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
+.PHONY: blacken-docs
+blacken-docs: venv
+	source venv/bin/activate
+	$(call check_install_status,blacken-docs)
+	blacken-docs \
+	--line-length 87 \
+	--target-version py310 \
+	$(PYTHON_SOURCE_SCRIPTS)
+
+.ONESHELL:
 .PHONY: docformatter
 docformatter: venv
 	source venv/bin/activate
 	$(call check_install_status,docformatter)
-	docformatter $(PYTHON_SOURCE_SCRIPTS)
+	docformatter ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: isort
@@ -118,7 +128,7 @@ pyupgrade: venv
 ##     format docstrings (docformatter)
 ##     format code style (black)
 .PHONY: format
-format: pyupgrade autoflake isort docformatter black
+format: pyupgrade autoflake isort docformatter blacken-docs black
 
 .ONESHELL:
 .PHONY: bandit
@@ -231,6 +241,13 @@ coverage-html: venv
 	coverage html
 
 .ONESHELL:
+.PHONY: coverage-report
+coverage-report: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage report
+
+.ONESHELL:
 .PHONY: coverage-run
 coverage-run: venv
 	source venv/bin/activate
@@ -238,12 +255,19 @@ coverage-run: venv
 	$(call check_install_status,pytest)
 	coverage run
 
+.ONESHELL:
+.PHONY: coverage-xml
+coverage-xml: venv
+	source venv/bin/activate
+	$(call check_install_status,coverage)
+	coverage xml
+
 ## coverage
 ##     test all doctests and unit tests (coverage-run)
 ##     create test coverage report (coverage-html)
 ##     delete collected coverage data (coverage-erase)
 .PHONY: coverage
-coverage: coverage-run coverage-html coverage-erase
+coverage: coverage-run coverage-report coverage-html coverage-xml coverage-erase
 
 .ONESHELL:
 .PHONY: sphinx-source
@@ -262,9 +286,9 @@ sphinx-source: venv
 .PHONY: sphinx-build
 sphinx-build: venv
 	source venv/bin/activate
+	$(call check_install_status,furo)
 	$(call check_install_status,Sphinx)
 	$(call check_install_status,sphinx-copybutton)
-	$(call check_install_status,sphinx-rtd-theme)
 	sphinx-build \
 	-b html \
 	${PYTHON_DOCS_DIRECTORY}/source \
@@ -352,7 +376,6 @@ mypy-stubgen: venv
 	source venv/bin/activate
 	$(call check_install_status,mypy)
 	stubgen \
-	--output typing-stubs-for-package-name-to-install-with \
 	--package package_name_to_import_with \
 	--module module_that_can_be_imported_directly \
 	--module module_that_can_be_invoked_from_cli \
