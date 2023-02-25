@@ -67,7 +67,7 @@ all = [
   "mypy",
   "nox",
   "pre-commit",
-  "pydocstyle",
+  "pydocstyle[toml]",
   "pylint",
   "pyproject-fmt",
   "pyright",
@@ -103,7 +103,7 @@ lint = [
   "flake8",
   "interrogate",
   "mypy",
-  "pydocstyle",
+  "pydocstyle[toml]",
   "pylint",
   "pyright",
   "validate-pyproject",
@@ -165,7 +165,6 @@ namespaces = false
 line-length = 99
 target-version = [
   "py310",
-  "py311",
 ]
 safe = true
 
