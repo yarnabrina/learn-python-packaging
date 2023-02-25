@@ -81,6 +81,9 @@ repos:
     rev: v2.16.2
     hooks:
       - id: pylint
+        args:
+          - src
+        pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
