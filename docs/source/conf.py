@@ -8,9 +8,9 @@ sys.path.insert(0, "../src")
 
 project = "package-name-to-install-with"
 version = str(package_name_to_import_with.__version__)
-project_copyright = "2022-2023, First Author, Second Author"
-author = "First Author, Second Author"
-release = "v1.0.0"
+project_copyright = "2022-2023, Anirban Ray, First Maintainer, Second Maintainer"
+author = "Anirban Ray, First Author, Second Author"
+release = f"v{version}"
 
 extensions = [
     "sphinx.ext.autodoc",

@@ -13,14 +13,18 @@ keywords = [
   "sample",
   "setuptools",
 ]
-license = { text = "AGPL-3.0-or-later" } # license = { file = "LICENSE.txt" }
+license = { text = "mit" } # license = { file = "LICENSE.txt" }
 maintainers = [
-  { name= "First Maintainer Name", email= "first.maintainer.email@example.com" },
-  { name= "Second Maintainer Name", email= "second.maintainer.email@example.com" },
+  { name = "Anirban Ray" },
+  { email = "39331844+yarnabrina@users.noreply.github.com" },
+  { name = "First Maintainer", email = "first.maintainer@example.com" },
+  { name = "Second Maintainer", email = "second.maintainer@example.com" },
 ]
 authors = [
-  { name= "First Author Name", email= "first.author.email@example.com" },
-  { name= "Second Author Name", email= "second.author.email@example.com" },
+  { name = "Anirban Ray" },
+  { email = "39331844+yarnabrina@users.noreply.github.com" },
+  { name = "First Author", email = "first.author@example.com" },
+  { name = "Second Author", email = "second.author@example.com" },
 ]
 requires-python = ">=3.10"
 classifiers = [
@@ -30,7 +34,7 @@ classifiers = [
   "Framework :: Sphinx",
   "Intended Audience :: Developers",
   "License :: OSI Approved",
-  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
