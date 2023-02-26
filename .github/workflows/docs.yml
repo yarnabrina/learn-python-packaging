@@ -1,0 +1,45 @@
+name: docs-workflow-name
+run-name: docs workflow run name
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - main
+defaults:
+  run:
+    shell: bash
+jobs:
+  docs-job-identifier:
+    name: docs job name
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          check-latest: true
+          architecture: x64
+          cache: pip
+      - name: build documentation
+        uses: ./.github/actions/nox-sessions-action-identifier
+        with:
+          session-name-input-identifier: sphinx
+      - name: caching documentation
+        id: docs-cache
+        uses: actions/cache@v3
+        with:
+          key: ${{ hashFiles('src/**/*') }}-${{ hashFiles('docs/source/*') }}
+          path: ./docs/build
+      - name: uploading new documentation
+        if: steps.docs-cache.outputs.cache-hit != 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: ./docs/build
