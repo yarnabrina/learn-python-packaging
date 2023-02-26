@@ -38,7 +38,7 @@ jobs:
           check-latest: true
           architecture: x64
       - name: run unit tests on python ${{ matrix.python-version }} in runner ${{ matrix.runner-platform }}
-        uses: ./.github/actions/nox-tags-action-identifier
+        uses: ./.github/actions/nox-sessions-action-identifier
         with:
-          tag-name-input-identifier: test
+          session-name-input-identifier: pytest
           python-version-input-identifier: ${{ matrix.python-version }}
