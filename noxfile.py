@@ -25,6 +25,9 @@ LINT_SESSION_DECORATOR = functools.partial(
 RELEASE_SESSION_DECORATOR = functools.partial(
     GENERAL_SESSION_DECORATOR, python=PYTHON_DEFAULT_VERSION, tags=["release"]
 )
+TEST_SESSION_DECORATOR = functools.partial(
+    GENERAL_SESSION_DECORATOR, python=PYTHON_VERSIONS, tags=["test"]
+)
 
 
 @FORMAT_SESSION_DECORATOR
@@ -101,7 +104,7 @@ def build(session: nox.Session) -> None:
     session.notify("twine")
 
 
-@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION, tags=["test"])
+@TEST_SESSION_DECORATOR
 def coverage(session: nox.Session) -> None:
     """Run coverage.
 
@@ -238,7 +241,7 @@ def pyright(session: nox.Session) -> None:
     session.run("pyright")
 
 
-@GENERAL_SESSION_DECORATOR(python=PYTHON_VERSIONS, tags=["test"])
+@TEST_SESSION_DECORATOR
 def pytest(session: nox.Session) -> None:
     """Run pytest.
 
