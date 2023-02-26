@@ -18,7 +18,7 @@ jobs:
           check-latest: true
           architecture: x64
           cache: pip
-      - name: run all pre-commit hooks on python
+      - name: run all pre-commit hooks
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pre_commit
