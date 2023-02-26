@@ -25,6 +25,9 @@ LINT_SESSION_DECORATOR = functools.partial(
 RELEASE_SESSION_DECORATOR = functools.partial(
     GENERAL_SESSION_DECORATOR, python=PYTHON_DEFAULT_VERSION, tags=["release"]
 )
+TEST_SESSION_DECORATOR = functools.partial(
+    GENERAL_SESSION_DECORATOR, python=PYTHON_VERSIONS, tags=["test"]
+)
 
 
 @FORMAT_SESSION_DECORATOR
@@ -101,7 +104,7 @@ def build(session: nox.Session) -> None:
     session.notify("twine")
 
 
-@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION, tags=["test"])
+@TEST_SESSION_DECORATOR
 def coverage(session: nox.Session) -> None:
     """Run coverage.
 
@@ -196,6 +199,29 @@ def mypy(session: nox.Session) -> None:
     session.run("mypy")
 
 
+@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION)
+def pre_commit(session: nox.Session) -> None:
+    """Run pre-commit.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
+    session.install("pre-commit")
+
+    session.run(
+        "pre-commit",
+        "run",
+        "--color",
+        "always",
+        "--verbose",
+        "--all-files",
+        "--hook-stage",
+        "manual",
+    )
+
+
 @LINT_SESSION_DECORATOR
 def pydocstyle(session: nox.Session) -> None:
     """Run pydocstyle.
@@ -238,7 +264,7 @@ def pyright(session: nox.Session) -> None:
     session.run("pyright")
 
 
-@GENERAL_SESSION_DECORATOR(python=PYTHON_VERSIONS, tags=["test"])
+@TEST_SESSION_DECORATOR
 def pytest(session: nox.Session) -> None:
     """Run pytest.
 
@@ -268,7 +294,7 @@ def pyupgrade(session: nox.Session) -> None:
     session.run("pyupgrade", "--py310-plus", *PYTHON_SCRIPTS)
 
 
-@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION, tags=["doc"])
+@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION)
 def sphinx(session: nox.Session) -> None:
     """Run sphinx.
 

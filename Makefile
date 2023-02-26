@@ -13,6 +13,7 @@ PYTHON_DIST_DIRECTORY := ./dist
 
 PYTHON_SOURCE_SCRIPTS_PATTERN := "${PYTHON_SOURCE_DIRECTORY}/**/*.py"
 PYTHON_TEST_SCRIPTS_PATTERN := "**/tests/*.py"
+PYTHON_SKIP_TEST_SCRIPTS_PATTERN := "./src/*tests*"
 
 PYTHON_SOURCE_SCRIPTS := $(shell find ${PYTHON_SOURCE_DIRECTORY} -type f -name "*.py")
 
@@ -280,7 +281,8 @@ sphinx-source: venv
 	--force \
 	--follow-links \
 	--separate \
-	${PYTHON_SOURCE_DIRECTORY}
+	${PYTHON_SOURCE_DIRECTORY} \
+	${PYTHON_SKIP_TEST_SCRIPTS_PATTERN}
 
 .ONESHELL:
 .PHONY: sphinx-build
