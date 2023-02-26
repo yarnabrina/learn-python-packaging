@@ -1,12 +1,6 @@
 name: docs-workflow-name
 run-name: docs workflow run name
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
   push:
     branches:
       - main
