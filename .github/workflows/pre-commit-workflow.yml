@@ -22,8 +22,3 @@ jobs:
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pre_commit
-      - name: caching pre-commit hooks
-        uses: actions/cache@v3
-        with:
-          key: ${{ hashFiles('.pre-commit-config.yaml') }}
-          path: ~/.cache/pre-commit
