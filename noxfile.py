@@ -199,6 +199,29 @@ def mypy(session: nox.Session) -> None:
     session.run("mypy")
 
 
+@GENERAL_SESSION_DECORATOR(python=PYTHON_DEFAULT_VERSION)
+def pre_commit(session: nox.Session) -> None:
+    """Run pre-commit.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
+    session.install("pre-commit")
+
+    session.run(
+        "pre-commit",
+        "run",
+        "--color",
+        "always",
+        "--verbose",
+        "--all-files",
+        "--hook-stage",
+        "manual",
+    )
+
+
 @LINT_SESSION_DECORATOR
 def pydocstyle(session: nox.Session) -> None:
     """Run pydocstyle.
