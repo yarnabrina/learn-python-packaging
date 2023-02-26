@@ -37,6 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           check-latest: true
           architecture: x64
+          cache: pip
       - name: run unit tests on python ${{ matrix.python-version }} in runner ${{ matrix.runner-platform }}
         uses: ./.github/actions/nox-sessions-action-identifier
         with:

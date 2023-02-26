@@ -30,6 +30,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           check-latest: true
           architecture: x64
+          cache: pip
       - name: run formatters on python ${{ matrix.python-version }}
         uses: ./.github/actions/nox-tags-action-identifier
         with:
