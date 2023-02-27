@@ -19,6 +19,8 @@ jobs:
           architecture: x64
           cache: pip
       - name: run all pre-commit hooks
+        env:
+          SKIP: no-commit-to-branch
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pre_commit
