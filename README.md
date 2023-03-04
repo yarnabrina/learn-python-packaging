@@ -5,5 +5,5 @@
 3. Release wheel
 4. ~~Setup Github Actions~~
 5. Host documentation
-6. Hypotheses testing
+6. ~~Hypotheses testing~~
 7. Version bumping
