@@ -78,7 +78,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/PyCQA/pylint
-    rev: v2.16.2
+    rev: v2.16.3
     hooks:
       - id: pylint
         args:
@@ -87,14 +87,14 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.295
+    rev: v1.1.296
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.252
+    rev: v0.0.254
     hooks:
       - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
@@ -141,7 +141,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.9.1
+    rev: 0.9.2
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject

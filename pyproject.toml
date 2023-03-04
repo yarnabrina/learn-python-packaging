@@ -66,6 +66,7 @@ all = [
   "docformatter",
   "flake8",
   "furo",
+  "hypothesis[pytest]",
   "interrogate",
   "isort",
   "mypy",
@@ -119,6 +120,7 @@ release = [
 ]
 test = [
   "coverage[toml]",
+  "hypothesis[pytest]",
   "pytest",
 ]
 [project.urls]

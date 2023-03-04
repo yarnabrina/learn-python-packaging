@@ -119,6 +119,40 @@ def expected_quotient(first_number: float, second_number: float) -> float:
 
 
 @pytest.fixture()
+def expected_negative(first_number: float) -> float:
+    """Define expected negative for unit tests.
+
+    Parameters
+    ----------
+    first_number : float
+        value of input number
+
+    Returns
+    -------
+    float
+        value of expected negative
+    """
+    return (-1) * first_number
+
+
+@pytest.fixture()
+def expected_reciprocal(second_number: float) -> float:
+    """Define expected reciprocal for unit tests.
+
+    Parameters
+    ----------
+    second_number : float
+        value of input number
+
+    Returns
+    -------
+    float
+        value of expected reciprocal
+    """
+    return 1 / second_number
+
+
+@pytest.fixture()
 def expected_result(
     first_number: float,
     second_number: float,

@@ -206,11 +206,18 @@ pytest-failure: venv
 	pytest -k "failure"
 
 .ONESHELL:
+.PHONY: pytest-hypotheses
+pytest-hypotheses: venv
+	source venv/bin/activate
+	$(call check_install_status,pytest)
+	pytest -k "hypothesis"
+
+.ONESHELL:
 .PHONY: pytest-others
 pytest-others: venv
 	source venv/bin/activate
 	$(call check_install_status,pytest)
-	pytest -k "test and not failure and not successful"
+	pytest -k "test and not failure and not hypothesis and not successful"
 
 .ONESHELL:
 .PHONY: pytest-successful
@@ -223,9 +230,10 @@ pytest-successful: venv
 ##     test doctests (pytest-doctest)
 ##     test successful operations (pytest-successful)
 ##     test failed operations (pytest-failure)
+##     test hypotheses (pytest-others)
 ##     test other unit tests (pytest-others)
 .PHONY: test
-test: pytest-doctest pytest-successful pytest-failure pytest-others
+test: pytest-doctest pytest-successful pytest-failure pytest-hypotheses pytest-others
 
 .ONESHELL:
 .PHONY: coverage-erase
