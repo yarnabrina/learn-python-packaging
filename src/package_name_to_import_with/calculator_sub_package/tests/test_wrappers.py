@@ -1,4 +1,5 @@
 """Define unit tests for calculators."""
+import math
 import typing
 
 import pytest
@@ -26,7 +27,7 @@ def test_successful_operation(
         value of expected sum
     """
     result = package_name_to_import_with.calculate_results(first_number, operator, second_number)
-    assert result == pytest.approx(expected_result)  # nosec B101
+    assert math.isclose(result, expected_result)  # nosec B101
 
 
 @pytest.mark.parametrize(
