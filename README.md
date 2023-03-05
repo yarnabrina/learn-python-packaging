@@ -4,6 +4,6 @@
 - [x] ~~Build wheel~~
 - [ ] Release wheel
 - [x] ~~Setup Github Actions~~
-- [ ] Host documentation
+- [x] ~~Host documentation~~
 - [x] ~~Hypotheses testing~~
 - [ ] Version bumping
