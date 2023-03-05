@@ -315,9 +315,7 @@ def twine(session: nox.Session) -> None:
     session.install("twine")
 
     session.run("twine", "check", f"{DIST_DIRECTORY.name}/*")
-    session.run(
-        "twine", "upload", "--repository-url", "PACKAGE_REGISTRY", f"{DIST_DIRECTORY.name}/*"
-    )
+    session.run("twine", "upload", f"{DIST_DIRECTORY.name}/*")
 
 
 @LINT_SESSION_DECORATOR
