@@ -98,7 +98,7 @@ def blacken_docs(session: nox.Session) -> None:
 def build(session: nox.Session) -> None:
     """Run build."""
     session.run("python3", "-m", "pip", "freeze", "--all")
-    session.install("build")
+    session.install("build", "wheel")
 
     session.run("python3", "-m", "build", "--outdir", f"{DIST_DIRECTORY.name}", "--no-isolation")
 
