@@ -1,0 +1,33 @@
+name: release-workflow-name
+run-name: release workflow run name
+on: workflow_dispatch
+defaults:
+  run:
+    shell: bash
+jobs:
+  release-job-identifier:
+    name: release job name
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          check-latest: true
+          architecture: x64
+          cache: pip
+      - name: build and release wheel
+        env:
+          TWINE_REPOSITORY: ${{ secrets.PYPI_REPOSITORY }}
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        uses: ./.github/actions/nox-sessions-action-identifier
+        with:
+          session-name-input-identifier: build
+      - name: upload wheel
+        uses: actions/upload-artifact@v3
+        with:
+          name: release
+          path: ./dist

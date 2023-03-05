@@ -99,7 +99,7 @@ def build(session: nox.Session) -> None:
     """Run build."""
     session.install("build")
 
-    session.run("python3", "-m", "build", "--no-isolation")
+    session.run("python3", "-m", "build", "--outdir", f"{DIST_DIRECTORY.name}", "--no-isolation")
 
     session.notify("twine")
 
