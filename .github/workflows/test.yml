@@ -43,3 +43,8 @@ jobs:
         with:
           session-name-input-identifier: pytest
           python-version-input-identifier: ${{ matrix.python-version }}
+      - name: upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage_xml_report.xml
