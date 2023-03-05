@@ -48,8 +48,8 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic=[
-  "readme", # readme = "README.md"
-  "version", # version = "1.0.0"
+  "readme",
+  "version",
 ]
 dependencies = [
   "PySimpleGUI",
@@ -140,7 +140,7 @@ py-modules = [
 ]
 
 [tool.setuptools.dynamic]
-version = { attr = "package_name_to_import_with.__version__" } # { attr = "module_with_version.__version__" }
+version = { attr = "package_name_to_import_with.__version__" }
 readme = { file = "README.md", content-type = "text/markdown" }
 
 [tool.setuptools.packages.find]

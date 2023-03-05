@@ -97,7 +97,7 @@ def blacken_docs(session: nox.Session) -> None:
 @RELEASE_SESSION_DECORATOR
 def build(session: nox.Session) -> None:
     """Run build."""
-    session.install("build")
+    session.install("build", "wheel")
 
     session.run("python3", "-m", "build", "--outdir", f"{DIST_DIRECTORY.name}", "--no-isolation")
 
@@ -315,9 +315,7 @@ def twine(session: nox.Session) -> None:
     session.install("twine")
 
     session.run("twine", "check", f"{DIST_DIRECTORY.name}/*")
-    session.run(
-        "twine", "upload", "--repository-url", "PACKAGE_REGISTRY", f"{DIST_DIRECTORY.name}/*"
-    )
+    session.run("twine", "upload", f"{DIST_DIRECTORY.name}/*")
 
 
 @LINT_SESSION_DECORATOR
