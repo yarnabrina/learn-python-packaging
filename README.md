@@ -8,6 +8,7 @@
 [![format workflow][format-workflow-badge-image]][format-workflow-badge-url]
 [![lint workflow][lint-workflow-badge-image]][lint-workflow-badge-url]
 [![pre-commit workflow][pre-commit-workflow-badge-image]][pre-commit-workflow-badge-url]
+[![release workflow][release-workflow-badge-image]][release-workflow-badge-url]
 [![test workflow][test-workflow-badge-image]][test-workflow-badge-url]
 
 [![pre-commit][pre-commit-badge-image]][pre-commit-badge-url]
@@ -24,7 +25,7 @@
 
 - [x] ~~Create python package~~
 - [x] ~~Build wheel~~
-- [ ] Release wheel
+- [x] ~~Release wheel~~
 - [x] ~~Setup Github Actions~~
 - [x] ~~Host documentation~~
 - [x] ~~Hypotheses testing~~
@@ -106,6 +107,9 @@
 
 [read-the-docs-badge-image]: https://readthedocs.org/projects/learn-python-packaging/badge/?version=latest
 [read-the-docs-badge-url]: https://learn-python-packaging.readthedocs.io/en/latest/?badge=latest
+
+[release-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/badge.svg
+[release-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/
 
 [ruff-badge-image]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json
 [ruff-badge-url]: https://github.com/charliermarsh/ruff
