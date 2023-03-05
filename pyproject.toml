@@ -125,7 +125,7 @@ test = [
 ]
 [project.urls]
 "Bug Tracker" = "https://github.com/yarnabrina/learn-python-packaging/issues"
-"Home Page" = "https://github.com/yarnabrina/learn-python-packaging"
+"Documentation" = "https://learn-python-packaging.readthedocs.io"
 "Source Code" = "https://github.com/yarnabrina/learn-python-packaging"
 [project.scripts]
 console-calculator = "module_that_can_be_invoked_from_cli:console_calculator"
