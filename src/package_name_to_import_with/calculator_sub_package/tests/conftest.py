@@ -10,6 +10,11 @@ from package_name_to_import_with.calculator_sub_package.wrapper_module import Ar
 def fixture_first_number(request: pytest.FixtureRequest) -> float:
     """Define first input for unit tests.
 
+    Parameters
+    ----------
+    request : pytest.FixtureRequest
+        request for fixture from test function
+
     Returns
     -------
     float
@@ -22,6 +27,11 @@ def fixture_first_number(request: pytest.FixtureRequest) -> float:
 def fixture_second_number(request: pytest.FixtureRequest) -> float:
     """Define second input for unit tests.
 
+    Parameters
+    ----------
+    request : pytest.FixtureRequest
+        request for fixture from test function
+
     Returns
     -------
     float
@@ -33,6 +43,11 @@ def fixture_second_number(request: pytest.FixtureRequest) -> float:
 @pytest.fixture(params=["+", "-", "*", "/"], name="operator")
 def fixture_operator(request: pytest.FixtureRequest) -> typing.Literal["+", "-", "*", "/"]:
     """Define operator for unit tests.
+
+    Parameters
+    ----------
+    request : pytest.FixtureRequest
+        request for fixture from test function
 
     Returns
     -------

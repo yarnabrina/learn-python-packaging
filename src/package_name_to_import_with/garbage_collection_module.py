@@ -25,6 +25,13 @@ def define_garbage_collection_decorator(
     def wrapper_function(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
         """Execute provided function with forceful garbage collection afterwards.
 
+        Parameters
+        ----------
+        args : tuple
+            positional arguments for ``function_to_be_decorated``
+        kwargs : dict
+            keyword arguments for ``function_to_be_decorated``
+
         Returns
         -------
         typing.Any

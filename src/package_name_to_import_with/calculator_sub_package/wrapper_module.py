@@ -96,8 +96,6 @@ def validate_operator_input(
     ------
     ValueError
         if input is not a basic arithmetic operator
-    NotImplementedError
-        if input is not one of ``+``, ``-``, ``*``, ``/``
     """
     try:
         processed_user_input = ArithmeticOperator(user_input)

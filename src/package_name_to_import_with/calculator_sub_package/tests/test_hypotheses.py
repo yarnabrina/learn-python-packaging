@@ -164,6 +164,11 @@ def test_operation_hypothesis(
         type of arithmetic operation
     second_number : float
         value of second number
+
+    Raises
+    ------
+    ValueError
+        if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
     """
     hypothesis.assume(
         not (
