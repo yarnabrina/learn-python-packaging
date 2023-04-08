@@ -129,7 +129,7 @@ def docformatter(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install("docformatter")
+    session.install("docformatter[tomli]")
 
     session.run("docformatter", *PYTHON_SCRIPTS)
 

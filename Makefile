@@ -106,6 +106,7 @@ blacken-docs: venv
 docformatter: venv
 	source venv/bin/activate
 	$(call check_install_status,docformatter)
+	$(call check_install_status,tomli)
 	docformatter ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
@@ -165,6 +166,7 @@ interrogate: venv
 pydocstyle: venv
 	source venv/bin/activate
 	$(call check_install_status,pydocstyle)
+	$(call check_install_status,tomli)
 	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
@@ -209,6 +211,7 @@ pytest-failure: venv
 .PHONY: pytest-hypotheses
 pytest-hypotheses: venv
 	source venv/bin/activate
+	$(call check_install_status,hypothesis)
 	$(call check_install_status,pytest)
 	pytest -k "hypothesis"
 
@@ -240,6 +243,7 @@ test: pytest-doctest pytest-successful pytest-failure pytest-hypotheses pytest-o
 coverage-erase: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
+	$(call check_install_status,tomli)
 	coverage erase
 
 .ONESHELL:
@@ -247,6 +251,7 @@ coverage-erase: venv
 coverage-html: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
+	$(call check_install_status,tomli)
 	coverage html
 
 .ONESHELL:
@@ -254,6 +259,7 @@ coverage-html: venv
 coverage-report: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
+	$(call check_install_status,tomli)
 	coverage report
 
 .ONESHELL:
@@ -261,7 +267,9 @@ coverage-report: venv
 coverage-run: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
+	$(call check_install_status,hypothesis)
 	$(call check_install_status,pytest)
+	$(call check_install_status,tomli)
 	coverage run
 
 .ONESHELL:
@@ -269,6 +277,7 @@ coverage-run: venv
 coverage-xml: venv
 	source venv/bin/activate
 	$(call check_install_status,coverage)
+	$(call check_install_status,tomli)
 	coverage xml
 
 ## coverage
