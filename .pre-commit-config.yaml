@@ -28,7 +28,7 @@ repos:
         args:
           - --py310-plus
   - repo: https://github.com/pycqa/autoflake
-    rev: v2.0.1
+    rev: v2.0.2
     hooks:
       - id: autoflake
   - repo: https://github.com/pycqa/isort
@@ -39,14 +39,14 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         args:
           - src
         pass_filenames: false
   - repo: https://github.com/pycqa/bandit
-    rev: 1.7.4
+    rev: 1.7.5
     hooks:
       - id: bandit
         args:
@@ -71,14 +71,14 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.0.1
+    rev: v1.2.0
     hooks:
       - id: mypy
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/PyCQA/pylint
-    rev: v2.16.3
+    rev: v3.0.0a6
     hooks:
       - id: pylint
         args:
@@ -87,14 +87,14 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.296
+    rev: v1.1.302
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.254
+    rev: v0.0.261
     hooks:
       - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
@@ -103,7 +103,7 @@ repos:
       - id: vulture
         pass_filenames: false
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.1
+    rev: v1.6.0
     hooks:
       - id: docformatter
         args:
@@ -145,11 +145,11 @@ repos:
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.12.1
+    rev: v0.12.2
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.2
+    rev: v2.2.4
     hooks:
       - id: codespell
 fail_fast: false
