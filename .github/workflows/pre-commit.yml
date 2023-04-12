@@ -1,0 +1,26 @@
+name: pre-commit-workflow-name
+run-name: pre-commit workflow run name
+on: push
+defaults:
+  run:
+    shell: bash
+jobs:
+  pre-commit-job-identifier:
+    name: pre-commit job name
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          check-latest: true
+          architecture: x64
+          cache: pip
+      - name: run all pre-commit hooks
+        env:
+          SKIP: no-commit-to-branch
+        uses: ./.github/actions/nox-sessions-action-identifier
+        with:
+          session-name-input-identifier: pre_commit

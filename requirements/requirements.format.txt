@@ -1,0 +1,7 @@
+autoflake
+black
+blacken-docs
+docformatter[tomli]
+isort
+pyproject-fmt
+pyupgrade

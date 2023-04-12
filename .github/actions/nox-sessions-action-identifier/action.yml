@@ -1,0 +1,33 @@
+name: nox-session-action-name
+description: run nox session
+inputs:
+  session-name-input-identifier:
+    description: name of nox session
+    required: true
+  python-version-input-identifier:
+    description: python version to run session
+    required: false
+    default: none
+runs:
+  using: composite
+  steps:
+    - id: nox-step-identifier
+      name: install nox
+      run: python3 -m pip install nox
+      shell: bash
+    - id: session-all-versions-step-identifier
+      name: run provided nox session for all configured python versions
+      if: env.PYTHON_VERSION == 'none'
+      run: nox --sessions ${{env.SESSION_NAME}} --force-venv-backend venv
+      shell: bash
+      env:
+        SESSION_NAME: ${{ inputs.session-name-input-identifier }}
+        PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}
+    - id: session-single-version-step-identifier
+      name: run provided nox session for provided python version
+      if: env.PYTHON_VERSION != 'none'
+      run: nox --sessions ${{env.SESSION_NAME}} --pythons ${{env.PYTHON_VERSION}} --force-venv-backend venv
+      shell: bash
+      env:
+        SESSION_NAME: ${{ inputs.session-name-input-identifier }}
+        PYTHON_VERSION: ${{ inputs.python-version-input-identifier }}

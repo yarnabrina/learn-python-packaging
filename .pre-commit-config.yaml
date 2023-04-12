@@ -1,0 +1,152 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: name-tests-test
+        args:
+          - --pytest-test-first
+      - id: no-commit-to-branch
+      - id: pretty-format-json
+        args:
+          - --autofix
+          - --indent
+          - "4"
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+      - id: pyupgrade
+        args:
+          - --py310-plus
+  - repo: https://github.com/pycqa/autoflake
+    rev: v2.0.2
+    hooks:
+      - id: autoflake
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args:
+          - src
+        pass_filenames: false
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        args:
+          - src
+        pass_filenames: false
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args:
+          - --recursive
+          - --severity-level
+          - high
+          - --confidence-level
+          - high
+          - src
+        pass_filenames: false
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        args:
+          - --extend-ignore
+          - E203
+          - --per-file-ignores
+          - __init__.py:F401
+          - --max-line-length
+          - "99"
+          - src
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.2.0
+    hooks:
+      - id: mypy
+        pass_filenames: false
+        stages:
+          - manual
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.0a6
+    hooks:
+      - id: pylint
+        args:
+          - src
+        pass_filenames: false
+        stages:
+          - manual
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.302
+    hooks:
+      - id: pyright
+        pass_filenames: false
+        stages:
+          - manual
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.261
+    hooks:
+      - id: ruff
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.7
+    hooks:
+      - id: vulture
+        pass_filenames: false
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.6.0
+    hooks:
+      - id: docformatter
+        additional_dependencies:
+          - tomli
+        args:
+          - --in-place
+          - src
+        pass_filenames: false
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: "1.13.0"
+    hooks:
+      - id: blacken-docs
+        args:
+          - --line-length
+          - "87"
+          - --target-version
+          - py310
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.5.0
+    hooks:
+      - id: interrogate
+        args:
+          - src
+        pass_filenames: false
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        additional_dependencies:
+          - tomli
+        args:
+          - src
+        pass_filenames: false
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: 0.9.2
+    hooks:
+      - id: pyproject-fmt
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.12.2
+    hooks:
+      - id: validate-pyproject
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+fail_fast: false

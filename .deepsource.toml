@@ -1,0 +1,41 @@
+version = 1
+exclude_patterns = [
+  "typing-stubs-for-package-name-to-install-with/**",
+]
+test_patterns = [
+  "**/tests/*.py",
+]
+
+[[analyzers]]
+name = "python"
+enabled = true
+dependency_file_paths = [
+  "pyproject.toml",
+  "requirements/requirements.dev.txt",
+  "requirements/requirements.doc.txt",
+  "requirements/requirements.format.txt",
+  "requirements/requirements.lint.txt",
+  "requirements/requirements.release.txt",
+  "requirements/requirements.test.txt",
+  "requirements/requirements.txt",
+]
+
+  [analyzers.meta]
+  runtime_version = "3.x.x"
+  max_line_length = 99
+  skip_doc_coverage = [
+    "init",
+  ]
+  type_checker = "mypy"
+
+[[analyzers]]
+name = "secrets"
+enabled = true
+
+[[transformers]]
+name = "black"
+enabled = true
+
+[[transformers]]
+name = "isort"
+enabled = true

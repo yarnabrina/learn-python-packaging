@@ -1,0 +1,9 @@
+bandit
+flake8
+interrogate
+mypy
+pydocstyle
+pylint
+pyright
+validate-pyproject
+vulture

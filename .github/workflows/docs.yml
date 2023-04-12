@@ -1,0 +1,29 @@
+name: docs-workflow-name
+run-name: docs workflow run name
+on: workflow_dispatch
+defaults:
+  run:
+    shell: bash
+jobs:
+  docs-job-identifier:
+    name: docs job name
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout commit
+        uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          check-latest: true
+          architecture: x64
+          cache: pip
+      - name: build documentation
+        uses: ./.github/actions/nox-sessions-action-identifier
+        with:
+          session-name-input-identifier: sphinx
+      - name: upload documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: ./docs/build
