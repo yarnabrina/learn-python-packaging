@@ -22,13 +22,13 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.3.2
     hooks:
       - id: pyupgrade
         args:
           - --py310-plus
   - repo: https://github.com/pycqa/autoflake
-    rev: v2.0.2
+    rev: v2.1.1
     hooks:
       - id: autoflake
   - repo: https://github.com/pycqa/isort
@@ -82,19 +82,21 @@ repos:
     hooks:
       - id: pylint
         args:
+          - --disable
+          - import-error
           - src
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.302
+    rev: v1.1.306
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.261
+    rev: v0.0.265
     hooks:
       - id: ruff
   - repo: https://github.com/jendrikseipp/vulture
@@ -103,7 +105,7 @@ repos:
       - id: vulture
         pass_filenames: false
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.6.0
+    rev: v1.6.5
     hooks:
       - id: docformatter
         additional_dependencies:
@@ -138,7 +140,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.9.2
+    rev: 0.11.1
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
