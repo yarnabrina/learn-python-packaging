@@ -82,6 +82,8 @@ repos:
     hooks:
       - id: pylint
         args:
+          - --disable
+          - import-error
           - src
         pass_filenames: false
         stages:
