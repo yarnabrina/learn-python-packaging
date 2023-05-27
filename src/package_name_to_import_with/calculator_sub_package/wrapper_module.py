@@ -104,6 +104,8 @@ def calculate_results(
         >>> calculate_results(1, "/", 2)
         0.5
     """
-    arithmetic_expression = ArithmeticExpression(first_input, operator, second_input)
+    arithmetic_expression = ArithmeticExpression(
+        first_input, operator, second_input
+    )  # pyright: ignore [reportGeneralTypeIssues]
 
     return arithmetic_expression.result
