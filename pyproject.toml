@@ -255,6 +255,9 @@ ignore-init-method = true
 convention = "numpy"
 
 [tool.pylint.main]
+extension-pkg-allow-list = [
+  "pydantic",
+]
 fail-under = 8.0
 jobs = 0
 recursive = true
