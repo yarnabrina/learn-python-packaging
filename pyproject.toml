@@ -30,6 +30,7 @@ requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Flake8",
+  "Framework :: Pydantic",
   "Framework :: Pytest",
   "Framework :: Sphinx",
   "Intended Audience :: Developers",
@@ -51,6 +52,7 @@ dynamic=[
   "version",
 ]
 dependencies = [
+  "pydantic",
   "PySimpleGUI",
 ]
 [project.optional-dependencies]
