@@ -1,9 +1,10 @@
-import collections.abc
 import enum
 import typing
 
 from .operations_module import add_numbers, multiply_numbers
 from .utility_module import divide_numbers, subtract_numbers
+
+ArithmeticOperation: typing.TypeAlias
 
 class ArithmeticOperator(enum.Enum):
     ADDITION: str
@@ -11,21 +12,17 @@ class ArithmeticOperator(enum.Enum):
     MULTIPLICATION: str
     DIVISION: str
 
-class ArithmeticOperation:
+ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation]
+
+class ArithmeticExpression:
     first_number: float
-    operation: collections.abc.Callable[[float, float], float]
+    operator: ArithmeticOperator
     second_number: float
     @property
+    def operation(self) -> ArithmeticOperation: ...
+    @property
     def result(self) -> float: ...
-    def __init__(self, first_number, operation, second_number) -> None: ...
 
-def validate_number_input(user_input: typing.Any) -> float: ...
-def validate_operator_input(
-    user_input: typing.Any,
-) -> collections.abc.Callable[[float, float], float]: ...
-def process_inputs(
-    first_input: typing.Any, operator: typing.Any, second_input: typing.Any
-) -> ArithmeticOperation: ...
 def calculate_results(
-    first_input: typing.Any, operator: typing.Literal["+", "-", "*", "/"], second_input: typing.Any
+    first_input: float, operator: ArithmeticOperator, second_input: float
 ) -> float: ...

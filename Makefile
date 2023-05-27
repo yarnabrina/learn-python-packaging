@@ -395,10 +395,11 @@ mypy-stubgen: venv
 	source venv/bin/activate
 	$(call check_install_status,mypy)
 	stubgen \
-	--package package_name_to_import_with \
+	--output typing-stubs-for-package-name-to-install-with \
 	--module module_that_can_be_imported_directly \
 	--module module_that_can_be_invoked_from_cli \
-	--module module_that_can_invoke_gui_from_cli
+	--module module_that_can_invoke_gui_from_cli \
+	--package package_name_to_import_with
 
 .ONESHELL:
 .PHONY: pyright
