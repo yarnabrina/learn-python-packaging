@@ -3,9 +3,12 @@ import argparse
 import sys
 import typing
 
+import pydantic
+
 import package_name_to_import_with
 
 
+@pydantic.validate_arguments
 def capture_user_inputs() -> dict[str, typing.Any]:
     """Capture user inputs for arithmetic expression.
 
@@ -25,6 +28,7 @@ def capture_user_inputs() -> dict[str, typing.Any]:
     return vars(parsed_arguments)
 
 
+@pydantic.validate_arguments
 def console_calculator() -> None:
     """Calculate arithmetic expressions."""
     user_inputs = capture_user_inputs()

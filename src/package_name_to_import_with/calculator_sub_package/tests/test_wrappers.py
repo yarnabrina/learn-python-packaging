@@ -33,15 +33,15 @@ def test_successful_operation(
 @pytest.mark.parametrize(
     ("first_input", "operator", "second_input", "error"),
     [
-        ("not_number", "+", 3, "Supports only real numbers"),
-        ("not_number", "-", 6, "Supports only real numbers"),
-        ("not_number", "*", 7, "Supports only real numbers"),
-        ("not_number", "/", 8, "Supports only real numbers"),
-        (3, "+", "not_number", "Supports only real numbers"),
-        (6, "-", "not_number", "Supports only real numbers"),
-        (7, "*", "not_number", "Supports only real numbers"),
-        (8, "/", "not_number", "Supports only real numbers"),
-        (0, "^", 0, "Supports only basic arithmetic"),
+        ("not_number", "+", 3, "value is not a valid float"),
+        ("not_number", "-", 6, "value is not a valid float"),
+        ("not_number", "*", 7, "value is not a valid float"),
+        ("not_number", "/", 8, "value is not a valid float"),
+        (3, "+", "not_number", "value is not a valid float"),
+        (6, "-", "not_number", "value is not a valid float"),
+        (7, "*", "not_number", "value is not a valid float"),
+        (8, "/", "not_number", "value is not a valid float"),
+        (0, "^", 0, "value is not a valid enumeration member"),
     ],
 )
 def test_operation_failure(

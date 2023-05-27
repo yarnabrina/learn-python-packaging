@@ -1,4 +1,5 @@
 """Calculate arithmetic expressions from GUI."""
+import pydantic
 import PySimpleGUI
 
 import package_name_to_import_with
@@ -10,6 +11,7 @@ OPERATION_RESULT = "result"
 CLOSE_BUTTON = "Close"
 
 
+@pydantic.validate_arguments
 def define_gui_layout() -> list[list[PySimpleGUI.Element]]:
     """Prepare design of the GUI.
 
@@ -33,6 +35,7 @@ def define_gui_layout() -> list[list[PySimpleGUI.Element]]:
     return layout
 
 
+@pydantic.validate_arguments(config={"arbitrary_types_allowed": True})
 def define_gui_window(gui_layout: list[list[PySimpleGUI.Element]]) -> PySimpleGUI.Window:
     """Create GUI with provided design.
 
@@ -51,6 +54,7 @@ def define_gui_window(gui_layout: list[list[PySimpleGUI.Element]]) -> PySimpleGU
     return window
 
 
+@pydantic.validate_arguments(config={"arbitrary_types_allowed": True})
 def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
     """Control flow of the GUI.
 
@@ -77,6 +81,7 @@ def orchestrate_interaction(gui_window: PySimpleGUI.Window) -> None:
             gui_window[OPERATION_RESULT].update(value=operation_result)
 
 
+@pydantic.validate_arguments
 def gui_calculator() -> None:
     """Calculate arithmetic expressions."""
     gui_layout = define_gui_layout()
