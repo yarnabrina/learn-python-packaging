@@ -43,7 +43,7 @@ venv:
 .PHONY: pre-commit-install
 pre-commit-install: venv
 	source venv/bin/activate
-	$(call check_install_status,pre-commit)
+	$(call check_install_status, pre-commit)
 	pre-commit install
 
 ## setup
@@ -81,21 +81,21 @@ update: venv-upgrade pre-commit-autoupdate
 .PHONY: autoflake
 autoflake: venv
 	source venv/bin/activate
-	$(call check_install_status,autoflake)
+	$(call check_install_status, autoflake)
 	autoflake $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
 .PHONY: black
 black: venv
 	source venv/bin/activate
-	$(call check_install_status,black)
+	$(call check_install_status, black)
 	black ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: blacken-docs
 blacken-docs: venv
 	source venv/bin/activate
-	$(call check_install_status,blacken-docs)
+	$(call check_install_status, blacken-docs)
 	blacken-docs \
 	--line-length 87 \
 	--target-version py310 \
@@ -105,22 +105,22 @@ blacken-docs: venv
 .PHONY: docformatter
 docformatter: venv
 	source venv/bin/activate
-	$(call check_install_status,docformatter)
-	$(call check_install_status,tomli)
+	$(call check_install_status, docformatter)
+	$(call check_install_status, tomli)
 	docformatter ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: isort
 isort: venv
 	source venv/bin/activate
-	$(call check_install_status,isort)
+	$(call check_install_status, isort)
 	isort ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pyupgrade
 pyupgrade: venv
 	source venv/bin/activate
-	$(call check_install_status,pyupgrade)
+	$(call check_install_status, pyupgrade)
 	pyupgrade --py310-plus $(PYTHON_SOURCE_SCRIPTS)
 
 ## format
@@ -136,7 +136,7 @@ format: pyupgrade autoflake isort docformatter blacken-docs black
 .PHONY: bandit
 bandit: venv
 	source venv/bin/activate
-	$(call check_install_status,bandit)
+	$(call check_install_status, bandit)
 	bandit \
     --recursive \
 	--severity-level high \
@@ -147,7 +147,7 @@ bandit: venv
 .PHONY: flake8
 flake8: venv
 	source venv/bin/activate
-	$(call check_install_status,flake8)
+	$(call check_install_status, flake8)
 	flake8 \
 	--extend-ignore E203 \
 	--per-file-ignores __init__.py:F401 \
@@ -158,29 +158,29 @@ flake8: venv
 .PHONY: interrogate
 interrogate: venv
 	source venv/bin/activate
-	$(call check_install_status,interrogate)
+	$(call check_install_status, interrogate)
 	interrogate ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pydocstyle
 pydocstyle: venv
 	source venv/bin/activate
-	$(call check_install_status,pydocstyle)
-	$(call check_install_status,tomli)
+	$(call check_install_status, pydocstyle)
+	$(call check_install_status, tomli)
 	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pylint
 pylint: venv
 	source venv/bin/activate
-	$(call check_install_status,pylint)
+	$(call check_install_status, pylint)
 	pylint ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: vulture
 vulture: venv
 	source venv/bin/activate
-	$(call check_install_status,vulture)
+	$(call check_install_status, vulture)
 	vulture
 
 ## lint
@@ -197,36 +197,36 @@ lint: bandit flake8 interrogate pydocstyle pylint vulture
 .PHONY: pytest-doctest
 pytest-doctest: venv
 	source venv/bin/activate
-	$(call check_install_status,pytest)
+	$(call check_install_status, pytest)
 	pytest -k "not test_"
 
 .ONESHELL:
 .PHONY: pytest-failure
 pytest-failure: venv
 	source venv/bin/activate
-	$(call check_install_status,pytest)
+	$(call check_install_status, pytest)
 	pytest -k "failure"
 
 .ONESHELL:
 .PHONY: pytest-hypotheses
 pytest-hypotheses: venv
 	source venv/bin/activate
-	$(call check_install_status,hypothesis)
-	$(call check_install_status,pytest)
+	$(call check_install_status, hypothesis)
+	$(call check_install_status, pytest)
 	pytest -k "hypothesis"
 
 .ONESHELL:
 .PHONY: pytest-others
 pytest-others: venv
 	source venv/bin/activate
-	$(call check_install_status,pytest)
+	$(call check_install_status, pytest)
 	pytest -k "test and not failure and not hypothesis and not successful"
 
 .ONESHELL:
 .PHONY: pytest-successful
 pytest-successful: venv
 	source venv/bin/activate
-	$(call check_install_status,pytest)
+	$(call check_install_status, pytest)
 	pytest -k "successful"
 
 ## test
@@ -242,42 +242,42 @@ test: pytest-doctest pytest-successful pytest-failure pytest-hypotheses pytest-o
 .PHONY: coverage-erase
 coverage-erase: venv
 	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,tomli)
+	$(call check_install_status, coverage)
+	$(call check_install_status, tomli)
 	coverage erase
 
 .ONESHELL:
 .PHONY: coverage-html
 coverage-html: venv
 	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,tomli)
+	$(call check_install_status, coverage)
+	$(call check_install_status, tomli)
 	coverage html
 
 .ONESHELL:
 .PHONY: coverage-report
 coverage-report: venv
 	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,tomli)
+	$(call check_install_status, coverage)
+	$(call check_install_status, tomli)
 	coverage report
 
 .ONESHELL:
 .PHONY: coverage-run
 coverage-run: venv
 	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,hypothesis)
-	$(call check_install_status,pytest)
-	$(call check_install_status,tomli)
+	$(call check_install_status, coverage)
+	$(call check_install_status, hypothesis)
+	$(call check_install_status, pytest)
+	$(call check_install_status, tomli)
 	coverage run
 
 .ONESHELL:
 .PHONY: coverage-xml
 coverage-xml: venv
 	source venv/bin/activate
-	$(call check_install_status,coverage)
-	$(call check_install_status,tomli)
+	$(call check_install_status, coverage)
+	$(call check_install_status, tomli)
 	coverage xml
 
 ## coverage
@@ -291,7 +291,7 @@ coverage: coverage-run coverage-report coverage-html coverage-xml coverage-erase
 .PHONY: sphinx-source
 sphinx-source: venv
 	source venv/bin/activate
-	$(call check_install_status,Sphinx)
+	$(call check_install_status, Sphinx)
 	sphinx-apidoc \
 	--output-dir ${PYTHON_DOCS_DIRECTORY}/source \
 	--maxdepth 3 \
@@ -305,9 +305,9 @@ sphinx-source: venv
 .PHONY: sphinx-build
 sphinx-build: venv
 	source venv/bin/activate
-	$(call check_install_status,furo)
-	$(call check_install_status,Sphinx)
-	$(call check_install_status,sphinx-copybutton)
+	$(call check_install_status, furo)
+	$(call check_install_status, Sphinx)
+	$(call check_install_status, sphinx-copybutton)
 	sphinx-build \
 	-b html \
 	${PYTHON_DOCS_DIRECTORY}/source \
@@ -323,21 +323,21 @@ docs: sphinx-source sphinx-build
 .PHONY: build
 build: venv
 	source venv/bin/activate
-	$(call check_install_status,build)
+	$(call check_install_status, build)
 	python3 -m build --outdir ${PYTHON_DIST_DIRECTORY}
 
 .ONESHELL:
 .PHONY: twine-check
 twine-check: venv
 	source venv/bin/activate
-	$(call check_install_status,twine)
+	$(call check_install_status, twine)
 	twine check --strict ${PYTHON_DIST_DIRECTORY}/*
 
 .ONESHELL:
 .PHONY: twine-upload
 twine-upload: venv
 	source venv/bin/activate
-	$(call check_install_status,twine)
+	$(call check_install_status, twine)
 	twine upload ${PYTHON_DIST_DIRECTORY}/*
 
 ## release
@@ -386,14 +386,14 @@ cleanup: clean-pycache clean-mypy_cache clean-pytest_cache clean-coverage
 .PHONY: mypy
 mypy: venv
 	source venv/bin/activate
-	$(call check_install_status,mypy)
+	$(call check_install_status, mypy)
 	mypy
 
 .ONESHELL:
 .PHONY: mypy-stubgen
 mypy-stubgen: venv
 	source venv/bin/activate
-	$(call check_install_status,mypy)
+	$(call check_install_status, mypy)
 	stubgen \
 	--output typing-stubs-for-package-name-to-install-with \
 	--module module_that_can_be_imported_directly \
@@ -405,14 +405,14 @@ mypy-stubgen: venv
 .PHONY: pyright
 pyright: venv
 	source venv/bin/activate
-	$(call check_install_status,pyright)
+	$(call check_install_status, pyright)
 	pyright
 
 .ONESHELL:
 .PHONY: pyright-stubs
 pyright-stubs: venv
 	source venv/bin/activate
-	$(call check_install_status,pyright)
+	$(call check_install_status, pyright)
 	pyright --createstub package_name_to_import_with
 	pyright --createstub module_that_can_be_imported_directly
 	pyright --createstub module_that_can_be_invoked_from_cli
