@@ -155,4 +155,6 @@ repos:
     rev: v2.2.5
     hooks:
       - id: codespell
+default_language_version:
+  python: python3.10
 fail_fast: false
