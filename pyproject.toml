@@ -6,6 +6,7 @@ requires = [
 
 [project]
 name = "package-name-to-install-with"
+version = "0.0.2"
 description = "A small example package"
 keywords = [
   "development",
@@ -49,7 +50,6 @@ classifiers = [
 ]
 dynamic=[
   "readme",
-  "version",
 ]
 dependencies = [
   "pydantic",
@@ -141,7 +141,6 @@ py-modules = [
 ]
 
 [tool.setuptools.dynamic]
-version = { attr = "package_name_to_import_with.__version__" }
 readme = { file = "README.md", content-type = "text/markdown" }
 
 [tool.setuptools.packages.find]
