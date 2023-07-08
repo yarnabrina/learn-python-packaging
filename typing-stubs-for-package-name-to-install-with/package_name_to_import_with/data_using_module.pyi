@@ -1,8 +1,9 @@
-import typing
+import pydantic
+from _typeshed import Incomplete
 
-class PackageMetadata(typing.TypedDict):
+class PackageMetadata(pydantic.BaseModel):
     Name: str
     Version: str
 
 METADATA_CONTENTS: str
-METADATA: PackageMetadata
+METADATA: Incomplete

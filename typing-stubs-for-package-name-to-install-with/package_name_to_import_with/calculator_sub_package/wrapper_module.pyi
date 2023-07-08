@@ -1,8 +1,8 @@
 import enum
+import pydantic
 import typing
-
-from .operations_module import add_numbers, multiply_numbers
-from .utility_module import divide_numbers, subtract_numbers
+from .operations_module import add_numbers as add_numbers, multiply_numbers as multiply_numbers
+from .utility_module import divide_numbers as divide_numbers, subtract_numbers as subtract_numbers
 
 ArithmeticOperation: typing.TypeAlias
 
@@ -14,7 +14,7 @@ class ArithmeticOperator(enum.Enum):
 
 ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation]
 
-class ArithmeticExpression:
+class ArithmeticExpression(pydantic.BaseModel):
     first_number: float
     operator: ArithmeticOperator
     second_number: float
@@ -23,6 +23,4 @@ class ArithmeticExpression:
     @property
     def result(self) -> float: ...
 
-def calculate_results(
-    first_input: float, operator: ArithmeticOperator, second_input: float
-) -> float: ...
+def calculate_results(first_input: float, operator: ArithmeticOperator, second_input: float) -> float: ...
