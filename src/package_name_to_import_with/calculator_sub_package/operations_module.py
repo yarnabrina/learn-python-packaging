@@ -1,6 +1,8 @@
 """Define functions to add and multiply."""
+import pydantic
 
 
+@pydantic.validate_call(validate_return=True)
 def add_numbers(first_number: float, second_number: float) -> float:
     """Perform addition of two real numbers.
 
@@ -22,19 +24,20 @@ def add_numbers(first_number: float, second_number: float) -> float:
 
         >>> from package_name_to_import_with.calculator_sub_package import add_numbers
         >>> add_numbers(1, 2)
-        3
+        3.0
         >>> add_numbers(1, -2)
-        -1
+        -1.0
         >>> add_numbers(-1, 2)
-        1
+        1.0
         >>> add_numbers(-1, -2)
-        -3
+        -3.0
     """
     sum_of_two_numbers = first_number + second_number
 
     return sum_of_two_numbers
 
 
+@pydantic.validate_call(validate_return=True)
 def multiply_numbers(first_number: float, second_number: float) -> float:
     """Perform multiplication of two real numbers.
 
@@ -56,13 +59,13 @@ def multiply_numbers(first_number: float, second_number: float) -> float:
 
         >>> from package_name_to_import_with.calculator_sub_package import multiply_numbers
         >>> multiply_numbers(1, 2)
-        2
+        2.0
         >>> multiply_numbers(1, -2)
-        -2
+        -2.0
         >>> multiply_numbers(-1, 2)
-        -2
+        -2.0
         >>> multiply_numbers(-1, -2)
-        2
+        2.0
     """
     product_of_two_numbers = first_number * second_number
 

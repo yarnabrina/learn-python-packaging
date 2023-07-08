@@ -6,6 +6,7 @@ requires = [
 
 [project]
 name = "package-name-to-install-with"
+version = "0.0.2"
 description = "A small example package"
 keywords = [
   "development",
@@ -30,6 +31,7 @@ requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Flake8",
+  "Framework :: Pydantic",
   "Framework :: Pytest",
   "Framework :: Sphinx",
   "Intended Audience :: Developers",
@@ -48,9 +50,9 @@ classifiers = [
 ]
 dynamic=[
   "readme",
-  "version",
 ]
 dependencies = [
+  "pydantic",
   "PySimpleGUI",
 ]
 [project.optional-dependencies]
@@ -139,7 +141,6 @@ py-modules = [
 ]
 
 [tool.setuptools.dynamic]
-version = { attr = "package_name_to_import_with.__version__" }
 readme = { file = "README.md", content-type = "text/markdown" }
 
 [tool.setuptools.packages.find]
@@ -172,6 +173,59 @@ target-version = [
   "py310",
 ]
 safe = true
+
+[tool.ruff]
+extend-exclude = [
+  "*.pyi",
+]
+fix = true
+format = "grouped"
+ignore = [
+  "ANN401",
+  "D203",
+  "D213",
+  "TRY003",
+]
+ignore-init-module-imports = true
+line-length = 99
+select = [
+  "F",
+  "E",
+  "W",
+  "C90",
+  "I",
+  "N",
+  "D",
+  "UP",
+  "ANN",
+  "S",
+  "B",
+  "A",
+  "C4",
+  "T10",
+  "ISC",
+  "G",
+  "T20",
+  "PT",
+  "Q",
+  "SIM",
+  "TID",
+  "ERA",
+  "PD",
+  "PGH",
+  "PL",
+  "TRY",
+  "RUF",
+]
+src = [
+  "src",
+]
+target-version = "py310"
+
+[tool.ruff.per-file-ignores]
+"**/test_*.py" = [
+  "S101",
+]
 
 [tool.isort]
 overwrite_in_place = true
@@ -254,6 +308,9 @@ ignore-init-method = true
 convention = "numpy"
 
 [tool.pylint.main]
+extension-pkg-allow-list = [
+  "pydantic",
+]
 fail-under = 8.0
 jobs = 0
 recursive = true
@@ -283,59 +340,6 @@ exclude = [
   "**/tests/*.py",
 ]
 reportMissingImports = false
-
-[tool.ruff]
-extend-exclude = [
-  "*.pyi",
-]
-fix = true
-format = "grouped"
-ignore = [
-  "ANN401",
-  "D203",
-  "D213",
-  "TRY003",
-]
-ignore-init-module-imports = true
-line-length = 99
-select = [
-  "F",
-  "E",
-  "W",
-  "C90",
-  "I",
-  "N",
-  "D",
-  "UP",
-  "ANN",
-  "S",
-  "B",
-  "A",
-  "C4",
-  "T10",
-  "ISC",
-  "G",
-  "T20",
-  "PT",
-  "Q",
-  "SIM",
-  "TID",
-  "ERA",
-  "PD",
-  "PGH",
-  "PL",
-  "TRY",
-  "RUF",
-]
-src = [
-  "src",
-]
-target-version = "py310"
-
-[tool.ruff.per-file-ignores]
-"**/test_*.py" = [
-  "S101",
-]
 
 [tool.vulture]
 min_confidence = 100

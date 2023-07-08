@@ -1,6 +1,8 @@
 """Define inverses."""
+import pydantic
 
 
+@pydantic.validate_call(validate_return=True)
 def get_negative(input_number: float) -> float:
     """Get additive inverse of a real number.
 
@@ -20,15 +22,16 @@ def get_negative(input_number: float) -> float:
 
         >>> from package_name_to_import_with.calculator_sub_package import get_negative
         >>> get_negative(1)
-        -1
+        -1.0
         >>> get_negative(-1)
-        1
+        1.0
     """
     additive_inverse = (-1) * input_number
 
     return additive_inverse
 
 
+@pydantic.validate_call(validate_return=True)
 def get_reciprocal(input_number: float) -> float:
     """Get multiplicative inverse of a real number.
 

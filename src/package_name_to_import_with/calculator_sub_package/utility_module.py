@@ -1,8 +1,11 @@
 """Define functions to subtract and divide."""
+import pydantic
+
 from .inverses_module import get_negative, get_reciprocal
 from .operations_module import add_numbers, multiply_numbers
 
 
+@pydantic.validate_call(validate_return=True)
 def subtract_numbers(first_number: float, second_number: float) -> float:
     """Perform subtraction of two real numbers.
 
@@ -24,19 +27,20 @@ def subtract_numbers(first_number: float, second_number: float) -> float:
 
         >>> from package_name_to_import_with.calculator_sub_package import subtract_numbers
         >>> subtract_numbers(1, 2)
-        -1
+        -1.0
         >>> subtract_numbers(1, -2)
-        3
+        3.0
         >>> subtract_numbers(-1, 2)
-        -3
+        -3.0
         >>> subtract_numbers(-1, -2)
-        1
+        1.0
     """
     difference_of_two_numbers = add_numbers(first_number, get_negative(second_number))
 
     return difference_of_two_numbers
 
 
+@pydantic.validate_call(validate_return=True)
 def divide_numbers(first_number: float, second_number: float) -> float:
     """Perform division of two real numbers.
 

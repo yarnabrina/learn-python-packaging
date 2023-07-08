@@ -1,5 +1,5 @@
-from .inverses_module import get_negative, get_reciprocal
-from .operations_module import add_numbers, multiply_numbers
+from .inverses_module import get_negative as get_negative, get_reciprocal as get_reciprocal
+from .operations_module import add_numbers as add_numbers, multiply_numbers as multiply_numbers
 
 def subtract_numbers(first_number: float, second_number: float) -> float: ...
 def divide_numbers(first_number: float, second_number: float) -> float: ...

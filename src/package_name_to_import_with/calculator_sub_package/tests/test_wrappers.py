@@ -2,6 +2,7 @@
 import math
 import typing
 
+import pydantic
 import pytest
 
 import package_name_to_import_with
@@ -31,21 +32,21 @@ def test_successful_operation(
 
 
 @pytest.mark.parametrize(
-    ("first_input", "operator", "second_input", "error"),
+    ("first_input", "operator", "second_input"),
     [
-        ("not_number", "+", 3, "Supports only real numbers"),
-        ("not_number", "-", 6, "Supports only real numbers"),
-        ("not_number", "*", 7, "Supports only real numbers"),
-        ("not_number", "/", 8, "Supports only real numbers"),
-        (3, "+", "not_number", "Supports only real numbers"),
-        (6, "-", "not_number", "Supports only real numbers"),
-        (7, "*", "not_number", "Supports only real numbers"),
-        (8, "/", "not_number", "Supports only real numbers"),
-        (0, "^", 0, "Supports only basic arithmetic"),
+        ("not_number", "+", 3),
+        ("not_number", "-", 6),
+        ("not_number", "*", 7),
+        ("not_number", "/", 8),
+        (3, "+", "not_number"),
+        (6, "-", "not_number"),
+        (7, "*", "not_number"),
+        (8, "/", "not_number"),
+        (0, "^", 0),
     ],
 )
 def test_operation_failure(
-    first_input: typing.Any, operator: typing.Any, second_input: typing.Any, error: str
+    first_input: typing.Any, operator: typing.Any, second_input: typing.Any
 ) -> None:
     """Check failure during calculations.
 
@@ -57,8 +58,6 @@ def test_operation_failure(
         input for operator
     second_input : typing.Any
         input for second number
-    error : str
-        expected error message
     """
-    with pytest.raises(ValueError, match=error):
+    with pytest.raises(pydantic.ValidationError):
         package_name_to_import_with.calculate_results(first_input, operator, second_input)

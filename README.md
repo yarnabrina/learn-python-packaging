@@ -29,6 +29,7 @@
 - [x] ~~Setup Github Actions~~
 - [x] ~~Host documentation~~
 - [x] ~~Hypotheses testing~~
+- [ ] Pydantic Validation
 
 ## Tools Used
 

@@ -22,15 +22,18 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.2
+    rev: v3.8.0
     hooks:
       - id: pyupgrade
         args:
           - --py310-plus
   - repo: https://github.com/pycqa/autoflake
-    rev: v2.1.1
+    rev: v2.2.0
     hooks:
       - id: autoflake
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
@@ -62,18 +65,14 @@ repos:
     hooks:
       - id: flake8
         args:
-          - --extend-ignore
-          - E203
-          - --per-file-ignores
-          - __init__.py:F401
-          - --max-line-length
-          - "99"
           - src
         pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.2.0
+    rev: v1.4.1
     hooks:
       - id: mypy
+        additional_dependencies:
+          - pydantic
         pass_filenames: false
         stages:
           - manual
@@ -89,23 +88,26 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.306
+    rev: v1.1.316
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.265
+    rev: v0.0.277
     hooks:
       - id: ruff
+        args:
+          - src
+        pass_filenames: false
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.7
     hooks:
       - id: vulture
         pass_filenames: false
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.6.5
+    rev: v1.7.3
     hooks:
       - id: docformatter
         additional_dependencies:
@@ -115,7 +117,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.13.0"
+    rev: "1.14.0"
     hooks:
       - id: blacken-docs
         args:
@@ -140,15 +142,17 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.11.1
+    rev: 0.13.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.12.2
+    rev: v0.13
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.4
+    rev: v2.2.5
     hooks:
       - id: codespell
+default_language_version:
+  python: python3.10
 fail_fast: false

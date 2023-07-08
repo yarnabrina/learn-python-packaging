@@ -194,7 +194,7 @@ def mypy(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install("mypy")
+    session.install("mypy", "pydantic")
 
     session.run("mypy")
 
@@ -231,7 +231,7 @@ def pydocstyle(session: nox.Session) -> None:
     session : nox.Session
         nox Session object
     """
-    session.install("pydocstyle")
+    session.install("pydocstyle[toml]")
 
     session.run("pydocstyle", str(SOURCE_DIRECTORY))
 
