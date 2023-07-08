@@ -97,7 +97,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.275
+    rev: v0.0.277
     hooks:
       - id: ruff
         args:
@@ -144,7 +144,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.12.1
+    rev: 0.13.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
