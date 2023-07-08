@@ -73,8 +73,6 @@ repos:
       - id: mypy
         additional_dependencies:
           - pydantic
-        args:
-          - --ignore-missing-imports
         pass_filenames: false
         stages:
           - manual
