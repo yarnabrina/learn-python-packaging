@@ -29,8 +29,7 @@ ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation] = {
 }
 
 
-@pydantic.dataclasses.dataclass
-class ArithmeticExpression:
+class ArithmeticExpression(pydantic.BaseModel):
     """Define arithmetic expression.
 
     Parameters
@@ -70,7 +69,7 @@ class ArithmeticExpression:
         return self.operation(self.first_number, self.second_number)
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def calculate_results(
     first_input: float, operator: ArithmeticOperator, second_input: float
 ) -> float:
@@ -105,7 +104,7 @@ def calculate_results(
         0.5
     """
     arithmetic_expression = ArithmeticExpression(
-        first_input, operator, second_input
-    )  # pyright: ignore [reportGeneralTypeIssues]
+        first_number=first_input, operator=operator, second_number=second_input
+    )
 
     return arithmetic_expression.result

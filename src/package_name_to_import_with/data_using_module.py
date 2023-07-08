@@ -1,10 +1,11 @@
 """Define package contents."""
 import importlib.resources
 import json
-import typing
+
+import pydantic
 
 
-class PackageMetadata(typing.TypedDict):
+class PackageMetadata(pydantic.BaseModel):
     """Define keys and types of corresponding values for package metadata."""
 
     Name: str
@@ -14,4 +15,4 @@ class PackageMetadata(typing.TypedDict):
 METADATA_CONTENTS: str = (
     importlib.resources.files("package_name_to_import_with").joinpath("metadata.json").read_text()
 )
-METADATA: PackageMetadata = json.loads(METADATA_CONTENTS)
+METADATA = PackageMetadata(**json.loads(METADATA_CONTENTS))

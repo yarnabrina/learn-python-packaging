@@ -2,7 +2,7 @@
 import pydantic
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def get_negative(input_number: float) -> float:
     """Get additive inverse of a real number.
 
@@ -31,7 +31,7 @@ def get_negative(input_number: float) -> float:
     return additive_inverse
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def get_reciprocal(input_number: float) -> float:
     """Get multiplicative inverse of a real number.
 

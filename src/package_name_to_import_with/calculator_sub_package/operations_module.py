@@ -2,7 +2,7 @@
 import pydantic
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def add_numbers(first_number: float, second_number: float) -> float:
     """Perform addition of two real numbers.
 
@@ -37,7 +37,7 @@ def add_numbers(first_number: float, second_number: float) -> float:
     return sum_of_two_numbers
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def multiply_numbers(first_number: float, second_number: float) -> float:
     """Perform multiplication of two real numbers.
 

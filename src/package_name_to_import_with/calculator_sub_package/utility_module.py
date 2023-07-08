@@ -5,7 +5,7 @@ from .inverses_module import get_negative, get_reciprocal
 from .operations_module import add_numbers, multiply_numbers
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def subtract_numbers(first_number: float, second_number: float) -> float:
     """Perform subtraction of two real numbers.
 
@@ -40,7 +40,7 @@ def subtract_numbers(first_number: float, second_number: float) -> float:
     return difference_of_two_numbers
 
 
-@pydantic.validate_arguments
+@pydantic.validate_call(validate_return=True)
 def divide_numbers(first_number: float, second_number: float) -> float:
     """Perform division of two real numbers.
 

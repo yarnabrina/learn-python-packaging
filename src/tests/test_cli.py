@@ -5,6 +5,8 @@ import pytest
 
 import module_that_can_be_invoked_from_cli
 
+PYDANTIC_VALIDATION_ERROR_MESSAGE = "validation error for calculate_results"
+
 
 def test_sum(capsys: pytest.CaptureFixture) -> None:
     """Check addition of two numbers.
@@ -78,7 +80,7 @@ def test_first_input_failure(capsys: pytest.CaptureFixture) -> None:
         module_that_can_be_invoked_from_cli.console_calculator()
         _, result_error = capsys.readouterr()
 
-    assert "value is not a valid float" in result_error  # nosec B101
+    assert PYDANTIC_VALIDATION_ERROR_MESSAGE in result_error  # nosec B101
 
 
 def test_second_input_failure(capsys: pytest.CaptureFixture) -> None:
@@ -93,7 +95,7 @@ def test_second_input_failure(capsys: pytest.CaptureFixture) -> None:
         module_that_can_be_invoked_from_cli.console_calculator()
         _, result_error = capsys.readouterr()
 
-    assert "value is not a valid float" in result_error  # nosec B101
+    assert PYDANTIC_VALIDATION_ERROR_MESSAGE in result_error  # nosec B101
 
 
 def test_operator_input_failure(capsys: pytest.CaptureFixture) -> None:
@@ -108,4 +110,4 @@ def test_operator_input_failure(capsys: pytest.CaptureFixture) -> None:
         module_that_can_be_invoked_from_cli.console_calculator()
         _, result_error = capsys.readouterr()
 
-    assert "value is not a valid enumeration member" in result_error  # nosec B101
+    assert PYDANTIC_VALIDATION_ERROR_MESSAGE in result_error  # nosec B101
