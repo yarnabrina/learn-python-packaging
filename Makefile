@@ -387,6 +387,7 @@ cleanup: clean-pycache clean-mypy_cache clean-pytest_cache clean-coverage
 mypy: venv
 	source venv/bin/activate
 	$(call check_install_status, mypy)
+	$(call check_install_status, pydantic)
 	mypy
 
 .ONESHELL:
