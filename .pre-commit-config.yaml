@@ -22,7 +22,7 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.8.0
+    rev: v3.10.1
     hooks:
       - id: pyupgrade
         args:
@@ -42,7 +42,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.7.0
     hooks:
       - id: black
         args:
@@ -61,14 +61,14 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         args:
           - src
         pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.4.1
+    rev: v1.5.1
     hooks:
       - id: mypy
         additional_dependencies:
@@ -77,7 +77,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/PyCQA/pylint
-    rev: v3.0.0a6
+    rev: v3.0.0a7
     hooks:
       - id: pylint
         args:
@@ -88,26 +88,26 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.316
+    rev: v1.1.323
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.277
+    rev: v0.0.284
     hooks:
       - id: ruff
         args:
           - src
         pass_filenames: false
   - repo: https://github.com/jendrikseipp/vulture
-    rev: v2.7
+    rev: v2.8
     hooks:
       - id: vulture
         pass_filenames: false
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.3
+    rev: v1.7.5
     hooks:
       - id: docformatter
         additional_dependencies:
@@ -117,7 +117,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.14.0"
+    rev: "1.16.0"
     hooks:
       - id: blacken-docs
         args:
@@ -142,7 +142,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 0.13.0
+    rev: 0.13.1
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
