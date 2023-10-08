@@ -5,7 +5,7 @@ import pathlib
 import nox
 
 PYTHON_DEFAULT_VERSION = "3.10"
-PYTHON_VERSIONS = ["3.10", "3.11"]
+PYTHON_VERSIONS = ["3.10", "3.11", "3.12"]
 
 SOURCE_DIRECTORY = pathlib.Path("src")
 DIST_DIRECTORY = pathlib.Path("dist")
