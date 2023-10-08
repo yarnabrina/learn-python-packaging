@@ -180,7 +180,6 @@ extend-exclude = [
   "*.pyi",
 ]
 fix = true
-format = "grouped"
 ignore = [
   "ANN401",
   "D203",
@@ -189,6 +188,7 @@ ignore = [
 ]
 ignore-init-module-imports = true
 line-length = 99
+output-format = "grouped"
 select = [
   "F",
   "E",
