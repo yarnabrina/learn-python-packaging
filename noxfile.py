@@ -5,7 +5,7 @@ import pathlib
 import nox
 
 PYTHON_DEFAULT_VERSION = "3.10"
-PYTHON_VERSIONS = ["3.10", "3.11"]
+PYTHON_VERSIONS = ["3.10", "3.11", "3.12"]
 
 SOURCE_DIRECTORY = pathlib.Path("src")
 DIST_DIRECTORY = pathlib.Path("dist")
@@ -155,20 +155,6 @@ def flake8(session: nox.Session) -> None:
         "99",
         *PYTHON_SCRIPTS,
     )
-
-
-@LINT_SESSION_DECORATOR
-def interrogate(session: nox.Session) -> None:
-    """Run interrogate.
-
-    Parameters
-    ----------
-    session : nox.Session
-        nox Session object
-    """
-    session.install("interrogate")
-
-    session.run("interrogate", str(SOURCE_DIRECTORY))
 
 
 @FORMAT_SESSION_DECORATOR

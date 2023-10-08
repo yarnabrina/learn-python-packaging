@@ -26,7 +26,7 @@ endef
 
 ## help
 ##     list all wrapper targets
-##     show documentaions of wrapper targets
+##     show documentations of wrapper targets
 .PHONY: help
 help: Makefile
 	@sed -n 's/^## //p' $<
