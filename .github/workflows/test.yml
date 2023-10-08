@@ -49,3 +49,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage_xml_report.xml
+          flags: ${{ matrix.python-version }}
