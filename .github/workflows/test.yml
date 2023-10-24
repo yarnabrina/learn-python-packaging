@@ -24,7 +24,7 @@ jobs:
           - "3.10"
           - "3.11"
           - "3.12"
-      max-parallel: 2
+      max-parallel: 5
     runs-on: ${{ matrix.runner-platform }}
     steps:
       - name: checkout commit
