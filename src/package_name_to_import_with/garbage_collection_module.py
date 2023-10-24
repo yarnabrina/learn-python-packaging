@@ -25,7 +25,7 @@ def define_garbage_collection_decorator(
     """
 
     @functools.wraps(function_to_be_decorated)
-    def wrapper_function(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+    def wrapper_function(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:  # noqa: ANN401
         """Execute provided function with forceful garbage collection afterwards.
 
         Parameters
