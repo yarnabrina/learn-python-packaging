@@ -6,13 +6,12 @@ on:
     workflows:
       - pre-commit-workflow-name
     types:
-      - completed
+      - requested
 defaults:
   run:
     shell: bash
 jobs:
   test-job-identifier:
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: test job name
     strategy:
       fail-fast: false
