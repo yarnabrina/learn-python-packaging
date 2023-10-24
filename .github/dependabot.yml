@@ -3,18 +3,23 @@ updates:
   - package-ecosystem: pip
     directory: /
     schedule:
-      interval: daily
+      interval: monthly
     commit-message:
-      prefix: "[Dependabot]"
+      prefix: "[Dependabot] [PIP]"
       include: "scope"
     labels:
       - maintenance
+      - bump-pip
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: daily
+      interval: weekly
+      day: sunday
+      time: 00:00
+      timezone: Asia/Calcutta
     commit-message:
-      prefix: "[Dependabot]"
+      prefix: "[Dependabot] [GHA]"
       include: "scope"
     labels:
       - maintenance
+      - bump-gha

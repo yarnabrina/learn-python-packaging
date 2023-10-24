@@ -37,7 +37,7 @@ def console_calculator() -> None:
         operation_result = package_name_to_import_with.calculate_results(
             user_inputs["first_number"], user_inputs["operator"], user_inputs["second_number"]
         )
-    except Exception as error:  # pylint: disable=broad-except
+    except Exception as error:  # noqa: BLE001  # pylint: disable=broad-except
         sys.stderr.write(f"Error: {error}")
     else:
         sys.stdout.write(f"Result = {operation_result}")

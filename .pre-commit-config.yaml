@@ -42,7 +42,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/psf/black
-    rev: 23.9.1
+    rev: 23.10.1
     hooks:
       - id: black
         args:
@@ -68,7 +68,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.5.1
+    rev: v1.6.1
     hooks:
       - id: mypy
         additional_dependencies:
@@ -88,14 +88,14 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.330.post0
+    rev: v1.1.332
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.292
+    rev: v0.1.1
     hooks:
       - id: ruff
         args:
@@ -146,7 +146,7 @@ repos:
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.14
+    rev: v0.15
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell

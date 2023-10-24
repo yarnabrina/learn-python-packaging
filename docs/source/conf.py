@@ -63,6 +63,7 @@ napoleon_preprocess_types = True
 todo_include_todos = True
 
 viewcode_follow_imported_members = True
+viewcode_line_numbers = True
 
 copybutton_prompt_text = r">>> |\.\.\. |\$ "
 copybutton_prompt_is_regexp = True

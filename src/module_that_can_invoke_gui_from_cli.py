@@ -77,7 +77,7 @@ def orchestrate_interaction(gui_window: pydantic.InstanceOf[PySimpleGUI.Window])
                 gui_elements[OPERATOR_INPUT],
                 gui_elements[SECOND_NUMBER_INPUT],
             )
-        except Exception as error:  # pylint: disable=broad-except
+        except Exception as error:  # noqa: BLE001  # pylint: disable=broad-except
             gui_window[OPERATION_RESULT].update(value=str(error))
         else:
             gui_window[OPERATION_RESULT].update(value=operation_result)
