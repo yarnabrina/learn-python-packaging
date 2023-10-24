@@ -1,6 +1,16 @@
 name: pre-commit-workflow-name
 run-name: pre-commit workflow run name
-on: push
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 defaults:
   run:
     shell: bash

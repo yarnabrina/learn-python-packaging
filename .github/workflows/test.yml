@@ -1,20 +1,17 @@
 name: test-workflow-name
 run-name: test workflow run name
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows:
+      - pre-commit-workflow-name
     types:
-      - opened
-      - synchronize
-  push:
-    branches:
-      - main
+      - completed
 defaults:
   run:
     shell: bash
 jobs:
   test-job-identifier:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: test job name
     strategy:
       fail-fast: false

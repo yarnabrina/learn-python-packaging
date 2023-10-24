@@ -1,12 +1,6 @@
 name: format-workflow-name
 run-name: format workflow run name
-on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
+on: workflow_dispatch
 defaults:
   run:
     shell: bash
