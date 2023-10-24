@@ -1,6 +1,7 @@
 name: test-workflow-name
 run-name: test workflow run name
 on:
+  workflow_dispatch:
   workflow_run:
     workflows:
       - pre-commit-workflow-name
