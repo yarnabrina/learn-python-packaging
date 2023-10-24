@@ -53,8 +53,8 @@ dynamic=[
   "readme",
 ]
 dependencies = [
-  "pydantic",
-  "PySimpleGUI",
+  "pydantic<3,>=2.4.2",
+  "PySimpleGUI<4.61,>=4.60.4",
 ]
 [project.optional-dependencies]
 all = [
