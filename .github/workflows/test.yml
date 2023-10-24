@@ -3,7 +3,7 @@ run-name: test workflow run name
 on:
   workflow_run:
     workflows:
-      - pre-commit workflow run name
+      - pre-commit-workflow-name
     types:
       - completed
 defaults:
