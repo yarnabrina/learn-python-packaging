@@ -1,5 +1,5 @@
-name: pre-commit-workflow-name
-run-name: pre-commit workflow run name
+name: code-quality-workflow-name
+run-name: code quality workflow run name
 on:
   pull_request:
     branches:
