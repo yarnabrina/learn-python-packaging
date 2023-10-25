@@ -34,3 +34,6 @@ jobs:
         uses: ./.github/actions/nox-sessions-action-identifier
         with:
           session-name-input-identifier: pre_commit
+  unit-test-job-identifier:
+    name: unit test job name
+    uses: ./.github/workflows/test.yml
