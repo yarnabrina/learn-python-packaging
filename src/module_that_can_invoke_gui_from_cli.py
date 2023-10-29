@@ -66,7 +66,7 @@ def orchestrate_interaction(gui_window: pydantic.InstanceOf[PySimpleGUI.Window])
         designed GUI
     """
     while True:
-        gui_event, gui_elements = gui_window.read()
+        gui_event, gui_elements = gui_window.read()  # pyright: ignore [reportGeneralTypeIssues]
 
         if PySimpleGUI.WINDOW_CLOSED or gui_event == CLOSE_BUTTON:
             break
