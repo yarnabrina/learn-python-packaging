@@ -23,12 +23,12 @@
 
 [![Docstring style: numpy][numpydoc-badge-image]][numpydoc-badge-url]
 
-- [x] ~~Create python package~~
-- [x] ~~Build wheel~~
-- [x] ~~Release wheel~~
+- [x] ~~Create Python Package~~
+- [x] ~~Build Wheel~~
+- [x] ~~Release Wheel~~
 - [x] ~~Setup Github Actions~~
-- [x] ~~Host documentation~~
-- [x] ~~Hypotheses testing~~
+- [x] ~~Host Documentation~~
+- [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
 
 ## Tools Used
