@@ -33,16 +33,16 @@ help: Makefile
 
 .ONESHELL:
 venv:
-	python3 -m venv venv
-	echo "*" > venv/.gitignore
-	source venv/bin/activate
+	python3 -m venv .venv
+	echo "*" > .venv/.gitignore
+	source .venv/bin/activate
 	python3 -m pip install --upgrade pip setuptools wheel
 	python3 -m pip install --editable ".[all]"
 
 .ONESHELL:
 .PHONY: pre-commit-install
 pre-commit-install: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pre-commit)
 	pre-commit install
 
@@ -54,7 +54,7 @@ setup: venv pre-commit-install
 
 .ONESHELL:
 venv-upgrade: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	python3 -m pip install --upgrade pip setuptools wheel
 	python3 -m pip install --upgrade \
 	--requirement ${PYTHON_DEPENDENCIES_DIRECTORY}/requirements.txt \
@@ -68,7 +68,7 @@ venv-upgrade: venv
 .ONESHELL:
 .PHONY: pre-commit-autoupdate
 pre-commit-autoupdate: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	pre-commit autoupdate
 
 ## update
@@ -80,21 +80,21 @@ update: venv-upgrade pre-commit-autoupdate
 .ONESHELL:
 .PHONY: autoflake
 autoflake: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, autoflake)
 	autoflake $(PYTHON_SOURCE_SCRIPTS)
 
 .ONESHELL:
 .PHONY: black
 black: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, black)
 	black ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: blacken-docs
 blacken-docs: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, blacken-docs)
 	blacken-docs \
 	--line-length 87 \
@@ -104,7 +104,7 @@ blacken-docs: venv
 .ONESHELL:
 .PHONY: docformatter
 docformatter: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, docformatter)
 	$(call check_install_status, tomli)
 	docformatter ${PYTHON_SOURCE_DIRECTORY}
@@ -112,14 +112,14 @@ docformatter: venv
 .ONESHELL:
 .PHONY: isort
 isort: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, isort)
 	isort ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pyupgrade
 pyupgrade: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pyupgrade)
 	pyupgrade --py310-plus $(PYTHON_SOURCE_SCRIPTS)
 
@@ -135,7 +135,7 @@ format: pyupgrade autoflake isort docformatter blacken-docs black
 .ONESHELL:
 .PHONY: bandit
 bandit: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, bandit)
 	bandit \
     --recursive \
@@ -146,7 +146,7 @@ bandit: venv
 .ONESHELL:
 .PHONY: flake8
 flake8: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, flake8)
 	flake8 \
 	--extend-ignore E203 \
@@ -157,14 +157,14 @@ flake8: venv
 .ONESHELL:
 .PHONY: interrogate
 interrogate: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, interrogate)
 	interrogate ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: pydocstyle
 pydocstyle: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pydocstyle)
 	$(call check_install_status, tomli)
 	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
@@ -172,14 +172,14 @@ pydocstyle: venv
 .ONESHELL:
 .PHONY: pylint
 pylint: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pylint)
 	pylint ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
 .PHONY: vulture
 vulture: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, vulture)
 	vulture
 
@@ -196,21 +196,21 @@ lint: bandit flake8 interrogate pydocstyle pylint vulture
 .ONESHELL:
 .PHONY: pytest-doctest
 pytest-doctest: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pytest)
 	pytest -k "not test_"
 
 .ONESHELL:
 .PHONY: pytest-failure
 pytest-failure: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pytest)
 	pytest -k "failure"
 
 .ONESHELL:
 .PHONY: pytest-hypotheses
 pytest-hypotheses: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, hypothesis)
 	$(call check_install_status, pytest)
 	pytest -k "hypothesis"
@@ -218,14 +218,14 @@ pytest-hypotheses: venv
 .ONESHELL:
 .PHONY: pytest-others
 pytest-others: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pytest)
 	pytest -k "test and not failure and not hypothesis and not successful"
 
 .ONESHELL:
 .PHONY: pytest-successful
 pytest-successful: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pytest)
 	pytest -k "successful"
 
@@ -241,7 +241,7 @@ test: pytest-doctest pytest-successful pytest-failure pytest-hypotheses pytest-o
 .ONESHELL:
 .PHONY: coverage-erase
 coverage-erase: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, coverage)
 	$(call check_install_status, tomli)
 	coverage erase
@@ -249,7 +249,7 @@ coverage-erase: venv
 .ONESHELL:
 .PHONY: coverage-html
 coverage-html: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, coverage)
 	$(call check_install_status, tomli)
 	coverage html
@@ -257,7 +257,7 @@ coverage-html: venv
 .ONESHELL:
 .PHONY: coverage-report
 coverage-report: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, coverage)
 	$(call check_install_status, tomli)
 	coverage report
@@ -265,7 +265,7 @@ coverage-report: venv
 .ONESHELL:
 .PHONY: coverage-run
 coverage-run: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, coverage)
 	$(call check_install_status, hypothesis)
 	$(call check_install_status, pytest)
@@ -275,7 +275,7 @@ coverage-run: venv
 .ONESHELL:
 .PHONY: coverage-xml
 coverage-xml: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, coverage)
 	$(call check_install_status, tomli)
 	coverage xml
@@ -290,7 +290,7 @@ coverage: coverage-run coverage-report coverage-html coverage-xml coverage-erase
 .ONESHELL:
 .PHONY: sphinx-source
 sphinx-source: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, Sphinx)
 	sphinx-apidoc \
 	--output-dir ${PYTHON_DOCS_DIRECTORY}/source \
@@ -304,7 +304,7 @@ sphinx-source: venv
 .ONESHELL:
 .PHONY: sphinx-build
 sphinx-build: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, furo)
 	$(call check_install_status, Sphinx)
 	$(call check_install_status, sphinx-copybutton)
@@ -322,21 +322,21 @@ docs: sphinx-source sphinx-build
 .ONESHELL:
 .PHONY: build
 build: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, build)
 	python3 -m build --outdir ${PYTHON_DIST_DIRECTORY}
 
 .ONESHELL:
 .PHONY: twine-check
 twine-check: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, twine)
 	twine check --strict ${PYTHON_DIST_DIRECTORY}/*
 
 .ONESHELL:
 .PHONY: twine-upload
 twine-upload: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, twine)
 	twine upload ${PYTHON_DIST_DIRECTORY}/*
 
@@ -385,7 +385,7 @@ cleanup: clean-pycache clean-mypy_cache clean-pytest_cache clean-coverage
 .ONESHELL:
 .PHONY: mypy
 mypy: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, mypy)
 	$(call check_install_status, pydantic)
 	mypy
@@ -393,7 +393,7 @@ mypy: venv
 .ONESHELL:
 .PHONY: mypy-stubgen
 mypy-stubgen: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, mypy)
 	stubgen \
 	--output typing-stubs-for-package-name-to-install-with \
@@ -405,14 +405,14 @@ mypy-stubgen: venv
 .ONESHELL:
 .PHONY: pyright
 pyright: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pyright)
 	pyright
 
 .ONESHELL:
 .PHONY: pyright-stubs
 pyright-stubs: venv
-	source venv/bin/activate
+	source .venv/bin/activate
 	$(call check_install_status, pyright)
 	pyright --createstub package_name_to_import_with
 	pyright --createstub module_that_can_be_imported_directly
