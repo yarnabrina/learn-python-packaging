@@ -238,6 +238,9 @@ classmethod-decorators = ["pydantic.field_validator"]
 "**/test_*.py" = [
   "S101",
 ]
+"docs/source/conf.py" = [
+  "INP001",
+]
 
 [tool.ruff.pycodestyle]
 max-doc-length = 99
