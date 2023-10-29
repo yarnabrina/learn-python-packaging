@@ -30,6 +30,8 @@
 - [x] ~~Host Documentation~~
 - [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
+- [ ] Support Expressions
+- [ ] Bump Workflow
 
 ## Tools Used
 
