@@ -39,7 +39,7 @@
     - [codespell](https://github.com/codespell-project/codespell)
     - [Nox](https://github.com/wntrblm/nox)
     - [pre-commit](https://github.com/pre-commit/pre-commit)
-    - [Ruff](https://github.com/charliermarsh/ruff)
+    - [Ruff](https://github.com/astral-sh/ruff)
 - Formatting
     - [autoflake](https://www.github.com/PyCQA/autoflake)
     - [Black](https://github.com/psf/black)
@@ -113,8 +113,8 @@
 [release-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/badge.svg
 [release-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/
 
-[ruff-badge-image]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json
-[ruff-badge-url]: https://github.com/charliermarsh/ruff
+[ruff-badge-image]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+[ruff-badge-url]: https://github.com/astral-sh/ruff
 
 [test-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/test.yml/badge.svg
 [test-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/test.yml/
