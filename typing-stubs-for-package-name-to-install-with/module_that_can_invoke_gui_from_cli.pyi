@@ -1,5 +1,5 @@
-import PySimpleGUI
 import pydantic
+import PySimpleGUI
 
 FIRST_NUMBER_INPUT: str
 SECOND_NUMBER_INPUT: str

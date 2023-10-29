@@ -1,6 +1,8 @@
 import enum
-import pydantic
 import typing
+
+import pydantic
+
 from .operations_module import add_numbers as add_numbers, multiply_numbers as multiply_numbers
 from .utility_module import divide_numbers as divide_numbers, subtract_numbers as subtract_numbers
 

@@ -4,10 +4,10 @@
 [![DeepSource][deepsource-badge-image]][deepsource-badge-url]
 [![Documentation Status][read-the-docs-badge-image]][read-the-docs-badge-url]
 
+[![code-quality workflow][code-quality-workflow-badge-image]][code-quality-workflow-badge-url]
 [![docs workflow][docs-workflow-badge-image]][docs-workflow-badge-url]
 [![format workflow][format-workflow-badge-image]][format-workflow-badge-url]
 [![lint workflow][lint-workflow-badge-image]][lint-workflow-badge-url]
-[![pre-commit workflow][pre-commit-workflow-badge-image]][pre-commit-workflow-badge-url]
 [![release workflow][release-workflow-badge-image]][release-workflow-badge-url]
 [![test workflow][test-workflow-badge-image]][test-workflow-badge-url]
 
@@ -23,13 +23,15 @@
 
 [![Docstring style: numpy][numpydoc-badge-image]][numpydoc-badge-url]
 
-- [x] ~~Create python package~~
-- [x] ~~Build wheel~~
-- [x] ~~Release wheel~~
+- [x] ~~Create Python Package~~
+- [x] ~~Build Wheel~~
+- [x] ~~Release Wheel~~
 - [x] ~~Setup Github Actions~~
-- [x] ~~Host documentation~~
-- [x] ~~Hypotheses testing~~
+- [x] ~~Host Documentation~~
+- [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
+- [ ] Support Expressions
+- [ ] Bump Workflow
 
 ## Tools Used
 
@@ -37,7 +39,7 @@
     - [codespell](https://github.com/codespell-project/codespell)
     - [Nox](https://github.com/wntrblm/nox)
     - [pre-commit](https://github.com/pre-commit/pre-commit)
-    - [Ruff](https://github.com/charliermarsh/ruff)
+    - [Ruff](https://github.com/astral-sh/ruff)
 - Formatting
     - [autoflake](https://www.github.com/PyCQA/autoflake)
     - [Black](https://github.com/psf/black)
@@ -72,11 +74,14 @@
 [black-badge-image]: https://img.shields.io/badge/code%20style-black-000000.svg
 [black-badge-url]: https://github.com/psf/black
 
-[docformatter-badge-image]: https://img.shields.io/badge/%20formatter-docformatter-fedcba.svg
-[docformatter-badge-url]: https://github.com/PyCQA/docformatter
+[code-quality-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/code-quality.yml/badge.svg
+[code-quality-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/code-quality.yml/
 
 [codecov-badge-image]: https://codecov.io/gh/yarnabrina/learn-python-packaging/branch/main/graph/badge.svg?token=BG1ECA7E14
 [codecov-badge-url]: https://codecov.io/gh/yarnabrina/learn-python-packaging
+
+[docformatter-badge-image]: https://img.shields.io/badge/%20formatter-docformatter-fedcba.svg
+[docformatter-badge-url]: https://github.com/PyCQA/docformatter
 
 [deepsource-badge-image]: https://deepsource.io/gh/yarnabrina/learn-python-packaging.svg/?label=active+issues&token=tfsfTm2RCqlPTgF3dN31q-0e
 [deepsource-badge-url]: https://deepsource.io/gh/yarnabrina/learn-python-packaging/?ref=repository-badge
@@ -99,9 +104,6 @@
 [pre-commit-badge-image]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
 [pre-commit-badge-url]: https://github.com/pre-commit/pre-commit
 
-[pre-commit-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/pre-commit.yml/badge.svg
-[pre-commit-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/pre-commit.yml/
-
 [pylint-badge-image]: https://img.shields.io/badge/linting-pylint-yellowgreen
 [pylint-badge-url]: https://github.com/PyCQA/pylint
 
@@ -111,8 +113,8 @@
 [release-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/badge.svg
 [release-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/release.yml/
 
-[ruff-badge-image]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json
-[ruff-badge-url]: https://github.com/charliermarsh/ruff
+[ruff-badge-image]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+[ruff-badge-url]: https://github.com/astral-sh/ruff
 
 [test-workflow-badge-image]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/test.yml/badge.svg
 [test-workflow-badge-url]: https://github.com/yarnabrina/learn-python-packaging/actions/workflows/test.yml/
