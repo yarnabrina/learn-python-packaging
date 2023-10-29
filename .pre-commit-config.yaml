@@ -117,7 +117,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.16.0"
+    rev: 1.16.0
     hooks:
       - id: blacken-docs
         args:
