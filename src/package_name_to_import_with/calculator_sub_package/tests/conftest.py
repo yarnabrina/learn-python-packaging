@@ -1,5 +1,4 @@
 """Define common inputs for unit tests."""
-import typing
 
 import pytest
 
@@ -40,8 +39,8 @@ def fixture_second_number(request: pytest.FixtureRequest) -> float:
     return request.param
 
 
-@pytest.fixture(params=["+", "-", "*", "/"], name="operator")
-def fixture_operator(request: pytest.FixtureRequest) -> typing.Literal["+", "-", "*", "/"]:
+@pytest.fixture(params=ArithmeticOperator, name="operator")
+def fixture_operator(request: pytest.FixtureRequest) -> ArithmeticOperator:
     """Define operator for unit tests.
 
     Parameters
@@ -51,127 +50,15 @@ def fixture_operator(request: pytest.FixtureRequest) -> typing.Literal["+", "-",
 
     Returns
     -------
-    typing.Literal[ "+", "-", "*", "/" ]
+    ArithmeticOperator
         value of operator
     """
     return request.param
 
 
 @pytest.fixture()
-def expected_sum(first_number: float, second_number: float) -> float:
-    """Define expected sum for unit tests.
-
-    Parameters
-    ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
-
-    Returns
-    -------
-    float
-        value of expected sum
-    """
-    return first_number + second_number
-
-
-@pytest.fixture()
-def expected_difference(first_number: float, second_number: float) -> float:
-    """Define expected difference for unit tests.
-
-    Parameters
-    ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
-
-    Returns
-    -------
-    float
-        value of expected difference
-    """
-    return first_number - second_number
-
-
-@pytest.fixture()
-def expected_product(first_number: float, second_number: float) -> float:
-    """Define expected product for unit tests.
-
-    Parameters
-    ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
-
-    Returns
-    -------
-    float
-        value of expected product
-    """
-    return first_number * second_number
-
-
-@pytest.fixture()
-def expected_quotient(first_number: float, second_number: float) -> float:
-    """Define expected quotient for unit tests.
-
-    Parameters
-    ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
-
-    Returns
-    -------
-    float
-        value of expected quotient
-    """
-    return first_number / second_number
-
-
-@pytest.fixture()
-def expected_negative(first_number: float) -> float:
-    """Define expected negative for unit tests.
-
-    Parameters
-    ----------
-    first_number : float
-        value of input number
-
-    Returns
-    -------
-    float
-        value of expected negative
-    """
-    return (-1) * first_number
-
-
-@pytest.fixture()
-def expected_reciprocal(second_number: float) -> float:
-    """Define expected reciprocal for unit tests.
-
-    Parameters
-    ----------
-    second_number : float
-        value of input number
-
-    Returns
-    -------
-    float
-        value of expected reciprocal
-    """
-    return 1 / second_number
-
-
-@pytest.fixture()
 def expected_result(
-    first_number: float,
-    second_number: float,
-    operator: typing.Literal["+", "-", "*", "/"],
+    first_number: float, second_number: float, operator: ArithmeticOperator
 ) -> float:
     """Define expected result for unit tests.
 
@@ -181,7 +68,7 @@ def expected_result(
         value of first number
     second_number : float
         value of second number
-    operator : typing.Literal[ "+", "-", "*", "/" ]
+    operator : ArithmeticOperator
         type of arithmetic operation
 
     Returns

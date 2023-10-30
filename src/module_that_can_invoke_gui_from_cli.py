@@ -24,7 +24,10 @@ def define_gui_layout() -> list[list[pydantic.InstanceOf[PySimpleGUI.Element]]]:
         [PySimpleGUI.Text("Enter first number"), PySimpleGUI.Input(key=FIRST_NUMBER_INPUT)],
         [
             PySimpleGUI.Text("Enter operator"),
-            PySimpleGUI.OptionMenu(["+", "-", "*", "/"], key=OPERATOR_INPUT),
+            PySimpleGUI.OptionMenu(
+                package_name_to_import_with.calculator_sub_package.ArithmeticOperator,
+                key=OPERATOR_INPUT,
+            ),
         ],
         [PySimpleGUI.Text("Enter second number"), PySimpleGUI.Input(key=SECOND_NUMBER_INPUT)],
         [PySimpleGUI.Button(button_text="Submit")],

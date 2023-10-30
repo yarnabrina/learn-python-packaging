@@ -1,13 +1,13 @@
 """Define property based unit tests based on random data."""
-import enum
 import math
 import sys
-import typing
 
 import hypothesis
 import hypothesis.strategies
 
 from package_name_to_import_with.calculator_sub_package import (
+    ArithmeticOperator,
+    IdentityElements,
     add_numbers,
     calculate_results,
     divide_numbers,
@@ -16,15 +16,6 @@ from package_name_to_import_with.calculator_sub_package import (
     multiply_numbers,
     subtract_numbers,
 )
-from package_name_to_import_with.calculator_sub_package.wrapper_module import ArithmeticOperator
-
-
-@enum.unique
-class InverseElements(enum.Enum):
-    """Define supported inverse elements."""
-
-    ADDITIVE_INVERSE = 0
-    MULTIPLICATIVE_INVERSE = 1
 
 
 def generate_finite_numbers() -> hypothesis.strategies.SearchStrategy:
@@ -90,7 +81,7 @@ def test_additive_inverse_hypothesis(first_number: float) -> None:
     calculated_negative = get_negative(first_number)
     negative_definition = add_numbers(first_number, calculated_negative)
 
-    assert math.isclose(negative_definition, InverseElements.ADDITIVE_INVERSE.value)
+    assert math.isclose(negative_definition, IdentityElements.ADDITIVE_IDENTITY)
 
 
 @hypothesis.given(second_number=generate_finite_numbers())
@@ -107,7 +98,7 @@ def test_multiplicative_inverse_hypothesis(second_number: float) -> None:
     calculated_reciprocal = get_reciprocal(second_number)
     reciprocal_definition = multiply_numbers(second_number, calculated_reciprocal)
 
-    assert math.isclose(reciprocal_definition, InverseElements.MULTIPLICATIVE_INVERSE.value)
+    assert math.isclose(reciprocal_definition, IdentityElements.MULTIPLICATIVE_IDENTITY)
 
 
 @hypothesis.given(first_number=generate_finite_numbers(), second_number=generate_finite_numbers())
@@ -152,7 +143,7 @@ def test_division_hypothesis(first_number: float, second_number: float) -> None:
     second_number=generate_finite_numbers(),
 )
 def test_operation_hypothesis(
-    first_number: float, operator: typing.Literal["+", "-", "*", "/"], second_number: float
+    first_number: float, operator: ArithmeticOperator, second_number: float
 ) -> None:
     """Check operation of two real numbers.
 
@@ -160,7 +151,7 @@ def test_operation_hypothesis(
     ----------
     first_number : float
         value of first number
-    operator : typing.Literal[ "+", "-", "*", "/" ]
+    operator : ArithmeticOperator
         type of arithmetic operation
     second_number : float
         value of second number

@@ -1,18 +1,18 @@
-"""Define unit tests for calculators."""
+"""Define unit tests for user level functions."""
 import math
 import typing
 
 import pydantic
 import pytest
 
-import package_name_to_import_with
+from package_name_to_import_with.calculator_sub_package import (
+    ArithmeticOperator,
+    calculate_results,
+)
 
 
 def test_successful_operation(
-    first_number: float,
-    operator: typing.Literal["+", "-", "*", "/"],
-    second_number: float,
-    expected_result: float,
+    first_number: float, operator: ArithmeticOperator, second_number: float, expected_result: float
 ) -> None:
     """Check operation of two real numbers.
 
@@ -20,14 +20,14 @@ def test_successful_operation(
     ----------
     first_number : float
         value of first number
-    operator : typing.Literal[ "+", "-", "*", "/" ]
+    operator : ArithmeticOperator
         type of arithmetic operation
     second_number : float
         value of second number
     expected_result : float
         value of expected sum
     """
-    result = package_name_to_import_with.calculate_results(first_number, operator, second_number)
+    result = calculate_results(first_number, operator, second_number)
     assert math.isclose(result, expected_result)  # nosec B101
 
 
@@ -60,4 +60,4 @@ def test_operation_failure(
         input for second number
     """
     with pytest.raises(pydantic.ValidationError):
-        package_name_to_import_with.calculate_results(first_input, operator, second_input)
+        calculate_results(first_input, operator, second_input)

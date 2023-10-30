@@ -70,3 +70,6 @@ def multiply_numbers(first_number: float, second_number: float) -> float:
     product_of_two_numbers = first_number * second_number
 
     return product_of_two_numbers
+
+
+__all__ = ["add_numbers", "multiply_numbers"]

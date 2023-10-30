@@ -1,12 +1,11 @@
-"""Define user level functions."""
+"""Define function for basic binary operations."""
 import collections.abc
 import enum
 import typing
 
 import pydantic
 
-from .operations_module import add_numbers, multiply_numbers
-from .utility_module import divide_numbers, subtract_numbers
+from .basics import add_numbers, divide_numbers, multiply_numbers, subtract_numbers
 
 ArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
 
@@ -108,3 +107,12 @@ def calculate_results(
     )
 
     return arithmetic_expression.result
+
+
+__all__ = [
+    "ARITHMETIC_OPERATIONS",
+    "ArithmeticExpression",
+    "ArithmeticOperation",
+    "ArithmeticOperator",
+    "calculate_results",
+]
