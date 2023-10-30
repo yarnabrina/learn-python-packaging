@@ -16,6 +16,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
@@ -51,6 +52,8 @@ autodoc_member_order = "bysource"
 autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
 autodoc_typehints_format = "fully-qualified"
+
+intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 napoleon_google_docstring = False
 napoleon_numpy_docstring = True
