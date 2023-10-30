@@ -1,8 +1,7 @@
 """Define functions to subtract and divide."""
 import pydantic
 
-from .inverses_module import get_negative, get_reciprocal
-from .operations_module import add_numbers, multiply_numbers
+from .assumptions import add_numbers, get_negative, get_reciprocal, multiply_numbers
 
 
 @pydantic.validate_call(validate_return=True)
@@ -73,3 +72,6 @@ def divide_numbers(first_number: float, second_number: float) -> float:
     quotient_of_two_numbers = multiply_numbers(first_number, get_reciprocal(second_number))
 
     return quotient_of_two_numbers
+
+
+__all__ = ["divide_numbers", "subtract_numbers"]

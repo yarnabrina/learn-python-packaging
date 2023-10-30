@@ -1,1 +1,1 @@
-"""Define unit tests for package contents."""
+"""Define unit tests for basic binary operations."""

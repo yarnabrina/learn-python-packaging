@@ -1,5 +1,23 @@
-"""Define inverses."""
+"""Define additive and multiplicative identities and inverses."""
+import enum
+
 import pydantic
+
+
+@enum.unique
+class IdentityElements(float, enum.Enum):
+    """Define assumed identity elements."""
+
+    ADDITIVE_IDENTITY = 0
+    MULTIPLICATIVE_IDENTITY = 1
+
+
+@enum.unique
+class InverseElements(float, enum.Enum):
+    """Define supported inverse elements."""
+
+    ADDITIVE_INVERSE = -1
+    MULTIPLICATIVE_INVERSE = 1
 
 
 @pydantic.validate_call(validate_return=True)
@@ -26,7 +44,7 @@ def get_negative(input_number: float) -> float:
         >>> get_negative(-1)
         1.0
     """
-    additive_inverse = (-1) * input_number
+    additive_inverse = InverseElements.ADDITIVE_INVERSE * input_number
 
     return additive_inverse
 
@@ -48,7 +66,7 @@ def get_reciprocal(input_number: float) -> float:
     Raises
     ------
     ValueError
-        if ``input_number`` is zero
+        if ``input_number`` is additive identity, viz. zero
 
     Examples
     --------
@@ -61,8 +79,11 @@ def get_reciprocal(input_number: float) -> float:
         2.0
     """
     try:
-        multiplicative_inverse = 1 / input_number
+        multiplicative_inverse = InverseElements.MULTIPLICATIVE_INVERSE / input_number
     except ZeroDivisionError as error:
-        raise ValueError("Multiplicative inverse is not defined for zero") from error
+        raise ValueError("Multiplicative inverse is not defined for additive identity") from error
 
     return multiplicative_inverse
+
+
+__all__ = ["IdentityElements", "InverseElements", "get_negative", "get_reciprocal"]
