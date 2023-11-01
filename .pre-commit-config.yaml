@@ -4,10 +4,16 @@ repos:
     hooks:
       - id: check-ast
       - id: check-case-conflict
+      - id: check-executables-have-shebangs
       - id: check-json
       - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
       - id: check-toml
       - id: check-yaml
+        args:
+          - --allow-multiple-documents
+      - id: detect-private-key
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: name-tests-test
@@ -157,6 +163,12 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
+        additional_dependencies:
+          - tomli
+        args:
+          - --write-changes
+        stages:
+          - manual
 default_language_version:
   python: python3.10
 fail_fast: false

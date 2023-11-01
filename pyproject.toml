@@ -217,6 +217,7 @@ ignore-fully-untyped = true
 extend-immutable-calls = [
   "fastapi.Depends",
   "fastapi.Query",
+  "pydantic.Field",
 ]
 
 [tool.ruff.flake8-type-checking]
@@ -229,7 +230,9 @@ runtime-evaluated-base-classes = [
 ]
 
 [tool.ruff.pep8-naming]
-classmethod-decorators = ["pydantic.field_validator"]
+classmethod-decorators = [
+  "pydantic.field_validator",
+]
 
 [tool.ruff.per-file-ignores]
 "**/__init__.py" = [
@@ -237,9 +240,6 @@ classmethod-decorators = ["pydantic.field_validator"]
 ]
 "**/test_*.py" = [
   "S101",
-]
-"docs/source/conf.py" = [
-  "INP001",
 ]
 
 [tool.ruff.pycodestyle]
@@ -261,7 +261,9 @@ atomic = true
 float_to_top = true
 line_length = 99
 remove_redundant_aliases = true
-src_paths = "src"
+src_paths = [
+  "src",
+]
 py_version = 310
 
 [tool.pytest.ini_options]
@@ -280,7 +282,7 @@ omit = [
 ]
 
 [tool.coverage.report]
-fail_under = 75
+fail_under = 85
 include = [
   "src/**/*.py",
 ]
@@ -330,7 +332,7 @@ wrap-summaries = 99
 wrap-descriptions = 99
 
 [tool.interrogate]
-fail-under = 75
+fail-under = 85
 ignore-init-method = true
 
 [tool.pydocstyle]
@@ -340,7 +342,7 @@ convention = "numpy"
 extension-pkg-allow-list = [
   "pydantic",
 ]
-fail-under = 7.5
+fail-under = 8.5
 jobs = 0
 recursive = true
 
