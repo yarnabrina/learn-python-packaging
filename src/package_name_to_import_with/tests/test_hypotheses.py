@@ -179,6 +179,6 @@ def test_operation_hypothesis(
     elif ArithmeticOperator(operator) == ArithmeticOperator.DIVISION:
         expected_result = first_number / second_number
     else:
-        raise ValueError("Unexpected value of operation")
+        raise ValueError(f"Unexpected value of operation: {operator}")
 
     assert math.isclose(calculated_result, expected_result)

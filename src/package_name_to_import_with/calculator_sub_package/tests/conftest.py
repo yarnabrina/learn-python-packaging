@@ -93,4 +93,4 @@ def expected_result(
     if ArithmeticOperator(operator) == ArithmeticOperator.DIVISION:
         return first_number / second_number
 
-    raise ValueError("Unexpected value of operation")
+    raise ValueError(f"Unexpected value of operation: {operator}")
