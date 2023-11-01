@@ -1,4 +1,4 @@
-"""Define package contents."""
+"""Define top level decorator."""
 import collections.abc
 import functools
 import gc
