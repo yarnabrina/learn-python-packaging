@@ -266,6 +266,40 @@ src_paths = [
 ]
 py_version = 310
 
+[tool.pylint.main]
+extension-pkg-allow-list = [
+  "pydantic",
+]
+fail-under = 8.5
+jobs = 0
+recursive = true
+
+[tool.pylint.basic]
+include-naming-hint = true
+
+[tool.pylint.format]
+max-line-length = 99
+
+[tool.pylint.logging]
+logging-format-style = "new"
+
+[tool.pylint."messages control"]
+enable = [
+  "all",
+]
+disable = [
+  "logging-fstring-interpolation",
+]
+
+[tool.pylint.reports]
+output-format = "colorized"
+
+[tool.docformatter]
+in-place = true
+recursive = true
+wrap-summaries = 99
+wrap-descriptions = 99
+
 [tool.pytest.ini_options]
 addopts = "--junit-xml=pytest_junit_report.xml --doctest-modules --doctest-ignore-import-errors --doctest-continue-on-failure"
 console_output_style = "count"
@@ -325,46 +359,12 @@ ignore-init-module-imports = true
 remove-duplicate-keys = true
 remove-unused-variables = true
 
-[tool.docformatter]
-in-place = true
-recursive = true
-wrap-summaries = 99
-wrap-descriptions = 99
-
 [tool.interrogate]
 fail-under = 85
 ignore-init-method = true
 
 [tool.pydocstyle]
 convention = "numpy"
-
-[tool.pylint.main]
-extension-pkg-allow-list = [
-  "pydantic",
-]
-fail-under = 8.5
-jobs = 0
-recursive = true
-
-[tool.pylint.basic]
-include-naming-hint = true
-
-[tool.pylint.format]
-max-line-length = 99
-
-[tool.pylint.logging]
-logging-format-style = "new"
-
-[tool.pylint."messages control"]
-enable = [
-  "all",
-]
-disable = [
-  "logging-fstring-interpolation",
-]
-
-[tool.pylint.reports]
-output-format = "colorized"
 
 [tool.pyright]
 include = [
