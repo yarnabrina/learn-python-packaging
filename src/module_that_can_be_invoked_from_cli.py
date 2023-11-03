@@ -21,9 +21,9 @@ class BinaryInputs(pydantic.BaseModel):
     """Define arguments for binary calculator."""
 
     calculator_type: typing.Literal[CalculatorType.BINARY]
-    first_number: str
-    operator: str
-    second_number: str
+    first_number: float
+    operator: package_name_to_import_with.calculator_sub_package.ArithmeticOperator
+    second_number: float
 
 
 class GeneralInputs(pydantic.BaseModel):
@@ -61,11 +61,15 @@ def capture_user_inputs() -> UserInputs:
         CalculatorType.GENERAL.value, help="standard simplification problems"
     )
 
-    binary_parser.add_argument("first_number", help="first number")
-    binary_parser.add_argument("operator", help="arithmetic operator")
-    binary_parser.add_argument("second_number", help="second number")
+    binary_parser.add_argument("first_number", type=float, help="first number")
+    binary_parser.add_argument(
+        "operator",
+        type=package_name_to_import_with.calculator_sub_package.ArithmeticOperator,
+        help="arithmetic operator",
+    )
+    binary_parser.add_argument("second_number", type=float, help="second number")
 
-    general_parser.add_argument("expression", help="infix expression")
+    general_parser.add_argument("expression", type=str, help="infix expression")
 
     parsed_arguments, _ = parser.parse_known_args()
 
@@ -81,13 +85,13 @@ def console_calculator() -> None:
         match user_inputs.inputs.calculator_type:
             case CalculatorType.BINARY:
                 operation_result = package_name_to_import_with.calculate_results(
-                    user_inputs.inputs.first_number,
-                    user_inputs.inputs.operator,
-                    user_inputs.inputs.second_number,
+                    user_inputs.inputs.first_number,  # type: ignore[union-attr]
+                    user_inputs.inputs.operator,  # type: ignore[union-attr]
+                    user_inputs.inputs.second_number,  # type: ignore[union-attr]
                 )
             case CalculatorType.GENERAL:
                 operation_result = package_name_to_import_with.solve_simplification(
-                    user_inputs.inputs.expression
+                    user_inputs.inputs.expression  # type: ignore[union-attr]
                 )
             case _:
                 operation_result = None
