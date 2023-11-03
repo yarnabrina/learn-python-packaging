@@ -217,16 +217,15 @@ def test_operation_hypothesis(
 
     calculated_result = calculate_results(first_number, operator, second_number)
 
-    if ArithmeticOperator(operator) == ArithmeticOperator.ADDITION:
-        expected_result = first_number + second_number
-    elif ArithmeticOperator(operator) == ArithmeticOperator.SUBTRACTION:
-        expected_result = first_number - second_number
-    elif ArithmeticOperator(operator) == ArithmeticOperator.MULTIPLICATION:
-        expected_result = first_number * second_number
-    elif ArithmeticOperator(operator) == ArithmeticOperator.DIVISION:
-        expected_result = first_number / second_number
-    else:
-        raise ValueError(f"Unexpected value of operation: {operator}")
+    match operator:
+        case ArithmeticOperator.ADDITION:
+            expected_result = first_number + second_number
+        case ArithmeticOperator.SUBTRACTION:
+            expected_result = first_number - second_number
+        case ArithmeticOperator.MULTIPLICATION:
+            expected_result = first_number * second_number
+        case ArithmeticOperator.DIVISION:
+            expected_result = first_number / second_number
 
     assert math.isclose(calculated_result, expected_result)
 

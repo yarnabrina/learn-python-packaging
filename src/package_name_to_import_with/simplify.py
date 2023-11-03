@@ -36,9 +36,7 @@ OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int] = {
 
 
 @pydantic.validate_call(validate_return=True)
-def parse_infix_expression(  # noqa: C901, PLR0912
-    infix_expression: str,
-) -> list[ArithmeticOperator | float]:
+def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
 
     Parameters
@@ -55,8 +53,6 @@ def parse_infix_expression(  # noqa: C901, PLR0912
     ------
     ValueError
         if brackets are not matching
-    ValueError
-        if unexpected characters are present in the expression
     """
     number_pattern = r"\d+(?:\.\d+)?"
     operator_pattern = (
@@ -85,43 +81,45 @@ def parse_infix_expression(  # noqa: C901, PLR0912
             if element_value is not None
         )
 
-        if token_type == TokenType.NUMBER:
-            valid_number = float(token_value)
+        match token_type:
+            case TokenType.NUMBER:
+                valid_number = float(token_value)
 
-            output_queue.append(valid_number)
-        elif token_type == TokenType.OPERATOR:
-            valid_operator = ArithmeticOperator(token_value)
+                output_queue.append(valid_number)
+            case TokenType.OPERATOR:
+                valid_operator = ArithmeticOperator(token_value)
 
-            while (
-                operator_stack
-                and (last_operator := operator_stack[-1]) != Parentheses.LEFT
-                and OPERATION_PRECEDENCES[last_operator] >= OPERATION_PRECEDENCES[valid_operator]
-            ):
-                _ = operator_stack.pop()
-                output_queue.append(last_operator)
-
-            operator_stack.append(valid_operator)
-        elif token_type == TokenType.PARENTHESIS:
-            valid_parenthesis = Parentheses(token_value)
-
-            if valid_parenthesis == Parentheses.LEFT:
-                operator_stack.append(valid_parenthesis)
-            elif valid_parenthesis == Parentheses.RIGHT:
-                while operator_stack and (last_operator := operator_stack[-1]) != Parentheses.LEFT:
-                    if not operator_stack:
-                        raise ValueError("Mismatched parentheses")
-
+                while (
+                    operator_stack
+                    and (last_operator := operator_stack[-1]) != Parentheses.LEFT
+                    and OPERATION_PRECEDENCES[last_operator]
+                    >= OPERATION_PRECEDENCES[valid_operator]
+                ):
                     _ = operator_stack.pop()
                     output_queue.append(last_operator)
 
-                if (last_operator := operator_stack[-1]) != Parentheses.LEFT:
-                    raise ValueError("Mismatched parentheses")
+                operator_stack.append(valid_operator)
+            case TokenType.PARENTHESIS:
+                valid_parenthesis = Parentheses(token_value)
 
-                _ = operator_stack.pop()
-            else:
-                raise ValueError(f"Unexpected value of bracket: {token_value}")
-        else:
-            raise ValueError(f"Unexpected value of token type: {token_type}")
+                match valid_parenthesis:
+                    case Parentheses.LEFT:
+                        operator_stack.append(valid_parenthesis)
+                    case Parentheses.RIGHT:
+                        while (
+                            operator_stack
+                            and (last_operator := operator_stack[-1]) != Parentheses.LEFT
+                        ):
+                            if not operator_stack:
+                                raise ValueError("Mismatched parentheses")
+
+                            _ = operator_stack.pop()
+                            output_queue.append(last_operator)
+
+                        if (last_operator := operator_stack[-1]) != Parentheses.LEFT:
+                            raise ValueError("Mismatched parentheses")
+
+                        _ = operator_stack.pop()
 
     while operator_stack:
         if (last_operator := operator_stack[-1]) == Parentheses.LEFT:

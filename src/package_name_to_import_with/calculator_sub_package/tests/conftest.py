@@ -1,5 +1,4 @@
 """Define common inputs for unit tests."""
-
 import pytest
 
 from package_name_to_import_with.calculator_sub_package.wrapper_module import ArithmeticOperator
@@ -81,16 +80,12 @@ def expected_result(
     ValueError
         if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
     """
-    if ArithmeticOperator(operator) == ArithmeticOperator.ADDITION:
-        return first_number + second_number
-
-    if ArithmeticOperator(operator) == ArithmeticOperator.SUBTRACTION:
-        return first_number - second_number
-
-    if ArithmeticOperator(operator) == ArithmeticOperator.MULTIPLICATION:
-        return first_number * second_number
-
-    if ArithmeticOperator(operator) == ArithmeticOperator.DIVISION:
-        return first_number / second_number
-
-    raise ValueError(f"Unexpected value of operation: {operator}")
+    match operator:
+        case ArithmeticOperator.ADDITION:
+            return first_number + second_number
+        case ArithmeticOperator.SUBTRACTION:
+            return first_number - second_number
+        case ArithmeticOperator.MULTIPLICATION:
+            return first_number * second_number
+        case ArithmeticOperator.DIVISION:
+            return first_number / second_number
