@@ -5,6 +5,7 @@ import sys
 import hypothesis
 import hypothesis.strategies
 
+from package_name_to_import_with import solve_simplification
 from package_name_to_import_with.calculator_sub_package import (
     ArithmeticOperator,
     IdentityElements,
@@ -33,6 +34,52 @@ def generate_finite_numbers() -> hypothesis.strategies.SearchStrategy:
     )
 
     return generate_numbers_strategy
+
+
+def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
+    """Generate an arbitrary arithmetic expression of positive finite real numbers.
+
+    Returns
+    -------
+    hypothesis.strategies.SearchStrategy
+        updated strategy
+    """
+    generate_non_negative_number_strategy = hypothesis.strategies.one_of(
+        hypothesis.strategies.integers(min_value=0).map(str),
+        hypothesis.strategies.floats(
+            min_value=0, allow_nan=False, allow_infinity=False, allow_subnormal=False
+        ).map(lambda element: format(element, "f")),
+    )
+    generate_conditional_space_strategy = hypothesis.strategies.booleans().map(
+        lambda element: " " if element else ""
+    )
+
+    generate_binary_expression_strategy = hypothesis.strategies.tuples(
+        generate_non_negative_number_strategy,
+        generate_conditional_space_strategy,
+        hypothesis.strategies.sampled_from(ArithmeticOperator).map(lambda element: element.value),
+        generate_conditional_space_strategy,
+        generate_non_negative_number_strategy,
+    ).map("".join)
+
+    generate_possibly_parenthesised_expression_strategy = hypothesis.strategies.tuples(
+        hypothesis.strategies.booleans(), generate_binary_expression_strategy
+    ).map(lambda elements: f"({elements[1]})" if elements[0] else elements[1])
+
+    generate_generalised_expression_strategy = hypothesis.strategies.recursive(
+        generate_possibly_parenthesised_expression_strategy,
+        lambda children: hypothesis.strategies.tuples(
+            children,
+            generate_conditional_space_strategy,
+            hypothesis.strategies.sampled_from(ArithmeticOperator).map(
+                lambda element: element.value
+            ),
+            generate_conditional_space_strategy,
+            children,
+        ).map("".join),
+    )
+
+    return generate_generalised_expression_strategy
 
 
 @hypothesis.given(first_number=generate_finite_numbers(), second_number=generate_finite_numbers())
@@ -182,3 +229,42 @@ def test_operation_hypothesis(
         raise ValueError(f"Unexpected value of operation: {operator}")
 
     assert math.isclose(calculated_result, expected_result)
+
+
+@hypothesis.given(expression=generate_arithmetic_expression())
+def test_simplification_hypothesis(expression: str) -> None:
+    """Check simplification of arithmetic expression.
+
+    Parameters
+    ----------
+    expression : str
+        arbitrary arithmetic expression
+    """
+    try:
+        calculated_result = solve_simplification(expression)
+    except ValueError as error:
+        if str(error) != "Multiplicative inverse is not defined for additive identity":
+            raise
+
+        calculation_failed = True
+    else:
+        calculation_failed = False
+
+    try:
+        expected_result = eval(  # noqa: PGH001, S307  # pylint: disable=eval-used
+            expression, {"__builtins__": {}}
+        )
+    except ZeroDivisionError:
+        expectation_failed = True
+    else:
+        expectation_failed = False
+
+    assert calculation_failed == expectation_failed
+
+    if not calculation_failed and not expectation_failed:
+        if math.isfinite(calculated_result):
+            assert math.isfinite(expected_result)
+            assert math.isclose(calculated_result, expected_result)
+        else:
+            assert math.isinf(calculated_result) == math.isinf(expected_result)
+            assert math.isnan(calculated_result) == math.isnan(expected_result)
