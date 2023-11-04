@@ -45,9 +45,9 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
         updated strategy
     """
     generate_non_negative_number_strategy = hypothesis.strategies.one_of(
-        hypothesis.strategies.integers(min_value=0).map(str),
+        hypothesis.strategies.integers().map(str),
         hypothesis.strategies.floats(
-            min_value=0, allow_nan=False, allow_infinity=False, allow_subnormal=False
+            allow_nan=False, allow_infinity=False, allow_subnormal=False
         ).map(lambda element: format(element, "f")),
     )
     generate_conditional_space_strategy = hypothesis.strategies.booleans().map(

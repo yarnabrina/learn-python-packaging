@@ -20,7 +20,8 @@ class Parentheses(str, enum.Enum):
 class TokenType(str, enum.Enum):
     """Define supported token types."""
 
-    NUMBER = "number"
+    POSITIVE_NUMBER = "positive_number"
+    NEGATIVE_NUMBER = "negative_number"
     OPERATOR = "operator"
     PARENTHESIS = "parenthesis"
 
@@ -54,7 +55,10 @@ def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | f
     ValueError
         if brackets are not matching
     """
-    number_pattern = r"\d+(?:\.\d+)?"
+    clean_expression = infix_expression.replace(" ", "")
+
+    positive_number_pattern = r"\d+(?:\.\d+)?"
+    negative_number_pattern = rf"(?<![\d|{Parentheses.RIGHT}])-\d+(?:\.\d+)?"
     operator_pattern = (
         "[" + "".join(rf"\{operator.value}" for operator in ArithmeticOperator) + "]"
     )
@@ -64,13 +68,14 @@ def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | f
 
     token_pattern = "|".join(
         (
-            f"(?P<{TokenType.NUMBER}>{number_pattern})",
+            f"(?P<{TokenType.POSITIVE_NUMBER}>{positive_number_pattern})",
+            f"(?P<{TokenType.NEGATIVE_NUMBER}>{negative_number_pattern})",
             f"(?P<{TokenType.OPERATOR}>{operator_pattern})",
             f"(?P<{TokenType.PARENTHESIS}>{parenthesis_pattern})",
         )
     )
 
-    tokens = re.finditer(token_pattern, infix_expression)
+    tokens = re.finditer(token_pattern, clean_expression)
 
     operator_stack: list[ArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
     output_queue: list[ArithmeticOperator | float] = []
@@ -82,7 +87,7 @@ def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | f
         )
 
         match token_type:
-            case TokenType.NUMBER:
+            case TokenType.POSITIVE_NUMBER | TokenType.NEGATIVE_NUMBER:
                 valid_number = float(token_value)
 
                 output_queue.append(valid_number)

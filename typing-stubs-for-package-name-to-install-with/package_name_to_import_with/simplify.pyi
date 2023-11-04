@@ -9,7 +9,8 @@ class Parentheses(str, enum.Enum):
 
 
 class TokenType(str, enum.Enum):
-    NUMBER: str
+    POSITIVE_NUMBER: str
+    NEGATIVE_NUMBER: str
     OPERATOR: str
     PARENTHESIS: str
 
