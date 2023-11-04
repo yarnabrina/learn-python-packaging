@@ -120,3 +120,9 @@ def test_expression_input_failure(capsys: pytest.CaptureFixture) -> None:
         _, result_error = capsys.readouterr()
 
     assert "Unexpected characters" in result_error  # nosec B101
+
+
+def test_sub_parser_input_failure() -> None:
+    """Check failure in sub-command input."""
+    with pytest.raises(SystemExit), unittest.mock.patch("sys.argv", ["prog", "unknown"]):
+        module_that_can_be_invoked_from_cli.console_calculator()
