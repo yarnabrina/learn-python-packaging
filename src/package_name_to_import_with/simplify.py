@@ -92,7 +92,7 @@ def clean_and_tokenise_expression(
 
 
 @pydantic.validate_call(validate_return=True)
-def parse_infix_expression(
+def parse_infix_expression(  # noqa: C901
     infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]],
 ) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
@@ -115,11 +115,14 @@ def parse_infix_expression(
     operator_stack: list[ArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
     output_queue: list[ArithmeticOperator | float] = []
     for token in infix_expression_tokens:
-        token_type, token_value = next(
-            (element_type, element_value)
-            for element_type, element_value in token.groupdict().items()
-            if element_value is not None
-        )
+        try:
+            token_type, token_value = next(
+                (element_type, element_value)
+                for element_type, element_value in token.groupdict().items()
+                if element_value is not None
+            )
+        except StopIteration:
+            continue
 
         match token_type:
             case TokenType.POSITIVE_NUMBER | TokenType.NEGATIVE_NUMBER:
