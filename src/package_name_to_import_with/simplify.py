@@ -97,6 +97,8 @@ def convert_infix_expression(  # noqa: C901
 ) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
 
+    This implements shunting yard algorithm following `Wikipedia`_ pseudocode.
+
     Parameters
     ----------
     infix_expression_tokens : collections.abc.Iterator[re.Match[str]]
@@ -111,6 +113,10 @@ def convert_infix_expression(  # noqa: C901
     ------
     ValueError
         if brackets are not matching
+
+    References
+    ----------
+    .. Wikipedia: https://en.wikipedia.org/wiki/Shunting_yard_algorithm#The_algorithm_in_detail
     """
     operator_stack: list[ArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
     output_queue: list[ArithmeticOperator | float] = []
