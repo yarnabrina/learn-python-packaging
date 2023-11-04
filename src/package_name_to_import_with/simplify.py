@@ -214,7 +214,7 @@ def convert_infix_expression(  # noqa: C901
         valid_parenthesis = Parentheses(parenthesis_token)
 
         if valid_parenthesis != Parentheses.LEFT:
-            raise ValueError(f"Unexpected token: {parenthesis_token}")
+            raise ValueError(f"Unexpected token: {parenthesis_token}")  # pragma: no cover
 
         operator_stack.append(valid_parenthesis)
 
@@ -243,7 +243,7 @@ def convert_infix_expression(  # noqa: C901
         valid_parenthesis = Parentheses(parenthesis_token)
 
         if valid_parenthesis != Parentheses.RIGHT:
-            raise ValueError(f"Unexpected token: {parenthesis_token}")
+            raise ValueError(f"Unexpected token: {parenthesis_token}")  # pragma: no cover
 
         while operator_stack and (last_operator := operator_stack[-1]) != Parentheses.LEFT:
             if not operator_stack:

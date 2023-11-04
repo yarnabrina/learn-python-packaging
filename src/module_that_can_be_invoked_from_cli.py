@@ -94,7 +94,7 @@ def console_calculator() -> None:
                     user_inputs.inputs.expression  # type: ignore[union-attr]
                 )
             case _:
-                operation_result = None
+                operation_result = None  # pragma: no cover
     except Exception as error:  # noqa: BLE001  # pylint: disable=broad-except
         sys.stderr.write(f"Error: {error}")
     else:
