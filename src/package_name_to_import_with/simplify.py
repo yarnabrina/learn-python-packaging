@@ -92,7 +92,7 @@ def clean_and_tokenise_expression(
 
 
 @pydantic.validate_call(validate_return=True)
-def parse_infix_expression(  # noqa: C901
+def convert_infix_expression(  # noqa: C901
     infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]],
 ) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
@@ -228,18 +228,18 @@ def solve_simplification(expression: str) -> float:
         >>> solve_simplification("5 * 6 / (7 + 8) - 9")
         -7.0
     """
-    tokens = clean_and_tokenise_expression(expression)
-    contents = parse_infix_expression(tokens)
-    solution = evaluate_postfix_expression(contents)
+    raw_infix_tokens = clean_and_tokenise_expression(expression)
+    ordered_postfix_tokens = convert_infix_expression(raw_infix_tokens)
+    expression_value = evaluate_postfix_expression(ordered_postfix_tokens)
 
-    return solution
+    return expression_value
 
 
 __all__ = [
     "OPERATION_PRECEDENCES",
     "Parentheses",
     "clean_and_tokenise_expression",
+    "convert_infix_expression",
     "evaluate_postfix_expression",
-    "parse_infix_expression",
     "solve_simplification",
 ]
