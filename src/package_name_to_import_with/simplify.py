@@ -35,7 +35,7 @@ ACCEPTABLE_CHARACTERS = set(" ")
 
 REGULAR_EXPRESSION_PATTERNS = {
     TokenType.POSITIVE_NUMBER: r"\d+(?:\.\d+)?",
-    TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT}])-\d+(?:\.\d+)?",
+    TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT.value}])-\d+(?:\.\d+)?",
     TokenType.OPERATOR: (
         "[" + "".join(rf"\{operator.value}" for operator in ArithmeticOperator) + "]"
     ),
@@ -44,7 +44,7 @@ REGULAR_EXPRESSION_PATTERNS = {
     ),
 }
 SUPPORTED_TOKEN_PATTERN = "|".join(
-    f"(?P<{token_type}>{token_pattern})"
+    f"(?P<{token_type.value}>{token_pattern})"
     for token_type, token_pattern in REGULAR_EXPRESSION_PATTERNS.items()
 )
 
