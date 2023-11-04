@@ -1,4 +1,8 @@
+import collections.abc
 import enum
+import re
+
+import pydantic
 
 from .calculator_sub_package import ArithmeticOperator
 
@@ -17,6 +21,11 @@ class TokenType(str, enum.Enum):
 
 OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int]
 
-def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | float]: ...
+def clean_and_tokenise_expression(
+    raw_expression: str
+) -> pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]]: ...
+def parse_infix_expression(
+    infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]]
+) -> list[ArithmeticOperator | float]: ...
 def evaluate_postfix_expression(postfix_expression: list[ArithmeticOperator | float]) -> float: ...
 def solve_simplification(expression: str) -> float: ...

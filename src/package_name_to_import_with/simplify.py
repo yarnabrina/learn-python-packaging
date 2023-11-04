@@ -1,6 +1,8 @@
 """Evaluate simplification expressions."""
+import collections.abc
 import enum
 import re
+import string
 import typing
 
 import pydantic
@@ -26,6 +28,26 @@ class TokenType(str, enum.Enum):
     PARENTHESIS = "parenthesis"
 
 
+SUPPORTED_CHARACTERS = set.union(
+    set(string.digits + "."), set(ArithmeticOperator), set(Parentheses)
+)
+ACCEPTABLE_CHARACTERS = set(" ")
+
+REGULAR_EXPRESSION_PATTERNS = {
+    TokenType.POSITIVE_NUMBER: r"\d+(?:\.\d+)?",
+    TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT}])-\d+(?:\.\d+)?",
+    TokenType.OPERATOR: (
+        "[" + "".join(rf"\{operator.value}" for operator in ArithmeticOperator) + "]"
+    ),
+    TokenType.PARENTHESIS: (
+        "[" + "".join(rf"\{parenthesis.value}" for parenthesis in Parentheses) + "]"
+    ),
+}
+SUPPORTED_TOKEN_PATTERN = "|".join(
+    f"(?P<{token_type}>{token_pattern})"
+    for token_type, token_pattern in REGULAR_EXPRESSION_PATTERNS.items()
+)
+
 OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int] = {
     Parentheses.LEFT: 0,
     Parentheses.RIGHT: 0,
@@ -37,13 +59,48 @@ OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int] = {
 
 
 @pydantic.validate_call(validate_return=True)
-def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | float]:
+def clean_and_tokenise_expression(
+    raw_expression: str,
+) -> pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]]:
+    """Extract tokens from arithmetic expression after pre-processing.
+
+    Parameters
+    ----------
+    raw_expression : str
+        infix expression
+
+    Returns
+    -------
+    collections.abc.Iterator[re.Match[str]]
+        tokens in standard arithmetic expression
+
+    Raises
+    ------
+    ValueError
+        if unsupported characters are passed
+    """
+    clean_expression = raw_expression.translate(
+        str.maketrans(dict.fromkeys(ACCEPTABLE_CHARACTERS, None))
+    )
+
+    if unsupported_characters := set(clean_expression).difference(SUPPORTED_CHARACTERS):
+        raise ValueError(f"Unexpected characters: {unsupported_characters}")
+
+    tokens = re.finditer(SUPPORTED_TOKEN_PATTERN, clean_expression)
+
+    return tokens
+
+
+@pydantic.validate_call(validate_return=True)
+def parse_infix_expression(
+    infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]],
+) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
 
     Parameters
     ----------
-    infix_expression : str
-        standard arithmetoc expression
+    infix_expression_tokens : collections.abc.Iterator[re.Match[str]]
+        tokens in standard arithmetic expression
 
     Returns
     -------
@@ -55,31 +112,9 @@ def parse_infix_expression(infix_expression: str) -> list[ArithmeticOperator | f
     ValueError
         if brackets are not matching
     """
-    clean_expression = infix_expression.replace(" ", "")
-
-    positive_number_pattern = r"\d+(?:\.\d+)?"
-    negative_number_pattern = rf"(?<![\d|{Parentheses.RIGHT}])-\d+(?:\.\d+)?"
-    operator_pattern = (
-        "[" + "".join(rf"\{operator.value}" for operator in ArithmeticOperator) + "]"
-    )
-    parenthesis_pattern = (
-        "[" + "".join(rf"\{parenthesis.value}" for parenthesis in Parentheses) + "]"
-    )
-
-    token_pattern = "|".join(
-        (
-            f"(?P<{TokenType.POSITIVE_NUMBER}>{positive_number_pattern})",
-            f"(?P<{TokenType.NEGATIVE_NUMBER}>{negative_number_pattern})",
-            f"(?P<{TokenType.OPERATOR}>{operator_pattern})",
-            f"(?P<{TokenType.PARENTHESIS}>{parenthesis_pattern})",
-        )
-    )
-
-    tokens = re.finditer(token_pattern, clean_expression)
-
     operator_stack: list[ArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
     output_queue: list[ArithmeticOperator | float] = []
-    for token in tokens:
+    for token in infix_expression_tokens:
         token_type, token_value = next(
             (element_type, element_value)
             for element_type, element_value in token.groupdict().items()
@@ -190,7 +225,8 @@ def solve_simplification(expression: str) -> float:
         >>> solve_simplification("5 * 6 / (7 + 8) - 9")
         -7.0
     """
-    contents = parse_infix_expression(expression)
+    tokens = clean_and_tokenise_expression(expression)
+    contents = parse_infix_expression(tokens)
     solution = evaluate_postfix_expression(contents)
 
     return solution
@@ -199,6 +235,7 @@ def solve_simplification(expression: str) -> float:
 __all__ = [
     "OPERATION_PRECEDENCES",
     "Parentheses",
+    "clean_and_tokenise_expression",
     "evaluate_postfix_expression",
     "parse_infix_expression",
     "solve_simplification",
