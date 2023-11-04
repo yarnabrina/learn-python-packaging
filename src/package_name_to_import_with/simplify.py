@@ -261,7 +261,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
                 for element_type, element_value in token.groupdict().items()
                 if element_value is not None
             )
-        except StopIteration:
+        except StopIteration:  # pragma: no cover
             continue
 
         match token_type:
