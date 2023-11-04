@@ -5,7 +5,7 @@ import pydantic
 
 ArithmeticOperation: typing.TypeAlias
 
-class ArithmeticOperator(enum.Enum):
+class ArithmeticOperator(str, enum.Enum):
     ADDITION: str
     SUBTRACTION: str
     MULTIPLICATION: str
@@ -22,4 +22,6 @@ class ArithmeticExpression(pydantic.BaseModel):
     @property
     def result(self) -> float: ...
 
-def calculate_results(first_input: float, operator: ArithmeticOperator, second_input: float) -> float: ...
+def calculate_results(
+    first_input: float, operator: ArithmeticOperator, second_input: float
+) -> float: ...

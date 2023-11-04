@@ -11,7 +11,7 @@ ArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float],
 
 
 @enum.unique
-class ArithmeticOperator(enum.Enum):
+class ArithmeticOperator(str, enum.Enum):
     """Define supported arithmetic operators."""
 
     ADDITION = "+"
