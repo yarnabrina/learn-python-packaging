@@ -250,7 +250,7 @@ def convert_infix_expression(  # noqa: C901
             output_queue.append(last_operator)
 
         if not operator_stack or (last_operator := operator_stack[-1]) != Parentheses.LEFT:
-            raise ValueError("Mismatched parentheses")
+            raise ValueError("Mismatched right parenthesis")
 
         _ = operator_stack.pop()
 
@@ -276,7 +276,7 @@ def convert_infix_expression(  # noqa: C901
 
     while operator_stack:
         if (last_operator := operator_stack[-1]) == Parentheses.LEFT:
-            raise ValueError("Mismatched parentheses")
+            raise ValueError("Mismatched left parenthesis")
 
         _ = operator_stack.pop()
         output_queue.append(last_operator)
