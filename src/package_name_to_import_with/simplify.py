@@ -92,7 +92,7 @@ def clean_and_tokenise_expression(
 
 
 @pydantic.validate_call(validate_return=True)
-def convert_infix_expression(  # noqa: C901
+def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
     infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]],
 ) -> list[ArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
