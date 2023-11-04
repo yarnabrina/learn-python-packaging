@@ -38,8 +38,8 @@ def test_simplification(expression: str) -> None:
     [
         ("one + one", "Unexpected characters"),
         ("2 minus 3", "Unexpected characters"),
-        ("1+(2*3", "Mismatched left parentheses"),
-        ("4 - 5 / 6)", "Mismatched right parentheses"),
+        ("1+(2*3", "Mismatched left parenthesis"),
+        ("4 - 5 / 6)", "Mismatched right parenthesis"),
     ],
 )
 def test_simplification_failure(expression: str, error: str) -> None:
