@@ -93,8 +93,8 @@ def console_calculator() -> None:
                 operation_result = package_name_to_import_with.solve_simplification(
                     user_inputs.inputs.expression  # type: ignore[union-attr]
                 )
-            case _:
-                operation_result = None  # pragma: no cover
+            case _:  # pragma: no cover
+                operation_result = None
     except Exception as error:  # noqa: BLE001  # pylint: disable=broad-except
         sys.stderr.write(f"Error: {error}")
     else:
