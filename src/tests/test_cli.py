@@ -105,3 +105,18 @@ def test_operator_input_failure() -> None:
         "sys.argv", ["prog", "binary", "0", "x", "0"]
     ):
         module_that_can_be_invoked_from_cli.console_calculator()
+
+
+def test_expression_input_failure(capsys: pytest.CaptureFixture) -> None:
+    """Check failure in expression input.
+
+    Parameters
+    ----------
+    capsys : pytest.CaptureFixture
+        fixture capturing ``sys.stdout`` and ``sys.stderr``
+    """
+    with unittest.mock.patch("sys.argv", ["prog", "general", "one plus one"]):
+        module_that_can_be_invoked_from_cli.console_calculator()
+        _, result_error = capsys.readouterr()
+
+    assert "Unexpected characters" in result_error  # nosec B101
