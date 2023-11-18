@@ -350,6 +350,16 @@ strict = true
 module = "PySimpleGUI"
 ignore_missing_imports = true
 
+[tool.pyright]
+include = [
+  "src",
+]
+exclude = [
+  "**/tests/*.py",
+]
+pythonVersion = "3.10"
+reportMissingImports = false
+
 [tool.autoflake]
 in-place = true
 remove-all-unused-imports = true
@@ -365,16 +375,6 @@ ignore-init-method = true
 
 [tool.pydocstyle]
 convention = "numpy"
-
-[tool.pyright]
-include = [
-  "src",
-]
-exclude = [
-  "**/tests/*.py",
-]
-pythonVersion = "3.10"
-reportMissingImports = false
 
 [tool.vulture]
 min_confidence = 100
