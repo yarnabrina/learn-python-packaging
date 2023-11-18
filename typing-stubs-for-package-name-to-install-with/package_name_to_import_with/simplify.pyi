@@ -14,7 +14,8 @@ class TokenType(str, enum.Enum):
     POSITIVE_NUMBER: str
     NEGATIVE_NUMBER: str
     OPERATOR: str
-    PARENTHESIS: str
+    LEFT_PARENTHESIS: str
+    RIGHT_PARENTHESIS: str
 
 OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int]
 
