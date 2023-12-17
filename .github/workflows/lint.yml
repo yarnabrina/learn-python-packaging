@@ -10,13 +10,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner-platform:
-          - ubuntu-latest
         python-version:
           - "3.10"
           - "3.11"
           - "3.12"
-    runs-on: ${{ matrix.runner-platform }}
+    runs-on: ubuntu-latest
     steps:
       - name: checkout commit
         uses: actions/checkout@v4
