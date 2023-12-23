@@ -38,6 +38,7 @@
 - Development
     - [codespell](https://github.com/codespell-project/codespell)
     - [Nox](https://github.com/wntrblm/nox)
+    - [numpydoc](https://numpydoc.readthedocs.io/)
     - [pre-commit](https://github.com/pre-commit/pre-commit)
     - [Ruff](https://github.com/astral-sh/ruff)
 - Formatting

@@ -3,7 +3,7 @@ import typing
 
 import pydantic
 
-import package_name_to_import_with
+from package_name_to_import_with import BinaryArithmeticOperator
 
 class CalculatorType(str, enum.Enum):
     BINARY: str
@@ -12,7 +12,7 @@ class CalculatorType(str, enum.Enum):
 class BinaryInputs(pydantic.BaseModel):
     calculator_type: typing.Literal[CalculatorType.BINARY]
     first_number: float
-    operator: package_name_to_import_with.calculator_sub_package.ArithmeticOperator
+    operator: BinaryArithmeticOperator
     second_number: float
 
 class GeneralInputs(pydantic.BaseModel):

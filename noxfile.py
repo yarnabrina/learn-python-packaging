@@ -96,7 +96,13 @@ def blacken_docs(session: nox.Session) -> None:
 
 @RELEASE_SESSION_DECORATOR
 def build(session: nox.Session) -> None:
-    """Run build."""
+    """Run build.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
     session.install("build", "wheel")
 
     session.run("python3", "-m", "build", "--outdir", f"{DIST_DIRECTORY.name}")
@@ -297,7 +303,13 @@ def sphinx(session: nox.Session) -> None:
 
 @RELEASE_SESSION_DECORATOR
 def twine(session: nox.Session) -> None:
-    """Run twine."""
+    """Run twine.
+
+    Parameters
+    ----------
+    session : nox.Session
+        nox Session object
+    """
     session.install("twine")
 
     session.run("twine", "check", f"{DIST_DIRECTORY.name}/*")

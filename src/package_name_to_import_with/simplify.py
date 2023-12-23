@@ -7,7 +7,7 @@ import typing
 
 import pydantic
 
-from .calculator_sub_package import ArithmeticOperator, calculate_results
+from .calculator_sub_package import BinaryArithmeticOperator, calculate_results
 
 
 @enum.unique
@@ -30,7 +30,7 @@ class TokenType(str, enum.Enum):
 
 
 SUPPORTED_CHARACTERS = set.union(
-    set(string.digits + "."), set(ArithmeticOperator), set(Parentheses)
+    set(string.digits + "."), set(BinaryArithmeticOperator), set(Parentheses)
 )
 ACCEPTABLE_CHARACTERS = set(" ")
 
@@ -38,7 +38,7 @@ REGULAR_EXPRESSION_PATTERNS = {
     TokenType.POSITIVE_NUMBER: r"\d+(?:\.\d+)?",
     TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT.value}])-\d+(?:\.\d+)?",
     TokenType.OPERATOR: (
-        "[" + "".join(rf"\{operator.value}" for operator in ArithmeticOperator) + "]"
+        "[" + "".join(rf"\{operator.value}" for operator in BinaryArithmeticOperator) + "]"
     ),
     TokenType.LEFT_PARENTHESIS: rf"\{Parentheses.LEFT.value}",
     TokenType.RIGHT_PARENTHESIS: rf"\{Parentheses.RIGHT.value}",
@@ -48,13 +48,13 @@ SUPPORTED_TOKEN_PATTERN = "|".join(
     for token_type, token_pattern in REGULAR_EXPRESSION_PATTERNS.items()
 )
 
-OPERATION_PRECEDENCES: dict[ArithmeticOperator | Parentheses, int] = {
+OPERATION_PRECEDENCES: dict[BinaryArithmeticOperator | Parentheses, int] = {
     Parentheses.LEFT: 0,
     Parentheses.RIGHT: 0,
-    ArithmeticOperator.ADDITION: 1,
-    ArithmeticOperator.SUBTRACTION: 1,
-    ArithmeticOperator.MULTIPLICATION: 2,
-    ArithmeticOperator.DIVISION: 2,
+    BinaryArithmeticOperator.ADDITION: 1,
+    BinaryArithmeticOperator.SUBTRACTION: 1,
+    BinaryArithmeticOperator.MULTIPLICATION: 2,
+    BinaryArithmeticOperator.DIVISION: 2,
 }
 
 
@@ -94,7 +94,7 @@ def clean_and_tokenise_expression(
 @pydantic.validate_call(validate_return=True)
 def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
     infix_expression_tokens: pydantic.InstanceOf[collections.abc.Iterator[re.Match[str]]],
-) -> list[ArithmeticOperator | float]:
+) -> list[BinaryArithmeticOperator | float]:
     """Convert standard arithmetic expression into reverse Polish notation.
 
     This implements shunting yard algorithm following pseudocode section in Wikipedia.
@@ -106,7 +106,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
 
     Returns
     -------
-    list[ArithmeticOperator | float]
+    list[BinaryArithmeticOperator | float]
         postfix arithmetic expression
 
     Raises
@@ -126,7 +126,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
 
         * Operator
 
-            #. Convert to operator (using ``ArithmeticOperator``).
+            #. Convert to operator (using ``BinaryArithmeticOperator``).
             #. Move top lower precedence operators from ``operator_stack`` into ``output_queue``.
             #. Add to ``operator_stack``.
 
@@ -144,8 +144,8 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
     ----------
     `Wikipedia <https://en.wikipedia.org/wiki/Shunting_yard_algorithm#The_algorithm_in_detail>`_.
     """
-    operator_stack: list[ArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
-    output_queue: list[ArithmeticOperator | float] = []
+    operator_stack: list[BinaryArithmeticOperator | typing.Literal[Parentheses.LEFT]] = []
+    output_queue: list[BinaryArithmeticOperator | float] = []
 
     @pydantic.validate_call
     def __process_number_token(number_token: str) -> None:
@@ -180,7 +180,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
         #. Move previous lower precedence operators from ``operator_stack`` into ``output_queue``.
         #. Add to ``operator_stack``.
         """
-        valid_operator = ArithmeticOperator(operator_token)
+        valid_operator = BinaryArithmeticOperator(operator_token)
 
         while (
             operator_stack
@@ -275,7 +275,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
                 __process_right_parenthesis_token(token_value)
 
     while operator_stack:
-        if (last_operator := operator_stack[-1]) == Parentheses.LEFT:
+        if (last_operator := operator_stack[-1]) is Parentheses.LEFT:
             raise ValueError("Mismatched left parenthesis")
 
         _ = operator_stack.pop()
@@ -285,12 +285,14 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
 
 
 @pydantic.validate_call(validate_return=True)
-def evaluate_postfix_expression(postfix_expression: list[ArithmeticOperator | float]) -> float:
+def evaluate_postfix_expression(
+    postfix_expression: list[BinaryArithmeticOperator | float],
+) -> float:
     """Evaluate postfix arithmetic expression in reverse Polish notation.
 
     Parameters
     ----------
-    postfix_expression : list[ArithmeticOperator | float]
+    postfix_expression : list[BinaryArithmeticOperator | float]
         elements of arithmetic expression in postfix format
 
     Returns
@@ -303,7 +305,7 @@ def evaluate_postfix_expression(postfix_expression: list[ArithmeticOperator | fl
         if isinstance(element, float | int):
             stack.append(element)
         else:
-            operator = ArithmeticOperator(element)
+            operator = BinaryArithmeticOperator(element)
 
             second_input = stack.pop()
             first_input = stack.pop()

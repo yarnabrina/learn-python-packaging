@@ -1,7 +1,9 @@
 """Define common inputs for unit tests."""
 import pytest
 
-from package_name_to_import_with.calculator_sub_package.wrapper_module import ArithmeticOperator
+from package_name_to_import_with.calculator_sub_package.wrapper_module import (
+    BinaryArithmeticOperator,
+)
 
 
 @pytest.fixture(params=[4, -9, 1.02, -3.4], name="first_number")
@@ -38,8 +40,8 @@ def fixture_second_number(request: pytest.FixtureRequest) -> float:
     return request.param
 
 
-@pytest.fixture(params=ArithmeticOperator, name="operator")
-def fixture_operator(request: pytest.FixtureRequest) -> ArithmeticOperator:
+@pytest.fixture(params=BinaryArithmeticOperator, name="operator")
+def fixture_operator(request: pytest.FixtureRequest) -> BinaryArithmeticOperator:
     """Define operator for unit tests.
 
     Parameters
@@ -49,7 +51,7 @@ def fixture_operator(request: pytest.FixtureRequest) -> ArithmeticOperator:
 
     Returns
     -------
-    ArithmeticOperator
+    BinaryArithmeticOperator
         value of operator
     """
     return request.param
@@ -57,7 +59,7 @@ def fixture_operator(request: pytest.FixtureRequest) -> ArithmeticOperator:
 
 @pytest.fixture()
 def expected_result(
-    first_number: float, second_number: float, operator: ArithmeticOperator
+    first_number: float, second_number: float, operator: BinaryArithmeticOperator
 ) -> float:
     """Define expected result for unit tests.
 
@@ -67,7 +69,7 @@ def expected_result(
         value of first number
     second_number : float
         value of second number
-    operator : ArithmeticOperator
+    operator : BinaryArithmeticOperator
         type of arithmetic operation
 
     Returns
@@ -81,11 +83,11 @@ def expected_result(
         if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
     """
     match operator:
-        case ArithmeticOperator.ADDITION:
+        case BinaryArithmeticOperator.ADDITION:
             return first_number + second_number
-        case ArithmeticOperator.SUBTRACTION:
+        case BinaryArithmeticOperator.SUBTRACTION:
             return first_number - second_number
-        case ArithmeticOperator.MULTIPLICATION:
+        case BinaryArithmeticOperator.MULTIPLICATION:
             return first_number * second_number
-        case ArithmeticOperator.DIVISION:
+        case BinaryArithmeticOperator.DIVISION:
             return first_number / second_number

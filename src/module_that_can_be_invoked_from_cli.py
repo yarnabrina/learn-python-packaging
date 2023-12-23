@@ -6,7 +6,11 @@ import typing
 
 import pydantic
 
-import package_name_to_import_with
+from package_name_to_import_with import (
+    BinaryArithmeticOperator,
+    calculate_results,
+    solve_simplification,
+)
 
 
 @enum.unique
@@ -18,23 +22,49 @@ class CalculatorType(str, enum.Enum):
 
 
 class BinaryInputs(pydantic.BaseModel):
-    """Define arguments for binary calculator."""
+    """Define arguments for binary calculator.
+
+    Attributes
+    ----------
+    calculator_type : typing.Literal[CalculatorType.BINARY]
+        kind of calculator
+    first_number : float
+        first number for the calculation
+    operator : BinaryArithmeticOperator
+        arithmetic operator to be used
+    second_number : float
+        second number for the calculation
+    """
 
     calculator_type: typing.Literal[CalculatorType.BINARY]
     first_number: float
-    operator: package_name_to_import_with.calculator_sub_package.ArithmeticOperator
+    operator: BinaryArithmeticOperator
     second_number: float
 
 
 class GeneralInputs(pydantic.BaseModel):
-    """Define arguments of general calculator."""
+    """Define arguments of general calculator.
+
+    Attributes
+    ----------
+    calculator_type : typing.Literal[CalculatorType.GENERAL]
+        kind of calculator
+    expression : str
+        mathematical expression to be evaluated
+    """
 
     calculator_type: typing.Literal[CalculatorType.GENERAL]
     expression: str
 
 
 class UserInputs(pydantic.BaseModel):
-    """Define sub-commands and arguments of CLI calculator."""
+    """Define sub-commands and arguments of CLI calculator.
+
+    Attributes
+    ----------
+    inputs : BinaryInputs | GeneralInputs
+        inputs for the calculator
+    """
 
     inputs: BinaryInputs | GeneralInputs = pydantic.Field(discriminator="calculator_type")
 
@@ -63,9 +93,7 @@ def capture_user_inputs() -> UserInputs:
 
     binary_parser.add_argument("first_number", type=float, help="first number")
     binary_parser.add_argument(
-        "operator",
-        type=package_name_to_import_with.calculator_sub_package.ArithmeticOperator,
-        help="arithmetic operator",
+        "operator", type=BinaryArithmeticOperator, help="arithmetic operator"
     )
     binary_parser.add_argument("second_number", type=float, help="second number")
 
@@ -84,13 +112,13 @@ def console_calculator() -> None:
     try:
         match user_inputs.inputs.calculator_type:
             case CalculatorType.BINARY:
-                operation_result = package_name_to_import_with.calculate_results(
+                operation_result = calculate_results(
                     user_inputs.inputs.first_number,  # type: ignore[union-attr]
                     user_inputs.inputs.operator,  # type: ignore[union-attr]
                     user_inputs.inputs.second_number,  # type: ignore[union-attr]
                 )
             case CalculatorType.GENERAL:
-                operation_result = package_name_to_import_with.solve_simplification(
+                operation_result = solve_simplification(
                     user_inputs.inputs.expression  # type: ignore[union-attr]
                 )
             case _:  # pragma: no cover

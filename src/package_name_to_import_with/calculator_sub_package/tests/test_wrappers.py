@@ -6,13 +6,16 @@ import pydantic
 import pytest
 
 from package_name_to_import_with.calculator_sub_package import (
-    ArithmeticOperator,
+    BinaryArithmeticOperator,
     calculate_results,
 )
 
 
 def test_successful_operation(
-    first_number: float, operator: ArithmeticOperator, second_number: float, expected_result: float
+    first_number: float,
+    operator: BinaryArithmeticOperator,
+    second_number: float,
+    expected_result: float,
 ) -> None:
     """Check operation of two real numbers.
 
@@ -20,7 +23,7 @@ def test_successful_operation(
     ----------
     first_number : float
         value of first number
-    operator : ArithmeticOperator
+    operator : BinaryArithmeticOperator
         type of arithmetic operation
     second_number : float
         value of second number

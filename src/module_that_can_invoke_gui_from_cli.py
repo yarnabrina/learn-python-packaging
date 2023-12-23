@@ -25,7 +25,7 @@ def define_gui_layout() -> list[list[pydantic.InstanceOf[PySimpleGUI.Element]]]:
         [
             PySimpleGUI.Text("Enter operator"),
             PySimpleGUI.OptionMenu(
-                package_name_to_import_with.calculator_sub_package.ArithmeticOperator,
+                package_name_to_import_with.calculator_sub_package.BinaryArithmeticOperator,
                 key=OPERATOR_INPUT,
             ),
         ],

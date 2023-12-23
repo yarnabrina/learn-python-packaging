@@ -27,7 +27,7 @@ def get_negative(input_number: float) -> float:
     Parameters
     ----------
     input_number : float
-        value of number
+        number for which additive inverse is required
 
     Returns
     -------
@@ -56,7 +56,7 @@ def get_reciprocal(input_number: float) -> float:
     Parameters
     ----------
     input_number : float
-        value of number
+        number for which multiplicative inverse is required
 
     Returns
     -------
