@@ -275,7 +275,7 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
                 __process_right_parenthesis_token(token_value)
 
     while operator_stack:
-        if (last_operator := operator_stack[-1]) == Parentheses.LEFT:
+        if (last_operator := operator_stack[-1]) is Parentheses.LEFT:
             raise ValueError("Mismatched left parenthesis")
 
         _ = operator_stack.pop()

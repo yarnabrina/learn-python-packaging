@@ -210,7 +210,7 @@ def test_operation_hypothesis(
     """
     hypothesis.assume(
         not (
-            operator == ArithmeticOperator.DIVISION
+            operator is ArithmeticOperator.DIVISION
             and abs(second_number) <= sys.float_info.epsilon
         )
     )
@@ -265,5 +265,5 @@ def test_simplification_hypothesis(expression: str) -> None:
             assert math.isfinite(expected_result)
             assert math.isclose(calculated_result, expected_result)
         else:
-            assert math.isinf(calculated_result) == math.isinf(expected_result)
-            assert math.isnan(calculated_result) == math.isnan(expected_result)
+            assert math.isinf(calculated_result) is math.isinf(expected_result)
+            assert math.isnan(calculated_result) is math.isnan(expected_result)
