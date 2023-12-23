@@ -30,9 +30,9 @@ def define_garbage_collection_decorator(
 
         Parameters
         ----------
-        args : tuple
+        *args : tuple
             positional arguments for ``function_to_be_decorated``
-        kwargs : dict
+        **kwargs : dict
             keyword arguments for ``function_to_be_decorated``
 
         Returns

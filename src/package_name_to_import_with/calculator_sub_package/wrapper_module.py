@@ -31,15 +31,6 @@ ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation] = {
 class ArithmeticExpression(pydantic.BaseModel):
     """Define arithmetic expression.
 
-    Parameters
-    ----------
-    first_number : float
-        value of first number
-    operator : ArithmeticOperator
-        value of arithmetic operator
-    second_number : float
-        value of second number
-
     Attributes
     ----------
     first_number : float
