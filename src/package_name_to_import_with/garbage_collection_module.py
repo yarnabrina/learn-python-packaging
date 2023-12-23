@@ -6,21 +6,23 @@ import typing
 
 import pydantic
 
+FunctionType: typing.TypeAlias = collections.abc.Callable[..., typing.Any]
+
 
 @pydantic.validate_call(validate_return=True)
 def define_garbage_collection_decorator(
-    function_to_be_decorated: collections.abc.Callable[..., typing.Any]
-) -> "collections.abc.Callable[..., typing.Any]":  # pragma: no cover
+    function_to_be_decorated: FunctionType,
+) -> FunctionType:  # pragma: no cover
     """Perform forcefully garbage collection after execution of provided function.
 
     Parameters
     ----------
-    function_to_be_decorated : collections.abc.Callable[..., typing.Any]
+    function_to_be_decorated : FunctionType
         function whose execution may require forceful garbage collection
 
     Returns
     -------
-    collections.abc.Callable[..., typing.Any]
+    FunctionType
         decorated function
     """
 

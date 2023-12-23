@@ -7,7 +7,7 @@ import hypothesis.strategies
 
 from package_name_to_import_with import solve_simplification
 from package_name_to_import_with.calculator_sub_package import (
-    ArithmeticOperator,
+    BinaryArithmeticOperator,
     IdentityElements,
     add_numbers,
     calculate_results,
@@ -57,7 +57,9 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
     generate_binary_expression_strategy = hypothesis.strategies.tuples(
         generate_non_negative_number_strategy,
         generate_conditional_space_strategy,
-        hypothesis.strategies.sampled_from(ArithmeticOperator).map(lambda element: element.value),
+        hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
+            lambda element: element.value
+        ),
         generate_conditional_space_strategy,
         generate_non_negative_number_strategy,
     ).map("".join)
@@ -71,7 +73,7 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
         lambda children: hypothesis.strategies.tuples(
             children,
             generate_conditional_space_strategy,
-            hypothesis.strategies.sampled_from(ArithmeticOperator).map(
+            hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
                 lambda element: element.value
             ),
             generate_conditional_space_strategy,
@@ -186,11 +188,11 @@ def test_division_hypothesis(first_number: float, second_number: float) -> None:
 
 @hypothesis.given(
     first_number=generate_finite_numbers(),
-    operator=hypothesis.strategies.sampled_from(ArithmeticOperator),
+    operator=hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
     second_number=generate_finite_numbers(),
 )
 def test_operation_hypothesis(
-    first_number: float, operator: ArithmeticOperator, second_number: float
+    first_number: float, operator: BinaryArithmeticOperator, second_number: float
 ) -> None:
     """Check operation of two real numbers.
 
@@ -198,7 +200,7 @@ def test_operation_hypothesis(
     ----------
     first_number : float
         value of first number
-    operator : ArithmeticOperator
+    operator : BinaryArithmeticOperator
         type of arithmetic operation
     second_number : float
         value of second number
@@ -210,7 +212,7 @@ def test_operation_hypothesis(
     """
     hypothesis.assume(
         not (
-            operator is ArithmeticOperator.DIVISION
+            operator is BinaryArithmeticOperator.DIVISION
             and abs(second_number) <= sys.float_info.epsilon
         )
     )
@@ -218,13 +220,13 @@ def test_operation_hypothesis(
     calculated_result = calculate_results(first_number, operator, second_number)
 
     match operator:
-        case ArithmeticOperator.ADDITION:
+        case BinaryArithmeticOperator.ADDITION:
             expected_result = first_number + second_number
-        case ArithmeticOperator.SUBTRACTION:
+        case BinaryArithmeticOperator.SUBTRACTION:
             expected_result = first_number - second_number
-        case ArithmeticOperator.MULTIPLICATION:
+        case BinaryArithmeticOperator.MULTIPLICATION:
             expected_result = first_number * second_number
-        case ArithmeticOperator.DIVISION:
+        case BinaryArithmeticOperator.DIVISION:
             expected_result = first_number / second_number
 
     assert math.isclose(calculated_result, expected_result)

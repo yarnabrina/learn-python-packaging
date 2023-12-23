@@ -3,25 +3,33 @@ import typing
 
 import pydantic
 
-ArithmeticOperation: typing.TypeAlias
+__all__ = [
+    "BINARY_ARITHMETIC_OPERATIONS",
+    "BinaryArithmeticExpression",
+    "BinaryArithmeticOperation",
+    "BinaryArithmeticOperator",
+    "calculate_results",
+]
 
-class ArithmeticOperator(str, enum.Enum):
+BinaryArithmeticOperation: typing.TypeAlias
+
+class BinaryArithmeticOperator(str, enum.Enum):
     ADDITION: str
     SUBTRACTION: str
     MULTIPLICATION: str
     DIVISION: str
 
-ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation]
+BINARY_ARITHMETIC_OPERATIONS: dict[BinaryArithmeticOperator, BinaryArithmeticOperation]
 
-class ArithmeticExpression(pydantic.BaseModel):
-    first_number: float
-    operator: ArithmeticOperator
-    second_number: float
+class BinaryArithmeticExpression(pydantic.BaseModel):
+    left_operand: float
+    binary_operator: BinaryArithmeticOperator
+    right_operand: float
     @property
-    def operation(self) -> ArithmeticOperation: ...
+    def operation(self) -> BinaryArithmeticOperation: ...
     @property
     def result(self) -> float: ...
 
 def calculate_results(
-    first_input: float, operator: ArithmeticOperator, second_input: float
+    first_input: float, operator: BinaryArithmeticOperator, second_input: float
 ) -> float: ...

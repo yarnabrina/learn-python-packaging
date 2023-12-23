@@ -9,9 +9,25 @@ from .basics import (
     subtract_numbers,
 )
 from .wrapper_module import (
-    ARITHMETIC_OPERATIONS,
-    ArithmeticExpression,
-    ArithmeticOperation,
-    ArithmeticOperator,
+    BINARY_ARITHMETIC_OPERATIONS,
+    BinaryArithmeticExpression,
+    BinaryArithmeticOperation,
+    BinaryArithmeticOperator,
     calculate_results,
 )
+
+__all__ = [
+    "BINARY_ARITHMETIC_OPERATIONS",
+    "BinaryArithmeticExpression",
+    "BinaryArithmeticOperation",
+    "BinaryArithmeticOperator",
+    "IdentityElements",
+    "InverseElements",
+    "add_numbers",
+    "calculate_results",
+    "divide_numbers",
+    "get_negative",
+    "get_reciprocal",
+    "multiply_numbers",
+    "subtract_numbers",
+]

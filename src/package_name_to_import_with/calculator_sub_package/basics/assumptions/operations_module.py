@@ -3,20 +3,20 @@ import pydantic
 
 
 @pydantic.validate_call(validate_return=True)
-def add_numbers(first_number: float, second_number: float) -> float:
+def add_numbers(left_addend: float, right_addend: float) -> float:
     """Perform addition of two real numbers.
 
     Parameters
     ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
+    left_addend : float
+        first number to be added
+    right_addend : float
+        second number to be added
 
     Returns
     -------
     float
-        sum of ``first_number`` and ``second_number``
+        sum of ``left_addend`` and ``right_addend``
 
     Examples
     --------
@@ -32,26 +32,26 @@ def add_numbers(first_number: float, second_number: float) -> float:
         >>> add_numbers(-1, -2)
         -3.0
     """
-    sum_of_two_numbers = first_number + second_number
+    sum_of_two_numbers = left_addend + right_addend
 
     return sum_of_two_numbers
 
 
 @pydantic.validate_call(validate_return=True)
-def multiply_numbers(first_number: float, second_number: float) -> float:
+def multiply_numbers(left_multiplicand: float, right_multiplicand: float) -> float:
     """Perform multiplication of two real numbers.
 
     Parameters
     ----------
-    first_number : float
-        value of first number
-    second_number : float
-        value of second number
+    left_multiplicand : float
+        first number to be multiplied
+    right_multiplicand : float
+        second number to be multiplied
 
     Returns
     -------
     float
-        product of two ``first_number`` and ``second_number``
+        product of two ``left_multiplicand`` and ``right_multiplicand``
 
     Examples
     --------
@@ -67,7 +67,7 @@ def multiply_numbers(first_number: float, second_number: float) -> float:
         >>> multiply_numbers(-1, -2)
         2.0
     """
-    product_of_two_numbers = first_number * second_number
+    product_of_two_numbers = left_multiplicand * right_multiplicand
 
     return product_of_two_numbers
 

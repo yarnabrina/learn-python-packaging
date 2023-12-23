@@ -7,11 +7,11 @@ import pydantic
 
 from .basics import add_numbers, divide_numbers, multiply_numbers, subtract_numbers
 
-ArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
+BinaryArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
 
 
 @enum.unique
-class ArithmeticOperator(str, enum.Enum):
+class BinaryArithmeticOperator(str, enum.Enum):
     """Define supported arithmetic operators."""
 
     ADDITION = "+"
@@ -20,77 +20,77 @@ class ArithmeticOperator(str, enum.Enum):
     DIVISION = "/"
 
 
-ARITHMETIC_OPERATIONS: dict[ArithmeticOperator, ArithmeticOperation] = {
-    ArithmeticOperator.ADDITION: add_numbers,
-    ArithmeticOperator.SUBTRACTION: subtract_numbers,
-    ArithmeticOperator.MULTIPLICATION: multiply_numbers,
-    ArithmeticOperator.DIVISION: divide_numbers,
+BINARY_ARITHMETIC_OPERATIONS: dict[BinaryArithmeticOperator, BinaryArithmeticOperation] = {
+    BinaryArithmeticOperator.ADDITION: add_numbers,
+    BinaryArithmeticOperator.SUBTRACTION: subtract_numbers,
+    BinaryArithmeticOperator.MULTIPLICATION: multiply_numbers,
+    BinaryArithmeticOperator.DIVISION: divide_numbers,
 }
 
 
-class ArithmeticExpression(pydantic.BaseModel):
-    """Define arithmetic expression.
+class BinaryArithmeticExpression(pydantic.BaseModel):
+    """Define binary arithmetic expression.
 
     Attributes
     ----------
-    first_number : float
-        value of first number
-    operator : ArithmeticOperator
-        value of arithmetic operator
-    second_number : float
-        value of second number
-    operation : ArithmeticOperation
-        function to perform arithmetic operation corresponding to ``self.operator``
+    left_operand : float
+        first number of binary arithmetic expression
+    binary_operator : BinaryArithmeticOperator
+        arithmetic operator of binary arithmetic expression
+    right_operand : float
+        second number of binary arithmetic expression
+    operation : BinaryArithmeticOperation
+        function to perform arithmetic operation corresponding to ``self.binary_operator``
     result : float
-        result of arithmetic expression
+        result of binary arithmetic expression
     """
 
-    first_number: float
-    operator: ArithmeticOperator
-    second_number: float
+    left_operand: float
+    binary_operator: BinaryArithmeticOperator
+    right_operand: float
 
     @property
-    def operation(self: "ArithmeticExpression") -> ArithmeticOperation:
-        """Store arithmetic operation.
+    def operation(self: "BinaryArithmeticExpression") -> BinaryArithmeticOperation:
+        """Store implementation of binary arithmetic operation.
 
         Returns
         -------
-        ArithmeticOperation
-            function to perform arithmetic operation corresponding to ``self.operator``
+        BinaryArithmeticOperation
+            implementation of binary arithmetic operation corresponding to ``self.binary_operator``
         """
-        return ARITHMETIC_OPERATIONS[self.operator]
+        return BINARY_ARITHMETIC_OPERATIONS[self.binary_operator]
 
     @property
-    def result(self: "ArithmeticExpression") -> float:
-        """Store result of arithmetic expression.
+    def result(self: "BinaryArithmeticExpression") -> float:
+        """Store result of binary arithmetic expression.
 
         Returns
         -------
         float
-            result of arithmetic expression
+            result of binary arithmetic expression
         """
-        return self.operation(self.first_number, self.second_number)
+        return self.operation(self.left_operand, self.right_operand)
 
 
 @pydantic.validate_call(validate_return=True)
 def calculate_results(
-    first_input: float, operator: ArithmeticOperator, second_input: float
+    first_input: float, operator: BinaryArithmeticOperator, second_input: float
 ) -> float:
-    """Perform basic arithmetic expressions.
+    """Perform basic binary arithmetic expressions.
 
     Parameters
     ----------
     first_input : float
-        value of first number
-    operator : ArithmeticOperator
-        type of arithmetic expression
+        left operand of binary arithmetic expression
+    operator : BinaryArithmeticOperator
+        kind of binary arithmetic expression
     second_input : float
-        value of second number
+        right operand of binary arithmetic expression
 
     Returns
     -------
     float
-        result of arithmetic expression
+        result of binary arithmetic expression
 
     Examples
     --------
@@ -106,17 +106,17 @@ def calculate_results(
         >>> calculate_results(1, "/", 2)
         0.5
     """
-    arithmetic_expression = ArithmeticExpression(
-        first_number=first_input, operator=operator, second_number=second_input
+    arithmetic_expression = BinaryArithmeticExpression(
+        left_operand=first_input, binary_operator=operator, right_operand=second_input
     )
 
     return arithmetic_expression.result
 
 
 __all__ = [
-    "ARITHMETIC_OPERATIONS",
-    "ArithmeticExpression",
-    "ArithmeticOperation",
-    "ArithmeticOperator",
+    "BINARY_ARITHMETIC_OPERATIONS",
+    "BinaryArithmeticExpression",
+    "BinaryArithmeticOperation",
+    "BinaryArithmeticOperator",
     "calculate_results",
 ]
