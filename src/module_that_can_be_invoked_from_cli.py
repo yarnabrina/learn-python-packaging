@@ -18,7 +18,19 @@ class CalculatorType(str, enum.Enum):
 
 
 class BinaryInputs(pydantic.BaseModel):
-    """Define arguments for binary calculator."""
+    """Define arguments for binary calculator.
+
+    Parameters
+    ----------
+    calculator_type : typing.Literal[CalculatorType.BINARY]
+        kind of calculator
+    first_number : float
+        first number for the calculation
+    operator : package_name_to_import_with.calculator_sub_package.ArithmeticOperator
+        arithmetic operator to be used
+    second_number : float
+        second number for the calculation
+    """
 
     calculator_type: typing.Literal[CalculatorType.BINARY]
     first_number: float
@@ -27,14 +39,33 @@ class BinaryInputs(pydantic.BaseModel):
 
 
 class GeneralInputs(pydantic.BaseModel):
-    """Define arguments of general calculator."""
+    """Define arguments of general calculator.
+
+    Parameters
+    ----------
+    calculator_type : typing.Literal[CalculatorType.GENERAL]
+        kind of calculator
+    expression : str
+        mathematical expression to be evaluated
+    """
 
     calculator_type: typing.Literal[CalculatorType.GENERAL]
     expression: str
 
 
 class UserInputs(pydantic.BaseModel):
-    """Define sub-commands and arguments of CLI calculator."""
+    """Define sub-commands and arguments of CLI calculator.
+
+    Parameters
+    ----------
+    inputs : BinaryInputs | GeneralInputs
+        inputs for the calculator
+
+    Attributes
+    ----------
+    inputs : BinaryInputs | GeneralInputs
+        inputs for the calculator
+    """
 
     inputs: BinaryInputs | GeneralInputs = pydantic.Field(discriminator="calculator_type")
 

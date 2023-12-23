@@ -39,6 +39,19 @@ class ArithmeticExpression(pydantic.BaseModel):
         value of arithmetic operator
     second_number : float
         value of second number
+
+    Attributes
+    ----------
+    first_number : float
+        value of first number
+    operator : ArithmeticOperator
+        value of arithmetic operator
+    second_number : float
+        value of second number
+    operation : ArithmeticOperation
+        function to perform arithmetic operation corresponding to ``self.operator``
+    result : float
+        result of arithmetic expression
     """
 
     first_number: float
