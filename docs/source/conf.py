@@ -21,6 +21,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
+    "sphinxcontrib.autodoc_pydantic",
 ]
 
 smartquotes = False
@@ -53,6 +54,9 @@ autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
 autodoc_typehints_format = "fully-qualified"
 
+coverage_show_missing_items = True
+coverage_statistics_to_stdout = True
+
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 napoleon_google_docstring = False
@@ -71,3 +75,10 @@ viewcode_line_numbers = True
 copybutton_prompt_text = r">>> |\.\.\. |\$ "
 copybutton_prompt_is_regexp = True
 copybutton_line_continuation_character = "\\"
+
+autodoc_pydantic_model_summary_list_order = "bysource"
+autodoc_pydantic_model_member_order = "bysource"
+autodoc_pydantic_model_erdantic_figure = False
+autodoc_pydantic_settings_summary_list_order = "bysource"
+autodoc_pydantic_settings_member_order = "bysource"
+autodoc_pydantic_validator_list_fields = True

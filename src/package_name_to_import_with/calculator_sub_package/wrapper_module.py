@@ -46,9 +46,15 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
         result of binary arithmetic expression
     """
 
-    left_operand: float
-    binary_operator: BinaryArithmeticOperator
-    right_operand: float
+    left_operand: float = pydantic.Field(
+        description="first number of binary arithmetic expression"
+    )
+    binary_operator: BinaryArithmeticOperator = pydantic.Field(
+        description="arithmetic operator of binary arithmetic expression"
+    )
+    right_operand: float = pydantic.Field(
+        description="second number of binary arithmetic expression"
+    )
 
     @pydantic.computed_field  # will allow serialisation
     @property  # will be computed every time it is called

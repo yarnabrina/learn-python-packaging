@@ -1,3 +1,4 @@
+autodoc-pydantic
 furo
 Sphinx
 sphinx-copybutton

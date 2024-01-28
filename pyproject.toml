@@ -58,6 +58,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 all = [
+  "autodoc-pydantic",
   "autoflake",
   "bandit",
   "black",
@@ -94,6 +95,7 @@ dev = [
   "pre-commit",
 ]
 doc = [
+  "autodoc-pydantic",
   "furo",
   "Sphinx",
   "sphinx-copybutton",

@@ -36,10 +36,14 @@ class BinaryInputs(pydantic.BaseModel):
         second number for the calculation
     """
 
-    calculator_type: typing.Literal[CalculatorType.BINARY]
-    first_number: float
-    operator: BinaryArithmeticOperator
-    second_number: float
+    calculator_type: typing.Literal[CalculatorType.BINARY] = pydantic.Field(
+        description="kind of calculator"
+    )
+    first_number: float = pydantic.Field(description="first number for the calculation")
+    operator: BinaryArithmeticOperator = pydantic.Field(
+        description="arithmetic operator to be used"
+    )
+    second_number: float = pydantic.Field(description="second number for the calculation")
 
 
 class GeneralInputs(pydantic.BaseModel):
@@ -53,8 +57,10 @@ class GeneralInputs(pydantic.BaseModel):
         mathematical expression to be evaluated
     """
 
-    calculator_type: typing.Literal[CalculatorType.GENERAL]
-    expression: str
+    calculator_type: typing.Literal[CalculatorType.GENERAL] = pydantic.Field(
+        description="kind of calculator"
+    )
+    expression: str = pydantic.Field(description="mathematical expression to be evaluated")
 
 
 class UserInputs(pydantic.BaseModel):
@@ -66,7 +72,9 @@ class UserInputs(pydantic.BaseModel):
         inputs for the calculator
     """
 
-    inputs: BinaryInputs | GeneralInputs = pydantic.Field(discriminator="calculator_type")
+    inputs: BinaryInputs | GeneralInputs = pydantic.Field(
+        description="inputs for the calculator", discriminator="calculator_type"
+    )
 
 
 @pydantic.validate_call(validate_return=True)

@@ -28,14 +28,16 @@ class PackageMetadata(pydantic.BaseModel):
         links associated with the package
     """
 
-    Name: str
-    Version: str
-    Description: str
-    Keywords: list[str]
-    License: str
-    Maintainers: list[str]
-    Authors: list[str]
-    Links: dict[str, pydantic.HttpUrl]
+    Name: str = pydantic.Field(description="name of the package")
+    Version: str = pydantic.Field(description="version of the package")
+    Description: str = pydantic.Field(description="description of the package")
+    Keywords: list[str] = pydantic.Field(description="keywords associated with the package")
+    License: str = pydantic.Field(description="license of the package")
+    Maintainers: list[str] = pydantic.Field(description="maintainers of the package")
+    Authors: list[str] = pydantic.Field(description="authors of the package")
+    Links: dict[str, pydantic.HttpUrl] = pydantic.Field(
+        description="links associated with the package"
+    )
 
 
 METADATA_CONTENTS: str = (
