@@ -41,6 +41,7 @@
     - [numpydoc](https://numpydoc.readthedocs.io/)
     - [pre-commit](https://github.com/pre-commit/pre-commit)
     - [Ruff](https://github.com/astral-sh/ruff)
+    - [typos](https://github.com/crate-ci/typos)
 - Formatting
     - [autoflake](https://www.github.com/PyCQA/autoflake)
     - [Black](https://github.com/psf/black)
