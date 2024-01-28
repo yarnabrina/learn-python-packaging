@@ -1,4 +1,5 @@
 """Define unit tests for console calculator."""
+
 import unittest.mock
 
 import pytest
@@ -85,24 +86,27 @@ def test_simplification(capsys: pytest.CaptureFixture) -> None:
 
 def test_first_input_failure() -> None:
     """Check failure in first user input."""
-    with pytest.raises(SystemExit), unittest.mock.patch(
-        "sys.argv", ["prog", "binary", "one", "+", "1"]
+    with (
+        pytest.raises(SystemExit),
+        unittest.mock.patch("sys.argv", ["prog", "binary", "one", "+", "1"]),
     ):
         module_that_can_be_invoked_from_cli.console_calculator()
 
 
 def test_second_input_failure() -> None:
     """Check failure in second user input."""
-    with pytest.raises(SystemExit), unittest.mock.patch(
-        "sys.argv", ["prog", "binary", "2", "*", "two"]
+    with (
+        pytest.raises(SystemExit),
+        unittest.mock.patch("sys.argv", ["prog", "binary", "2", "*", "two"]),
     ):
         module_that_can_be_invoked_from_cli.console_calculator()
 
 
 def test_operator_input_failure() -> None:
     """Check failure in operator input."""
-    with pytest.raises(SystemExit), unittest.mock.patch(
-        "sys.argv", ["prog", "binary", "0", "x", "0"]
+    with (
+        pytest.raises(SystemExit),
+        unittest.mock.patch("sys.argv", ["prog", "binary", "0", "x", "0"]),
     ):
         module_that_can_be_invoked_from_cli.console_calculator()
 

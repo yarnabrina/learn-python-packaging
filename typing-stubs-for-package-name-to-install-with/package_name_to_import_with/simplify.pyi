@@ -1,10 +1,10 @@
 import collections.abc
-import enum
 import re
 
 import pydantic
 
 from .calculator_sub_package import BinaryArithmeticOperator
+from .utils import CustomStrEnum
 
 __all__ = [
     "OPERATION_PRECEDENCES",
@@ -15,11 +15,11 @@ __all__ = [
     "solve_simplification",
 ]
 
-class Parentheses(str, enum.Enum):
+class Parentheses(CustomStrEnum):
     LEFT: str
     RIGHT: str
 
-class TokenType(str, enum.Enum):
+class TokenType(CustomStrEnum):
     POSITIVE_NUMBER: str
     NEGATIVE_NUMBER: str
     OPERATOR: str

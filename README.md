@@ -41,6 +41,7 @@
     - [numpydoc](https://numpydoc.readthedocs.io/)
     - [pre-commit](https://github.com/pre-commit/pre-commit)
     - [Ruff](https://github.com/astral-sh/ruff)
+    - [typos](https://github.com/crate-ci/typos)
 - Formatting
     - [autoflake](https://www.github.com/PyCQA/autoflake)
     - [Black](https://github.com/psf/black)
@@ -54,7 +55,6 @@
     - [Flake8](https://github.com/pycqa/flake8)
     - [interrogate](https://interrogate.readthedocs.io/)
     - [Mypy](http://www.mypy-lang.org/)
-    - [pydocstyle](https://www.pydocstyle.org/en/stable/)
     - [Pylint](https://github.com/PyCQA/pylint)
     - [Pyright for Python](https://github.com/RobertCraigie/pyright-python)
     - [validate-pyproject](https://github.com/abravalheri/validate-pyproject/)

@@ -1,4 +1,5 @@
 """Define common inputs for unit tests."""
+
 import pytest
 
 from package_name_to_import_with.calculator_sub_package.wrapper_module import (

@@ -1,11 +1,15 @@
 """Define package contents."""
+
 import importlib.resources
 import json
+import re
 
 import pydantic
 
+from .utils import CustomPydanticBaseModel
 
-class PackageMetadata(pydantic.BaseModel):
+
+class PackageMetadata(CustomPydanticBaseModel):
     """Define keys and types of corresponding values for package metadata.
 
     Attributes
@@ -28,14 +32,51 @@ class PackageMetadata(pydantic.BaseModel):
         links associated with the package
     """
 
-    Name: str
-    Version: str
-    Description: str
-    Keywords: list[str]
-    License: str
-    Maintainers: list[str]
-    Authors: list[str]
-    Links: dict[str, pydantic.HttpUrl]
+    Name: str = pydantic.Field(description="name of the package")
+    Version: str = pydantic.Field(description="version of the package")
+    Description: str = pydantic.Field(description="description of the package")
+    Keywords: list[str] = pydantic.Field(description="keywords associated with the package")
+    License: str = pydantic.Field(description="license of the package")
+    Maintainers: list[str] = pydantic.Field(description="maintainers of the package")
+    Authors: list[str] = pydantic.Field(description="authors of the package")
+    Links: dict[str, pydantic.HttpUrl] = pydantic.Field(
+        description="links associated with the package"
+    )
+
+    @pydantic.field_validator("Version")
+    @classmethod
+    def validate_version(cls: type["PackageMetadata"], version: str) -> str:
+        """Validate if specified version adhere to semantic versioning.
+
+        Parameters
+        ----------
+        version : str
+            specified value for version
+
+        Returns
+        -------
+        str
+            unchanged ``version`` if validation passes
+
+        Raises
+        ------
+        ValueError
+            if ``version`` is not a valid semantic version
+
+        Notes
+        -----
+        #. Only checks for MAJOR.MINOR.PATCH format.
+
+        References
+        ----------
+        `Semantic Versioning 2.0.0 <https://semver.org/>`_.
+        """
+        del cls  # skipcq: PTC-W0043
+
+        if re.fullmatch(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", version) is None:
+            raise ValueError(f"Invalid semantic version: {version}")
+
+        return version
 
 
 METADATA_CONTENTS: str = (

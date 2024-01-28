@@ -1,17 +1,20 @@
 """Define function for basic binary operations."""
+
 import collections.abc
 import enum
+import functools
 import typing
 
 import pydantic
 
+from ..utils import CustomPydanticBaseModel, CustomStrEnum
 from .basics import add_numbers, divide_numbers, multiply_numbers, subtract_numbers
 
 BinaryArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
 
 
 @enum.unique
-class BinaryArithmeticOperator(str, enum.Enum):
+class BinaryArithmeticOperator(CustomStrEnum):
     """Define supported arithmetic operators."""
 
     ADDITION = "+"
@@ -28,7 +31,7 @@ BINARY_ARITHMETIC_OPERATIONS: dict[BinaryArithmeticOperator, BinaryArithmeticOpe
 }
 
 
-class BinaryArithmeticExpression(pydantic.BaseModel):
+class BinaryArithmeticExpression(CustomPydanticBaseModel):
     """Define binary arithmetic expression.
 
     Attributes
@@ -45,11 +48,37 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
         result of binary arithmetic expression
     """
 
-    left_operand: float
-    binary_operator: BinaryArithmeticOperator
-    right_operand: float
+    left_operand: float = pydantic.Field(
+        description="first number of binary arithmetic expression"
+    )
+    binary_operator: BinaryArithmeticOperator = pydantic.Field(
+        description="arithmetic operator of binary arithmetic expression"
+    )
+    right_operand: float = pydantic.Field(
+        description="second number of binary arithmetic expression"
+    )
 
-    @property
+    @pydantic.model_validator(mode="after")
+    def validate_zero_division(self: "BinaryArithmeticExpression") -> "BinaryArithmeticExpression":
+        """Validate that division by zero is not attempted.
+
+        Returns
+        -------
+        BinaryArithmeticExpression
+            unchanged instance if validation passes
+
+        Raises
+        ------
+        ValueError
+            if division by zero is attempted
+        """
+        if self.binary_operator == BinaryArithmeticOperator.DIVISION and not self.right_operand:
+            raise ValueError("Division by zero is attempted.")
+
+        return self
+
+    @pydantic.computed_field  # type: ignore[misc] # will allow serialisation
+    @property  # will be computed every time it is called
     def operation(self: "BinaryArithmeticExpression") -> BinaryArithmeticOperation:
         """Store implementation of binary arithmetic operation.
 
@@ -60,7 +89,8 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
         """
         return BINARY_ARITHMETIC_OPERATIONS[self.binary_operator]
 
-    @property
+    @pydantic.computed_field  # type: ignore[misc] # will allow serialisation
+    @functools.cached_property  # will be computed just once unless deleted
     def result(self: "BinaryArithmeticExpression") -> float:
         """Store result of binary arithmetic expression.
 

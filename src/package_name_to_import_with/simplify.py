@@ -1,4 +1,5 @@
 """Evaluate simplification expressions."""
+
 import collections.abc
 import enum
 import re
@@ -8,10 +9,11 @@ import typing
 import pydantic
 
 from .calculator_sub_package import BinaryArithmeticOperator, calculate_results
+from .utils import CustomStrEnum
 
 
 @enum.unique
-class Parentheses(str, enum.Enum):
+class Parentheses(CustomStrEnum):
     """Define supported brackets."""
 
     LEFT = "("
@@ -19,7 +21,7 @@ class Parentheses(str, enum.Enum):
 
 
 @enum.unique
-class TokenType(str, enum.Enum):
+class TokenType(CustomStrEnum):
     """Define supported token types."""
 
     POSITIVE_NUMBER = "positive_number"
@@ -36,15 +38,15 @@ ACCEPTABLE_CHARACTERS = set(" ")
 
 REGULAR_EXPRESSION_PATTERNS = {
     TokenType.POSITIVE_NUMBER: r"\d+(?:\.\d+)?",
-    TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT.value}])-\d+(?:\.\d+)?",
+    TokenType.NEGATIVE_NUMBER: rf"(?<![\d|{Parentheses.RIGHT}])-\d+(?:\.\d+)?",
     TokenType.OPERATOR: (
-        "[" + "".join(rf"\{operator.value}" for operator in BinaryArithmeticOperator) + "]"
+        "[" + "".join(rf"\{operator}" for operator in BinaryArithmeticOperator) + "]"
     ),
-    TokenType.LEFT_PARENTHESIS: rf"\{Parentheses.LEFT.value}",
-    TokenType.RIGHT_PARENTHESIS: rf"\{Parentheses.RIGHT.value}",
+    TokenType.LEFT_PARENTHESIS: rf"\{Parentheses.LEFT}",
+    TokenType.RIGHT_PARENTHESIS: rf"\{Parentheses.RIGHT}",
 }
 SUPPORTED_TOKEN_PATTERN = "|".join(
-    f"(?P<{token_type.value}>{token_pattern})"
+    f"(?P<{token_type}>{token_pattern})"
     for token_type, token_pattern in REGULAR_EXPRESSION_PATTERNS.items()
 )
 

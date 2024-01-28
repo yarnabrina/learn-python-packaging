@@ -1,6 +1,8 @@
 import pydantic
 
-class PackageMetadata(pydantic.BaseModel):
+from .utils import CustomPydanticBaseModel
+
+class PackageMetadata(CustomPydanticBaseModel):
     Name: str
     Version: str
     Description: str

@@ -49,14 +49,16 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.1.1
     hooks:
       - id: black
+        additional_dependencies:
+          - .[jupyter]
         args:
           - src
         pass_filenames: false
   - repo: https://github.com/pycqa/bandit
-    rev: 1.7.6
+    rev: 1.7.7
     hooks:
       - id: bandit
         args:
@@ -68,7 +70,7 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/pycqa/flake8
-    rev: 6.1.0
+    rev: 7.0.0
     hooks:
       - id: flake8
         args:
@@ -95,17 +97,15 @@ repos:
           - import-error
           - src
         pass_filenames: false
-        stages:
-          - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.342
+    rev: v1.1.348
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.9
+    rev: v0.1.14
     hooks:
       - id: ruff
         args:
@@ -121,7 +121,7 @@ repos:
     hooks:
       - id: docformatter
         additional_dependencies:
-          - tomli
+          - .[tomli]
         args:
           - --in-place
           - src
@@ -142,21 +142,18 @@ repos:
         args:
           - src
         pass_filenames: false
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
+  - repo: https://github.com/numpy/numpydoc
+    rev: v1.6.0
     hooks:
-      - id: pydocstyle
-        additional_dependencies:
-          - tomli
-        args:
-          - src
-        pass_filenames: false
+      - id: numpydoc-validation
+        stages:
+          - manual
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 1.5.3
+    rev: 1.7.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.15
+    rev: v0.16
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell
@@ -164,9 +161,22 @@ repos:
     hooks:
       - id: codespell
         additional_dependencies:
-          - tomli
+          - .[toml]
         args:
           - --write-changes
+        stages:
+          - manual
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.17.2
+    hooks:
+      - id: typos
+        args:
+          - --force-exclude
+          - --write-changes
+          - --locale
+          - en-gb
+          - --format
+          - brief
         stages:
           - manual
 default_language_version:

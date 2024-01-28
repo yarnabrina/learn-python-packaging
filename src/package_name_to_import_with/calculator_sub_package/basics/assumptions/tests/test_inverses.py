@@ -1,4 +1,5 @@
 """Define unit tests for arithmetic operations."""
+
 import math
 
 import pytest

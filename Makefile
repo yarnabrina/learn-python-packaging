@@ -162,14 +162,6 @@ interrogate: venv
 	interrogate ${PYTHON_SOURCE_DIRECTORY}
 
 .ONESHELL:
-.PHONY: pydocstyle
-pydocstyle: venv
-	source .venv/bin/activate
-	$(call check_install_status, pydocstyle)
-	$(call check_install_status, tomli)
-	pydocstyle ${PYTHON_SOURCE_DIRECTORY}
-
-.ONESHELL:
 .PHONY: pylint
 pylint: venv
 	source .venv/bin/activate
@@ -187,11 +179,10 @@ vulture: venv
 ##     find security issues (bandit)
 ##     lint all python scripts (flake8)
 ##     check docstring coverage (interrogate)
-##     check docstring presence and formats (pydocstyle)
 ##     lint all python scripts (pylint)
 ##     find dead code (vulture)
 .PHONY: lint
-lint: bandit flake8 interrogate pydocstyle pylint vulture
+lint: bandit flake8 interrogate pylint vulture
 
 .ONESHELL:
 .PHONY: pytest-doctest

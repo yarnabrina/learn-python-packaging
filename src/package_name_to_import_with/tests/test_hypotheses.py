@@ -1,9 +1,12 @@
 """Define property based unit tests based on random data."""
+
 import math
+import re
 import sys
 
 import hypothesis
 import hypothesis.strategies
+import pydantic
 
 from package_name_to_import_with import solve_simplification
 from package_name_to_import_with.calculator_sub_package import (
@@ -37,14 +40,14 @@ def generate_finite_numbers() -> hypothesis.strategies.SearchStrategy:
 
 
 def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
-    """Generate an arbitrary arithmetic expression of positive finite real numbers.
+    """Generate an arbitrary arithmetic expression of finite real numbers.
 
     Returns
     -------
     hypothesis.strategies.SearchStrategy
         updated strategy
     """
-    generate_non_negative_number_strategy = hypothesis.strategies.one_of(
+    generate_finite_number_strategy = hypothesis.strategies.one_of(
         hypothesis.strategies.integers().map(str),
         hypothesis.strategies.floats(
             allow_nan=False, allow_infinity=False, allow_subnormal=False
@@ -55,13 +58,11 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
     )
 
     generate_binary_expression_strategy = hypothesis.strategies.tuples(
-        generate_non_negative_number_strategy,
+        generate_finite_number_strategy,
         generate_conditional_space_strategy,
-        hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
-            lambda element: element.value
-        ),
+        hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
         generate_conditional_space_strategy,
-        generate_non_negative_number_strategy,
+        generate_finite_number_strategy,
     ).map("".join)
 
     generate_possibly_parenthesised_expression_strategy = hypothesis.strategies.tuples(
@@ -73,9 +74,7 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
         lambda children: hypothesis.strategies.tuples(
             children,
             generate_conditional_space_strategy,
-            hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
-                lambda element: element.value
-            ),
+            hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
             generate_conditional_space_strategy,
             children,
         ).map("".join),
@@ -243,8 +242,8 @@ def test_simplification_hypothesis(expression: str) -> None:
     """
     try:
         calculated_result = solve_simplification(expression)
-    except ValueError as error:
-        if str(error) != "Multiplicative inverse is not defined for additive identity":
+    except pydantic.ValidationError as error:
+        if not re.search("Division by zero is attempted.", str(error)):
             raise
 
         calculation_failed = True
