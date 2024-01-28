@@ -49,14 +49,14 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.1.1
     hooks:
       - id: black
         args:
           - src
         pass_filenames: false
   - repo: https://github.com/pycqa/bandit
-    rev: 1.7.6
+    rev: 1.7.7
     hooks:
       - id: bandit
         args:
@@ -98,7 +98,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.347
+    rev: v1.1.348
     hooks:
       - id: pyright
         pass_filenames: false
@@ -152,11 +152,11 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 1.6.0
+    rev: 1.7.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.15
+    rev: v0.16
     hooks:
       - id: validate-pyproject
   - repo: https://github.com/codespell-project/codespell
