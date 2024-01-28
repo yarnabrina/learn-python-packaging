@@ -38,14 +38,14 @@ def generate_finite_numbers() -> hypothesis.strategies.SearchStrategy:
 
 
 def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
-    """Generate an arbitrary arithmetic expression of positive finite real numbers.
+    """Generate an arbitrary arithmetic expression of finite real numbers.
 
     Returns
     -------
     hypothesis.strategies.SearchStrategy
         updated strategy
     """
-    generate_non_negative_number_strategy = hypothesis.strategies.one_of(
+    generate_finite_number_strategy = hypothesis.strategies.one_of(
         hypothesis.strategies.integers().map(str),
         hypothesis.strategies.floats(
             allow_nan=False, allow_infinity=False, allow_subnormal=False
@@ -56,11 +56,11 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
     )
 
     generate_binary_expression_strategy = hypothesis.strategies.tuples(
-        generate_non_negative_number_strategy,
+        generate_finite_number_strategy,
         generate_conditional_space_strategy,
         hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
         generate_conditional_space_strategy,
-        generate_non_negative_number_strategy,
+        generate_finite_number_strategy,
     ).map("".join)
 
     generate_possibly_parenthesised_expression_strategy = hypothesis.strategies.tuples(
