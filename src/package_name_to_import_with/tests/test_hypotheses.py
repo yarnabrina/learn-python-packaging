@@ -1,4 +1,5 @@
 """Define property based unit tests based on random data."""
+
 import math
 import sys
 

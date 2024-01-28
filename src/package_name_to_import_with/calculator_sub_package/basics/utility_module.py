@@ -1,4 +1,5 @@
 """Define functions to subtract and divide."""
+
 import pydantic
 
 from .assumptions import add_numbers, get_negative, get_reciprocal, multiply_numbers

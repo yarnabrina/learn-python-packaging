@@ -1,4 +1,5 @@
 """Evaluate simplification expressions."""
+
 import collections.abc
 import enum
 import re

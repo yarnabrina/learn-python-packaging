@@ -1,4 +1,5 @@
 """Calculate arithmetic expressions from GUI."""
+
 import pydantic
 import PySimpleGUI
 

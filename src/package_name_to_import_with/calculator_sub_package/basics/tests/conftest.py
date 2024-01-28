@@ -1,4 +1,5 @@
 """Define common inputs for unit tests."""
+
 import pytest
 
 

@@ -1,4 +1,5 @@
 """Define package contents."""
+
 import importlib.resources
 import json
 

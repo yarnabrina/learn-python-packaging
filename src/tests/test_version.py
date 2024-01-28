@@ -1,4 +1,5 @@
 """Define unit tests for version."""
+
 import module_that_can_be_imported_directly
 import package_name_to_import_with
 

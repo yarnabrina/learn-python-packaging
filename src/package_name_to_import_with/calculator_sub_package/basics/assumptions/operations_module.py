@@ -1,4 +1,5 @@
 """Define functions to add and multiply."""
+
 import pydantic
 
 

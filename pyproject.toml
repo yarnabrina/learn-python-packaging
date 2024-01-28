@@ -177,7 +177,6 @@ line-length = 99
 target-version = [
   "py310",
 ]
-safe = true
 
 [tool.ruff]
 extend-exclude = [

@@ -1,4 +1,5 @@
 """Define additive and multiplicative identities and inverses."""
+
 import enum
 
 import pydantic

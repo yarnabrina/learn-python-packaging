@@ -1,4 +1,5 @@
 """Define unit tests for simplification problems."""
+
 import math
 
 import pytest

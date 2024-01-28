@@ -1,4 +1,5 @@
 """Calculate arithmetic expressions from command line."""
+
 import argparse
 import enum
 import sys
