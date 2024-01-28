@@ -31,6 +31,7 @@ pygments_style = "friendly"
 add_function_parentheses = False
 add_module_names = False
 trim_doctest_flags = True
+option_emphasise_placeholders = True
 
 html_theme = "furo"
 html_theme_options = {
@@ -47,12 +48,14 @@ html_show_sourcelink = False
 html_show_sphinx = False
 html_output_encoding = "utf-8"
 
+python_display_short_literal_types = True
+
 autoclass_content = "class"
 autodoc_inherit_docstrings = True
 autodoc_member_order = "bysource"
-autodoc_typehints = "description"
+autodoc_typehints = "both"
 autodoc_typehints_description_target = "documented"
-autodoc_typehints_format = "fully-qualified"
+autodoc_typehints_format = "short"
 
 coverage_show_missing_items = True
 coverage_statistics_to_stdout = True
