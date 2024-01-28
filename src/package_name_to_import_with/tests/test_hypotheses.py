@@ -1,10 +1,12 @@
 """Define property based unit tests based on random data."""
 
 import math
+import re
 import sys
 
 import hypothesis
 import hypothesis.strategies
+import pydantic
 
 from package_name_to_import_with import solve_simplification
 from package_name_to_import_with.calculator_sub_package import (
@@ -240,8 +242,8 @@ def test_simplification_hypothesis(expression: str) -> None:
     """
     try:
         calculated_result = solve_simplification(expression)
-    except ValueError as error:
-        if str(error) != "Multiplicative inverse is not defined for additive identity":
+    except pydantic.ValidationError as error:
+        if not re.search("Division by zero is attempted.", str(error)):
             raise
 
         calculation_failed = True

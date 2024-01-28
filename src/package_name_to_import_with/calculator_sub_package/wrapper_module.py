@@ -58,6 +58,25 @@ class BinaryArithmeticExpression(CustomPydanticBaseModel):
         description="second number of binary arithmetic expression"
     )
 
+    @pydantic.model_validator(mode="after")
+    def validate_zero_division(self: "BinaryArithmeticExpression") -> "BinaryArithmeticExpression":
+        """Validate that division by zero is not attempted.
+
+        Returns
+        -------
+        BinaryArithmeticExpression
+            unchanged instance if validation passes
+
+        Raises
+        ------
+        ValueError
+            if division by zero is attempted
+        """
+        if self.binary_operator == BinaryArithmeticOperator.DIVISION and not self.right_operand:
+            raise ValueError("Division by zero is attempted.")
+
+        return self
+
     @pydantic.computed_field  # type: ignore[misc] # will allow serialisation
     @property  # will be computed every time it is called
     def operation(self: "BinaryArithmeticExpression") -> BinaryArithmeticOperation:
