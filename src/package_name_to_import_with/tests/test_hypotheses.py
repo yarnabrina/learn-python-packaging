@@ -58,9 +58,7 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
     generate_binary_expression_strategy = hypothesis.strategies.tuples(
         generate_non_negative_number_strategy,
         generate_conditional_space_strategy,
-        hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
-            lambda element: element.value
-        ),
+        hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
         generate_conditional_space_strategy,
         generate_non_negative_number_strategy,
     ).map("".join)
@@ -74,9 +72,7 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
         lambda children: hypothesis.strategies.tuples(
             children,
             generate_conditional_space_strategy,
-            hypothesis.strategies.sampled_from(BinaryArithmeticOperator).map(
-                lambda element: element.value
-            ),
+            hypothesis.strategies.sampled_from(BinaryArithmeticOperator),
             generate_conditional_space_strategy,
             children,
         ).map("".join),

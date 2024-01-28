@@ -7,13 +7,14 @@ import typing
 
 import pydantic
 
+from ..utils import CustomStrEnum
 from .basics import add_numbers, divide_numbers, multiply_numbers, subtract_numbers
 
 BinaryArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
 
 
 @enum.unique
-class BinaryArithmeticOperator(str, enum.Enum):
+class BinaryArithmeticOperator(CustomStrEnum):
     """Define supported arithmetic operators."""
 
     ADDITION = "+"

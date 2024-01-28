@@ -9,13 +9,14 @@ import pydantic
 
 from package_name_to_import_with import (
     BinaryArithmeticOperator,
+    CustomStrEnum,
     calculate_results,
     solve_simplification,
 )
 
 
 @enum.unique
-class CalculatorType(str, enum.Enum):
+class CalculatorType(CustomStrEnum):
     """Define supported calculator types."""
 
     BINARY = "binary"
@@ -93,11 +94,9 @@ def capture_user_inputs() -> UserInputs:
         dest="calculator_type", help="types of arithmetic expressions"
     )
 
-    binary_parser = sub_parsers.add_parser(
-        CalculatorType.BINARY.value, help="basic binary operations"
-    )
+    binary_parser = sub_parsers.add_parser(CalculatorType.BINARY, help="basic binary operations")
     general_parser = sub_parsers.add_parser(
-        CalculatorType.GENERAL.value, help="standard simplification problems"
+        CalculatorType.GENERAL, help="standard simplification problems"
     )
 
     binary_parser.add_argument("first_number", type=float, help="first number")
