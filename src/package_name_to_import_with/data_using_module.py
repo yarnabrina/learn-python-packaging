@@ -71,7 +71,7 @@ class PackageMetadata(CustomPydanticBaseModel):
         ----------
         `Semantic Versioning 2.0.0 <https://semver.org/>`_.
         """
-        del cls  # unused
+        del cls  # skipcq: PTC-W0043
 
         if re.fullmatch(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", version) is None:
             raise ValueError(f"Invalid semantic version: {version}")
