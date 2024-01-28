@@ -13,15 +13,15 @@ author = "Anirban Ray, First Author, Second Author"
 release = f"v{version}"
 
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.coverage",
-    "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.todo",
-    "sphinx.ext.viewcode",
-    "sphinx_copybutton",
-    "sphinxcontrib.autodoc_pydantic",
+    "sphinx.ext.autodoc",  # track modules and objects
+    "sphinx.ext.coverage",  # track undocumented items
+    "sphinx.ext.doctest",  # test example code snippets
+    "sphinx.ext.intersphinx",  # add link to external documentation
+    "sphinx.ext.napoleon",  # parse Numpy style docstrings
+    "sphinx.ext.todo",  # track remaining items
+    "sphinx.ext.viewcode",  # add link to source code in documentation
+    "sphinx_copybutton",  # copy to clipboard for code snippets
+    "sphinxcontrib.autodoc_pydantic",  # document Pydantic model and configurations
 ]
 
 smartquotes = False
