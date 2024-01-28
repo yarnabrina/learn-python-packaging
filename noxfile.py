@@ -215,20 +215,6 @@ def pre_commit(session: nox.Session) -> None:
 
 
 @LINT_SESSION_DECORATOR
-def pydocstyle(session: nox.Session) -> None:
-    """Run pydocstyle.
-
-    Parameters
-    ----------
-    session : nox.Session
-        nox Session object
-    """
-    session.install("pydocstyle[toml]")
-
-    session.run("pydocstyle", str(SOURCE_DIRECTORY))
-
-
-@LINT_SESSION_DECORATOR
 def pylint(session: nox.Session) -> None:
     """Run pylint.
 

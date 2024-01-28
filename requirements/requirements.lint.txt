@@ -2,7 +2,6 @@ bandit
 flake8
 interrogate
 mypy
-pydocstyle
 pylint
 pyright
 setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability

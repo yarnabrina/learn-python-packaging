@@ -27,7 +27,7 @@ authors = [
   { name = "First Author", email = "first.author@example.com" },
   { name = "Second Author", email = "second.author@example.com" },
 ]
-requires-python = ">=3.10, <3.13"
+requires-python = "<3.13,>=3.10"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Flake8",
@@ -49,7 +49,7 @@ classifiers = [
   "Topic :: Utilities",
   "Typing :: Typed",
 ]
-dynamic=[
+dynamic = [
   "readme",
 ]
 dependencies = [
@@ -64,7 +64,7 @@ all = [
   "black",
   "blacken-docs",
   "build",
-  "codespell",
+  "codespell[toml]",
   "coverage[toml]",
   "docformatter[tomli]",
   "flake8",
@@ -76,12 +76,12 @@ all = [
   "nox",
   "numpydoc",
   "pre-commit",
-  "pydocstyle[toml]",
   "pylint",
   "pyproject-fmt",
   "pyright",
   "pytest",
   "pyupgrade",
+  "ruff",
   "Sphinx",
   "sphinx-copybutton",
   "twine",
@@ -89,10 +89,11 @@ all = [
   "vulture",
 ]
 dev = [
-  "codespell",
+  "codespell[toml]",
   "nox",
   "numpydoc",
   "pre-commit",
+  "ruff",
 ]
 doc = [
   "autodoc-pydantic",
@@ -114,7 +115,6 @@ lint = [
   "flake8",
   "interrogate",
   "mypy",
-  "pydocstyle[toml]",
   "pylint",
   "pyright",
   "validate-pyproject",
@@ -199,6 +199,7 @@ ignore = [
   "RET503",
   "RET504",
   "SLF",
+  "TID252",
   "TRY003",
 ]
 ignore-init-module-imports = true
@@ -209,21 +210,26 @@ select = [
 ]
 src = [
   "src",
+  "docs",
 ]
 target-version = "py310"
+task-tags = [
+  "TODO",
+  "FIXME",
+]
 
-[tool.ruff.flake8-annotations]
+[tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
 ignore-fully-untyped = true
 
-[tool.ruff.flake8-bugbear]
+[tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = [
   "fastapi.Depends",
   "fastapi.Query",
   "pydantic.Field",
 ]
 
-[tool.ruff.flake8-type-checking]
+[tool.ruff.lint.flake8-type-checking]
 exempt-modules = [
   "typing",
   "typing_extensions",
@@ -232,30 +238,40 @@ runtime-evaluated-base-classes = [
   "pydantic.BaseModel",
 ]
 
-[tool.ruff.pep8-naming]
+[tool.ruff.lint.pep8-naming]
 classmethod-decorators = [
   "pydantic.field_validator",
 ]
 
-[tool.ruff.per-file-ignores]
-"**/__init__.py" = [
-  "F401",
-]
-"**/test_*.py" = [
-  "S101",
-]
-
-[tool.ruff.pycodestyle]
+[tool.ruff.lint.pycodestyle]
 max-doc-length = 99
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "numpy"
 ignore-decorators = [
   "typing.overload",
 ]
 
-[tool.ruff.pyupgrade]
+[tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
+
+[tool.ruff.per-file-ignores]
+"**/__init__.py" = [
+  "F401",
+]
+"**/conftest.py" = [
+  "INP001",
+  "PLR0913",
+]
+"**/docs/**/conf.py" = [
+  "INP001",
+]
+"**/test_*.py" = [
+  "INP001",
+  "PLR0913",
+  "S101",
+  "S311",
+]
 
 [tool.isort]
 overwrite_in_place = true
@@ -291,6 +307,7 @@ enable = [
   "all",
 ]
 disable = [
+  "import-outside-toplevel",
   "logging-fstring-interpolation",
 ]
 
@@ -315,23 +332,25 @@ include = [
   "src/**/*.py",
 ]
 omit = [
-  "**/tests/*.py",
+  "**/tests/**/*.py",
 ]
 
 [tool.coverage.report]
-fail_under = 85
-include = [
-  "src/**/*.py",
-]
-omit = [
-  "**/tests/*.py",
-]
-precision = 2
 exclude_lines = [
   "pragma: no cover",
   "if __name__ == .__main__.:",
   "if typing.TYPE_CHECKING:",
 ]
+fail_under = 85
+include = [
+  "src/**/*.py",
+]
+include_namespace_packages = true
+omit = [
+  "**/tests/**/*.py",
+]
+precision = 2
+show_missing = true
 
 [tool.coverage.html]
 directory = "coverage_html_report"
@@ -358,7 +377,7 @@ include = [
   "src",
 ]
 exclude = [
-  "**/tests/*.py",
+  "**/tests/**/*.py",
 ]
 pythonVersion = "3.10"
 reportMissingImports = false
@@ -375,9 +394,6 @@ remove-unused-variables = true
 [tool.interrogate]
 fail-under = 85
 ignore-init-method = true
-
-[tool.pydocstyle]
-convention = "numpy"
 
 [tool.vulture]
 min_confidence = 100
