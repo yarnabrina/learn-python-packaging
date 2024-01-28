@@ -18,6 +18,7 @@ Submodules
    package_name_to_import_with.data_using_module
    package_name_to_import_with.garbage_collection_module
    package_name_to_import_with.simplify
+   package_name_to_import_with.utils
 
 Module contents
 ---------------
