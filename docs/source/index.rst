@@ -10,6 +10,7 @@ Welcome to the documentation of package-name-to-install-with!
    :caption: Contents:
 
    modules
+   guidelines/INDEX
 
 Indices and tables
 ==================

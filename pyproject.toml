@@ -73,6 +73,7 @@ all = [
   "interrogate",
   "isort",
   "mypy",
+  "myst-parser[linkify]",
   "nox",
   "numpydoc",
   "pre-commit",
@@ -98,6 +99,7 @@ dev = [
 doc = [
   "autodoc-pydantic",
   "furo",
+  "myst-parser[linkify]",
   "Sphinx",
   "sphinx-copybutton",
 ]

@@ -1,4 +1,5 @@
 autodoc-pydantic
 furo
+myst-parser[linkify]
 Sphinx
 sphinx-copybutton

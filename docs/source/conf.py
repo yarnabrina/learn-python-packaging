@@ -13,6 +13,7 @@ author = "Anirban Ray, First Author, Second Author"
 release = f"v{version}"
 
 extensions = [
+    "myst_parser",
     "sphinx.ext.autodoc",  # track modules and objects
     "sphinx.ext.coverage",  # track undocumented items
     "sphinx.ext.doctest",  # test example code snippets
@@ -23,6 +24,7 @@ extensions = [
     "sphinx_copybutton",  # copy to clipboard for code snippets
     "sphinxcontrib.autodoc_pydantic",  # document Pydantic model and configurations
 ]
+source_suffix = {".md": "markdown", ".rst": "restructuredtext"}
 
 smartquotes = False
 today_fmt = "%Y-%m-%d"
@@ -49,6 +51,23 @@ html_show_sphinx = False
 html_output_encoding = "utf-8"
 
 python_display_short_literal_types = True
+
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]
 
 autoclass_content = "class"
 autodoc_inherit_docstrings = True
