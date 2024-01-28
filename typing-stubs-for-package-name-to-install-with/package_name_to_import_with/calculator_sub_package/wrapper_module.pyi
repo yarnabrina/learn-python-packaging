@@ -1,7 +1,9 @@
-import enum
+import functools
 import typing
 
 import pydantic
+
+from ..utils import CustomStrEnum
 
 __all__ = [
     "BINARY_ARITHMETIC_OPERATIONS",
@@ -13,7 +15,7 @@ __all__ = [
 
 BinaryArithmeticOperation: typing.TypeAlias
 
-class BinaryArithmeticOperator(str, enum.Enum):
+class BinaryArithmeticOperator(CustomStrEnum):
     ADDITION: str
     SUBTRACTION: str
     MULTIPLICATION: str
@@ -27,7 +29,7 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
     right_operand: float
     @property
     def operation(self) -> BinaryArithmeticOperation: ...
-    @property
+    @functools.cached_property
     def result(self) -> float: ...
 
 def calculate_results(

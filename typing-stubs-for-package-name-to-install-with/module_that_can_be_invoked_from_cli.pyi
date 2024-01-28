@@ -1,11 +1,10 @@
-import enum
 import typing
 
 import pydantic
 
-from package_name_to_import_with import BinaryArithmeticOperator
+from package_name_to_import_with import BinaryArithmeticOperator, CustomStrEnum
 
-class CalculatorType(str, enum.Enum):
+class CalculatorType(CustomStrEnum):
     BINARY: str
     GENERAL: str
 
