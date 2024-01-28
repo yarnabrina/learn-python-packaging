@@ -1,6 +1,7 @@
 """Define function for basic binary operations."""
 import collections.abc
 import enum
+import functools
 import typing
 
 import pydantic
@@ -49,7 +50,8 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
     binary_operator: BinaryArithmeticOperator
     right_operand: float
 
-    @property
+    @pydantic.computed_field  # will allow serialisation
+    @property  # will be computed every time it is called
     def operation(self: "BinaryArithmeticExpression") -> BinaryArithmeticOperation:
         """Store implementation of binary arithmetic operation.
 
@@ -60,7 +62,8 @@ class BinaryArithmeticExpression(pydantic.BaseModel):
         """
         return BINARY_ARITHMETIC_OPERATIONS[self.binary_operator]
 
-    @property
+    @pydantic.computed_field  # will allow serialisation
+    @functools.cached_property  # will be computed just once unless deleted
     def result(self: "BinaryArithmeticExpression") -> float:
         """Store result of binary arithmetic expression.
 
