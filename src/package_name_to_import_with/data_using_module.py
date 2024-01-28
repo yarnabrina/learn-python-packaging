@@ -73,7 +73,7 @@ class PackageMetadata(CustomPydanticBaseModel):
         """
         del cls  # unused
 
-        if re.match(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$", version) is None:
+        if re.fullmatch(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", version) is None:
             raise ValueError(f"Invalid semantic version: {version}")
 
         return version
