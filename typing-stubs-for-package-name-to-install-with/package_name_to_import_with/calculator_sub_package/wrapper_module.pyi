@@ -1,9 +1,7 @@
 import functools
 import typing
 
-import pydantic
-
-from ..utils import CustomStrEnum
+from ..utils import CustomPydanticBaseModel, CustomStrEnum
 
 __all__ = [
     "BINARY_ARITHMETIC_OPERATIONS",
@@ -23,7 +21,7 @@ class BinaryArithmeticOperator(CustomStrEnum):
 
 BINARY_ARITHMETIC_OPERATIONS: dict[BinaryArithmeticOperator, BinaryArithmeticOperation]
 
-class BinaryArithmeticExpression(pydantic.BaseModel):
+class BinaryArithmeticExpression(CustomPydanticBaseModel):
     left_operand: float
     binary_operator: BinaryArithmeticOperator
     right_operand: float

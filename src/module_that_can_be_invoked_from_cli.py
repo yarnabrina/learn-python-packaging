@@ -9,6 +9,7 @@ import pydantic
 
 from package_name_to_import_with import (
     BinaryArithmeticOperator,
+    CustomPydanticBaseModel,
     CustomStrEnum,
     calculate_results,
     solve_simplification,
@@ -23,7 +24,7 @@ class CalculatorType(CustomStrEnum):
     GENERAL = "general"
 
 
-class BinaryInputs(pydantic.BaseModel):
+class BinaryInputs(CustomPydanticBaseModel):
     """Define arguments for binary calculator.
 
     Attributes
@@ -48,7 +49,7 @@ class BinaryInputs(pydantic.BaseModel):
     second_number: float = pydantic.Field(description="second number for the calculation")
 
 
-class GeneralInputs(pydantic.BaseModel):
+class GeneralInputs(CustomPydanticBaseModel):
     """Define arguments of general calculator.
 
     Attributes
@@ -65,7 +66,7 @@ class GeneralInputs(pydantic.BaseModel):
     expression: str = pydantic.Field(description="mathematical expression to be evaluated")
 
 
-class UserInputs(pydantic.BaseModel):
+class UserInputs(CustomPydanticBaseModel):
     """Define sub-commands and arguments of CLI calculator.
 
     Attributes

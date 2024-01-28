@@ -1,24 +1,26 @@
 import typing
 
-import pydantic
-
-from package_name_to_import_with import BinaryArithmeticOperator, CustomStrEnum
+from package_name_to_import_with import (
+    BinaryArithmeticOperator,
+    CustomPydanticBaseModel,
+    CustomStrEnum,
+)
 
 class CalculatorType(CustomStrEnum):
     BINARY: str
     GENERAL: str
 
-class BinaryInputs(pydantic.BaseModel):
+class BinaryInputs(CustomPydanticBaseModel):
     calculator_type: typing.Literal[CalculatorType.BINARY]
     first_number: float
     operator: BinaryArithmeticOperator
     second_number: float
 
-class GeneralInputs(pydantic.BaseModel):
+class GeneralInputs(CustomPydanticBaseModel):
     calculator_type: typing.Literal[CalculatorType.GENERAL]
     expression: str
 
-class UserInputs(pydantic.BaseModel):
+class UserInputs(CustomPydanticBaseModel):
     inputs: BinaryInputs | GeneralInputs
 
 def capture_user_inputs() -> UserInputs: ...

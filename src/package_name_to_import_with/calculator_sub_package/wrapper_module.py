@@ -7,7 +7,7 @@ import typing
 
 import pydantic
 
-from ..utils import CustomStrEnum
+from ..utils import CustomPydanticBaseModel, CustomStrEnum
 from .basics import add_numbers, divide_numbers, multiply_numbers, subtract_numbers
 
 BinaryArithmeticOperation: typing.TypeAlias = collections.abc.Callable[[float, float], float]
@@ -31,7 +31,7 @@ BINARY_ARITHMETIC_OPERATIONS: dict[BinaryArithmeticOperator, BinaryArithmeticOpe
 }
 
 
-class BinaryArithmeticExpression(pydantic.BaseModel):
+class BinaryArithmeticExpression(CustomPydanticBaseModel):
     """Define binary arithmetic expression.
 
     Attributes

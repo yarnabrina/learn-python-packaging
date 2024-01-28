@@ -5,8 +5,10 @@ import json
 
 import pydantic
 
+from .utils import CustomPydanticBaseModel
 
-class PackageMetadata(pydantic.BaseModel):
+
+class PackageMetadata(CustomPydanticBaseModel):
     """Define keys and types of corresponding values for package metadata.
 
     Attributes

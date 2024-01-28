@@ -7,4 +7,4 @@ __all__ = ["CustomPydanticBaseModel", "CustomStrEnum"]
 class CustomStrEnum(str, enum.Enum): ...
 
 class CustomPydanticBaseModel(pydantic.BaseModel):
-    model_config: pydantic.ConfigDict
+    model_config: dict
