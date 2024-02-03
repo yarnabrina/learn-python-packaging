@@ -98,14 +98,14 @@ repos:
           - src
         pass_filenames: false
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.348
+    rev: v1.1.349
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.14
+    rev: v0.2.0
     hooks:
       - id: ruff
         args:
@@ -167,7 +167,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/crate-ci/typos
-    rev: v1.17.2
+    rev: v1.18.0
     hooks:
       - id: typos
         args:
