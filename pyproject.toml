@@ -181,7 +181,6 @@ line-length = 99
 target-version = [
   "py310",
 ]
-skip-magic-trailing-comma = true
 
 [tool.ruff]
 fix = true
@@ -203,7 +202,6 @@ docstring-code-line-length = "dynamic"
 indent-style = "space"
 preview = false
 quote-style = "double"
-skip-magic-trailing-comma = true
 
 [tool.ruff.lint]
 fixable = [
