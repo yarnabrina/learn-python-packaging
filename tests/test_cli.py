@@ -15,7 +15,7 @@ def test_sum(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "binary", "4", "+", "5"]):
         module_that_can_be_invoked_from_cli.console_calculator()
@@ -30,7 +30,7 @@ def test_difference(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "binary", "8", "-", "7"]):
         module_that_can_be_invoked_from_cli.console_calculator()
@@ -45,7 +45,7 @@ def test_product(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "binary", "2", "*", "3"]):
         module_that_can_be_invoked_from_cli.console_calculator()
@@ -60,7 +60,7 @@ def test_quotient(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "binary", "0", "/", "10"]):
         module_that_can_be_invoked_from_cli.console_calculator()
@@ -75,7 +75,7 @@ def test_simplification(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "general", "0.1 + 2 * (3.4 / 5) - 6.789"]):
         module_that_can_be_invoked_from_cli.console_calculator()
@@ -117,7 +117,7 @@ def test_expression_input_failure(capsys: pytest.CaptureFixture) -> None:
     Parameters
     ----------
     capsys : pytest.CaptureFixture
-        fixture capturing ``sys.stdout`` and ``sys.stderr``
+        fixture capturing `sys.stdout` and `sys.stderr`
     """
     with unittest.mock.patch("sys.argv", ["prog", "general", "one plus one"]):
         module_that_can_be_invoked_from_cli.console_calculator()

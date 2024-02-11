@@ -19,7 +19,7 @@ def subtract_numbers(minuend: float, subtrahend: float) -> float:
     Returns
     -------
     float
-        difference of ``minuend`` from ``subtrahend``
+        difference of `minuend` from `subtrahend`
 
     Examples
     --------
@@ -54,7 +54,7 @@ def divide_numbers(dividend: float, divisor: float) -> float:
     Returns
     -------
     float
-        quotient of ``dividend`` by ``divisor``
+        quotient of `dividend` by `divisor`
 
     Examples
     --------

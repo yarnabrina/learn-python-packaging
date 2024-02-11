@@ -3,7 +3,8 @@ exclude_patterns = [
   "typing-stubs-for-package-name-to-install-with/**",
 ]
 test_patterns = [
-  "**/tests/*.py",
+  "tests/**/conftest.py",
+  "tests/**/test_*.py",
 ]
 
 [[analyzers]]
@@ -30,12 +31,4 @@ dependency_file_paths = [
 
 [[analyzers]]
 name = "secrets"
-enabled = true
-
-[[transformers]]
-name = "black"
-enabled = true
-
-[[transformers]]
-name = "isort"
 enabled = true

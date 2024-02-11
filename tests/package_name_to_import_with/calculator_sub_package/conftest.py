@@ -81,7 +81,7 @@ def expected_result(
     Raises
     ------
     ValueError
-        if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
+        if `operator` not one of ``+``, ``-``, ``*``, ``/``
     """
     match operator:
         case BinaryArithmeticOperator.ADDITION:

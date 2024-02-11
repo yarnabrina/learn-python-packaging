@@ -4,9 +4,11 @@ import enum
 
 import pydantic
 
+from ....utils import CustomFloatEnum
+
 
 @enum.unique
-class IdentityElements(float, enum.Enum):
+class IdentityElements(CustomFloatEnum):
     """Define assumed identity elements."""
 
     ADDITIVE_IDENTITY = 0
@@ -14,7 +16,7 @@ class IdentityElements(float, enum.Enum):
 
 
 @enum.unique
-class InverseElements(float, enum.Enum):
+class InverseElements(CustomFloatEnum):
     """Define supported inverse elements."""
 
     ADDITIVE_INVERSE = -1
@@ -33,7 +35,7 @@ def get_negative(input_number: float) -> float:
     Returns
     -------
     float
-        negative of ``input_number``
+        negative of `input_number`
 
     Examples
     --------
@@ -62,12 +64,12 @@ def get_reciprocal(input_number: float) -> float:
     Returns
     -------
     float
-        reciprocal of ``input_number``
+        reciprocal of `input_number`
 
     Raises
     ------
     ValueError
-        if ``input_number`` is additive identity, viz. zero
+        if `input_number` is additive identity, viz. zero
 
     Examples
     --------

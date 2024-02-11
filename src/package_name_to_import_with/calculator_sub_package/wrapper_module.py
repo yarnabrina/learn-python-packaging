@@ -43,7 +43,7 @@ class BinaryArithmeticExpression(CustomPydanticBaseModel):
     right_operand : float
         second number of binary arithmetic expression
     operation : BinaryArithmeticOperation
-        function to perform arithmetic operation corresponding to ``self.binary_operator``
+        function to perform arithmetic operation corresponding to `binary_operator`
     result : float
         result of binary arithmetic expression
     """
@@ -85,7 +85,7 @@ class BinaryArithmeticExpression(CustomPydanticBaseModel):
         Returns
         -------
         BinaryArithmeticOperation
-            implementation of binary arithmetic operation corresponding to ``self.binary_operator``
+            implementation of binary arithmetic operation corresponding to `binary_operator`
         """
         return BINARY_ARITHMETIC_OPERATIONS[self.binary_operator]
 

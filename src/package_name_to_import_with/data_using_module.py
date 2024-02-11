@@ -56,12 +56,12 @@ class PackageMetadata(CustomPydanticBaseModel):
         Returns
         -------
         str
-            unchanged ``version`` if validation passes
+            unchanged `version` if validation passes
 
         Raises
         ------
         ValueError
-            if ``version`` is not a valid semantic version
+            if `version` is not a valid semantic version
 
         Notes
         -----

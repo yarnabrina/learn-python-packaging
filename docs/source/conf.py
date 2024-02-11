@@ -72,9 +72,15 @@ myst_enable_extensions = [
 autoclass_content = "class"
 autodoc_inherit_docstrings = True
 autodoc_member_order = "bysource"
-autodoc_typehints = "both"
-autodoc_typehints_description_target = "documented"
+autodoc_typehints = "signature"
+autodoc_typehints_description_target = "documented_params"
+autodoc_type_aliases = {
+    "BinaryArithmeticOperation": "package_name_to_import_with.calculator_sub_package.wrapper_module.BinaryArithmeticOperation",  # noqa: E501
+    "FunctionType": "package_name_to_import_with.garbage_collection_module.FunctionType",
+}
 autodoc_typehints_format = "short"
+autodoc_preserve_defaults = True
+autodoc_inherit_docstrings = False
 
 coverage_show_missing_items = True
 coverage_statistics_to_stdout = True

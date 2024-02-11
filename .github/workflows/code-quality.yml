@@ -38,3 +38,4 @@ jobs:
     needs: pre-commit-job-identifier
     name: unit test job name
     uses: ./.github/workflows/test.yml
+    secrets: inherit

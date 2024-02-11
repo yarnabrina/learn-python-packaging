@@ -1,6 +1,6 @@
 """Evaluate simplification expressions."""
 
-import collections.abc
+import collections.abc  # noqa: TCH003
 import enum
 import re
 import string
@@ -123,22 +123,22 @@ def convert_infix_expression(  # noqa: C901 # skipcq: PY-R1000
 
         * Number
 
-            #. Convert to number (using ``float``).
+            #. Convert to number (using `float`).
             #. Add to ``output_queue``.
 
         * Operator
 
-            #. Convert to operator (using ``BinaryArithmeticOperator``).
+            #. Convert to operator (using `BinaryArithmeticOperator`).
             #. Move top lower precedence operators from ``operator_stack`` into ``output_queue``.
             #. Add to ``operator_stack``.
 
         * Left Parenthesis
 
-            #. Convert to bracket (using ``Parentheses``).
+            #. Convert to bracket (using `Parentheses`).
 
         * Right Parenthesis
 
-            #. Convert to bracket (using ``Parentheses``).
+            #. Convert to bracket (using `Parentheses`).
             #. Move operators from ``operator_stack`` into ``output_queue`` till left bracket.
             #. Discard left bracket from top of ``operator_stack``.
 
