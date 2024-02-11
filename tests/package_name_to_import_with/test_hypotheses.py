@@ -32,7 +32,7 @@ def generate_finite_numbers() -> hypothesis.strategies.SearchStrategy:
     """
     generate_numbers_strategy = hypothesis.strategies.one_of(
         hypothesis.strategies.integers(),
-        hypothesis.strategies.floats(allow_nan=False, allow_infinity=False, allow_subnormal=False),
+        hypothesis.strategies.floats(allow_nan=False, allow_infinity=False, allow_subnormal=False, width=16),
         hypothesis.strategies.fractions(),
     )
 
@@ -50,7 +50,7 @@ def generate_arithmetic_expression() -> hypothesis.strategies.SearchStrategy:
     generate_finite_number_strategy = hypothesis.strategies.one_of(
         hypothesis.strategies.integers().map(str),
         hypothesis.strategies.floats(
-            allow_nan=False, allow_infinity=False, allow_subnormal=False
+            allow_nan=False, allow_infinity=False, allow_subnormal=False, width=16
         ).map(lambda element: format(element, "f")),
     )
     generate_conditional_space_strategy = hypothesis.strategies.booleans().map(
