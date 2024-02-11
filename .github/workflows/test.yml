@@ -42,6 +42,7 @@ jobs:
       - name: upload coverage reports
         uses: codecov/codecov-action@v4
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage_xml_report.xml
           flags: ${{ matrix.python-version }},${{ matrix.runner-platform }}
         env:
