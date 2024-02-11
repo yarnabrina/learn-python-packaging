@@ -96,6 +96,7 @@ dev = [
   "numpydoc",
   "pre-commit",
   "ruff",
+  "typos",
 ]
 doc = [
   "autodoc-pydantic",
