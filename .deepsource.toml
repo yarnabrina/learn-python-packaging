@@ -3,7 +3,8 @@ exclude_patterns = [
   "typing-stubs-for-package-name-to-install-with/**",
 ]
 test_patterns = [
-  "**/tests/*.py",
+  "tests/**/conftest.py",
+  "tests/**/test_*.py",
 ]
 
 [[analyzers]]
