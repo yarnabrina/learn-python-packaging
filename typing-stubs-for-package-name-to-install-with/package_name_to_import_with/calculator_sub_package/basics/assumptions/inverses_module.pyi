@@ -1,12 +1,12 @@
-import enum
+from ....utils import CustomFloatEnum
 
 __all__ = ["IdentityElements", "InverseElements", "get_negative", "get_reciprocal"]
 
-class IdentityElements(float, enum.Enum):
+class IdentityElements(CustomFloatEnum):
     ADDITIVE_IDENTITY: int
     MULTIPLICATIVE_IDENTITY: int
 
-class InverseElements(float, enum.Enum):
+class InverseElements(CustomFloatEnum):
     ADDITIVE_INVERSE: int
     MULTIPLICATIVE_INVERSE: int
 

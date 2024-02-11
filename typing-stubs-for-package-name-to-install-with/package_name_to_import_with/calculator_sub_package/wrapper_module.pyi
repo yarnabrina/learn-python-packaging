@@ -25,6 +25,7 @@ class BinaryArithmeticExpression(CustomPydanticBaseModel):
     left_operand: float
     binary_operator: BinaryArithmeticOperator
     right_operand: float
+    def validate_zero_division(self) -> BinaryArithmeticExpression: ...
     @property
     def operation(self) -> BinaryArithmeticOperation: ...
     @functools.cached_property

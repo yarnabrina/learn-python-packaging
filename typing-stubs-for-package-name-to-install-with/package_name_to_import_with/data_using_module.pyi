@@ -11,6 +11,8 @@ class PackageMetadata(CustomPydanticBaseModel):
     Maintainers: list[str]
     Authors: list[str]
     Links: dict[str, pydantic.HttpUrl]
+    @classmethod
+    def validate_version(cls, version: str) -> str: ...
 
 METADATA_CONTENTS: str
 METADATA: PackageMetadata
