@@ -45,5 +45,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage_xml_report.xml
           flags: ${{ matrix.python-version }},${{ matrix.runner-platform }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
