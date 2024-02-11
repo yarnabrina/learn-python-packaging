@@ -42,7 +42,6 @@ jobs:
       - name: upload coverage reports
         uses: codecov/codecov-action@v4
         with:
-          verbose: true
           files: coverage_xml_report.xml
           flags: ${{ matrix.python-version }},${{ matrix.runner-platform }}
         env:
