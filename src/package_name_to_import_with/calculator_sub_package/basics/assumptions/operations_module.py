@@ -17,7 +17,7 @@ def add_numbers(left_addend: float, right_addend: float) -> float:
     Returns
     -------
     float
-        sum of ``left_addend`` and ``right_addend``
+        sum of `left_addend` and `right_addend`
 
     Examples
     --------
@@ -52,7 +52,7 @@ def multiply_numbers(left_multiplicand: float, right_multiplicand: float) -> flo
     Returns
     -------
     float
-        product of two ``left_multiplicand`` and ``right_multiplicand``
+        product of two `left_multiplicand` and `right_multiplicand`
 
     Examples
     --------

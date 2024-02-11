@@ -207,7 +207,7 @@ def test_operation_hypothesis(
     Raises
     ------
     ValueError
-        if ``operator`` not one of ``+``, ``-``, ``*``, ``/``
+        if `operator` not one of ``+``, ``-``, ``*``, ``/``
     """
     hypothesis.assume(
         not (

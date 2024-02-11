@@ -1,13 +1,26 @@
 codecov:
+  branch: main
   require_ci_to_pass: true
 coverage:
+  precision: 4
+  round: nearest
+  range: 85...95
   status:
     patch:
       default:
         target: 80%
+        flags:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+          - "3.10"
+          - "3.11"
+          - "3.12"
     project:
       default:
         target: 80%
 ignore:
-  - "**/tests/*.py"
+  - noxfile.py
+  - "tests/**/conftest.py"
+  - "tests/**/test_*.py"
 comment: false

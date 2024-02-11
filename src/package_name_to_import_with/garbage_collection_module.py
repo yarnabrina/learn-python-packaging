@@ -49,3 +49,6 @@ def define_garbage_collection_decorator(
         return result
 
     return wrapper_function
+
+
+__all__ = ["FunctionType", "define_garbage_collection_decorator"]
