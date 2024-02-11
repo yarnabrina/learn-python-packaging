@@ -31,11 +31,3 @@ dependency_file_paths = [
 [[analyzers]]
 name = "secrets"
 enabled = true
-
-[[transformers]]
-name = "black"
-enabled = true
-
-[[transformers]]
-name = "isort"
-enabled = true
