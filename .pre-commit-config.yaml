@@ -34,6 +34,8 @@ repos:
         args:
           - --keep-runtime-typing
           - --py310-plus
+        stages:
+          - manual
   - repo: https://github.com/pycqa/autoflake
     rev: v2.3.1
     hooks:
@@ -41,6 +43,8 @@ repos:
         args:
           - src
         pass_filenames: false
+        stages:
+          - manual
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
     hooks:
@@ -48,6 +52,8 @@ repos:
         args:
           - src
         pass_filenames: false
+        stages:
+          - manual
   - repo: https://github.com/psf/black
     rev: 24.3.0
     hooks:
@@ -57,6 +63,8 @@ repos:
         args:
           - src
         pass_filenames: false
+        stages:
+          - manual
   - repo: https://github.com/pycqa/bandit
     rev: 1.7.8
     hooks:
@@ -76,6 +84,8 @@ repos:
         args:
           - src
         pass_filenames: false
+        stages:
+          - manual
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.9.0
     hooks:
