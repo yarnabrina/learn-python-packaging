@@ -31,7 +31,7 @@
 - [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
 - [x] ~~Support Expressions~~
-- [ ] Bump Workflow
+- [x] ~~Bump Workflow~~
 
 ## Tools Used
 
@@ -70,6 +70,7 @@
     - [Sphinx](https://www.sphinx-doc.org/)
     - [sphinx-copybutton](https://github.com/executablebooks/sphinx-copybutton)
 - Release
+    - [Bump My Version](https://github.com/callowayproject/bump-my-version)
     - [build](https://build.pypa.io/)
     - [setuptools](https://github.com/pypa/setuptools)
     - [Twine](https://twine.readthedocs.io/)

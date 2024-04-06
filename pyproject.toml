@@ -65,6 +65,7 @@ all = [
   "black",
   "blacken-docs",
   "build",
+  "bump-my-version",
   "codespell[toml]",
   "coverage[toml]",
   "docformatter[tomli]",
@@ -126,6 +127,7 @@ lint = [
 ]
 release = [
   "build",
+  "bump-my-version",
   "twine",
 ]
 test = [
@@ -386,6 +388,24 @@ directory = "coverage_html_report"
 
 [tool.coverage.xml]
 output = "coverage_xml_report.xml"
+
+[tool.bumpversion]
+allow_dirty = false
+commit = true
+current_version = "0.0.5"
+ignore_missing_files = false
+ignore_missing_version = false
+message = "Bump version: {current_version} → {new_version}"
+parse = "(?P<major>0|[1-9]\\d*)\\.(?P<minor>0|[1-9]\\d*)\\.(?P<patch>0|[1-9]\\d*)"
+regex = false
+replace = "{new_version}"
+search = "{current_version}"
+serialize = [
+  "{major}.{minor}.{patch}",
+]
+tag = false
+[[tool.bumpversion.files]]
+filename = "src/package_name_to_import_with/metadata.json"
 
 [tool.mypy]
 files = [
