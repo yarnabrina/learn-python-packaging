@@ -64,6 +64,7 @@
     - [Hypothesis](https://hypothesis.works/)
     - [pytest](https://docs.pytest.org/en/latest/)
 - Documentation
+    - [autodoc_pydantic](https://github.com/mansenfranzen/autodoc_pydantic)
     - [Furo](https://github.com/pradyunsg/furo)
     - [Read the Docs](https://readthedocs.org/)
     - [Sphinx](https://www.sphinx-doc.org/)

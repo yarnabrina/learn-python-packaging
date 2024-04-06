@@ -59,7 +59,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 all = [
-  "autodoc-pydantic",
+  "autodoc_pydantic",
   "autoflake",
   "bandit",
   "black",
@@ -99,7 +99,7 @@ dev = [
   "typos",
 ]
 doc = [
-  "autodoc-pydantic",
+  "autodoc_pydantic",
   "furo",
   "myst-parser[linkify]",
   "Sphinx",
