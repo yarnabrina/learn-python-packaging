@@ -31,7 +31,7 @@
 - [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
 - [x] ~~Support Expressions~~
-- [ ] Bump Workflow
+- [x] ~~Bump Workflow~~
 
 ## Tools Used
 
@@ -64,10 +64,16 @@
     - [Hypothesis](https://hypothesis.works/)
     - [pytest](https://docs.pytest.org/en/latest/)
 - Documentation
+    - [autodoc_pydantic](https://github.com/mansenfranzen/autodoc_pydantic)
     - [Furo](https://github.com/pradyunsg/furo)
     - [Read the Docs](https://readthedocs.org/)
     - [Sphinx](https://www.sphinx-doc.org/)
     - [sphinx-copybutton](https://github.com/executablebooks/sphinx-copybutton)
+- Release
+    - [Bump My Version](https://github.com/callowayproject/bump-my-version)
+    - [build](https://build.pypa.io/)
+    - [setuptools](https://github.com/pypa/setuptools)
+    - [Twine](https://twine.readthedocs.io/)
 
 [bandit-badge-image]: https://img.shields.io/badge/security-bandit-yellow.svg
 [bandit-badge-url]: https://github.com/PyCQA/bandit

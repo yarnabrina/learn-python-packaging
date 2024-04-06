@@ -1,4 +1,4 @@
-autodoc-pydantic
+autodoc_pydantic
 furo
 myst-parser[linkify]
 Sphinx
