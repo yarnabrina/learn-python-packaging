@@ -69,6 +69,10 @@
     - [Read the Docs](https://readthedocs.org/)
     - [Sphinx](https://www.sphinx-doc.org/)
     - [sphinx-copybutton](https://github.com/executablebooks/sphinx-copybutton)
+- Release
+    - [build](https://build.pypa.io/)
+    - [setuptools](https://github.com/pypa/setuptools)
+    - [Twine](https://twine.readthedocs.io/)
 
 [bandit-badge-image]: https://img.shields.io/badge/security-bandit-yellow.svg
 [bandit-badge-url]: https://github.com/PyCQA/bandit
