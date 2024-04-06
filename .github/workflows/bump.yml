@@ -35,18 +35,18 @@ jobs:
         shell: bash
       - id: branch-step-identifier
         name: create new branch
-        run: git switch --create bump-package-version
+        run: git branch bump-branch-name
         shell: bash
       - id: bump-step-identifier
         name: bump package version
         env:
           GIT_AUTHOR_NAME: ${{ secrets.GIT_USER_NAME }}
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-        run: bump-my-version bump ${{ inputs.semantic-version-identifier }}
+        run: git switch bump-branch-name && bump-my-version bump ${{ inputs.semantic-version-identifier }}
         shell: bash
       - id: pull-request-step-identifier
         name: create new pull-request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --base main --fill --head bump-package-version --label maintenance --label bump-package
+        run: gh pr create --base main --fill --head bump-branch-name --label maintenance --label bump-package
         shell: bash
