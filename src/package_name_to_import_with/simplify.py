@@ -1,6 +1,6 @@
 """Evaluate simplification expressions."""
 
-import collections.abc  # noqa: TCH003
+import collections.abc
 import enum
 import re
 import string
