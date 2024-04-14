@@ -405,6 +405,8 @@ serialize = [
 ]
 tag = false
 [[tool.bumpversion.files]]
+filename = "docs/source/conf.py"
+[[tool.bumpversion.files]]
 filename = "src/package_name_to_import_with/metadata.json"
 
 [tool.mypy]
