@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -55,7 +55,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/psf/black
-    rev: 24.3.0
+    rev: 24.4.0
     hooks:
       - id: black
         additional_dependencies:
@@ -110,14 +110,14 @@ repos:
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.357
+    rev: v1.1.358
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.5
+    rev: v0.3.7
     hooks:
       - id: ruff
         args:
@@ -152,7 +152,7 @@ repos:
           - --target-version
           - py310
   - repo: https://github.com/econchick/interrogate
-    rev: 1.5.0
+    rev: 1.7.0
     hooks:
       - id: interrogate
         args:
@@ -183,7 +183,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/crate-ci/typos
-    rev: v1.20.4
+    rev: v1.20.8
     hooks:
       - id: typos
         args:
