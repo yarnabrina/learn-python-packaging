@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -41,7 +41,10 @@ repos:
     hooks:
       - id: autoflake
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -50,18 +53,21 @@ repos:
     hooks:
       - id: isort
         args:
-          - src
+          - .
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/psf/black
-    rev: 24.3.0
+    rev: 24.4.0
     hooks:
       - id: black
         additional_dependencies:
           - .[jupyter]
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -75,14 +81,20 @@ repos:
           - high
           - --confidence-level
           - high
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/pycqa/flake8
     rev: 7.0.0
     hooks:
       - id: flake8
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -105,27 +117,27 @@ repos:
         args:
           - --disable
           - import-error
-          - src
+          - .
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.357
+    rev: v1.1.358
     hooks:
       - id: pyright
         pass_filenames: false
         stages:
           - manual
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.5
+    rev: v0.3.7
     hooks:
       - id: ruff
         args:
-          - src
+          - .
         pass_filenames: false
       - id: ruff-format
         args:
-          - src
+          - .
         pass_filenames: false
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.11
@@ -140,7 +152,10 @@ repos:
           - .[tomli]
         args:
           - --in-place
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
     rev: 1.16.0
@@ -152,11 +167,14 @@ repos:
           - --target-version
           - py310
   - repo: https://github.com/econchick/interrogate
-    rev: 1.5.0
+    rev: 1.7.0
     hooks:
       - id: interrogate
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/numpy/numpydoc
     rev: v1.7.0
@@ -183,7 +201,7 @@ repos:
         stages:
           - manual
   - repo: https://github.com/crate-ci/typos
-    rev: v1.20.4
+    rev: v1.20.8
     hooks:
       - id: typos
         args:

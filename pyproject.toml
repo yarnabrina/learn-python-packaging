@@ -195,6 +195,7 @@ src = [
   "docs",
   "src",
   "tests",
+  "noxfile.py",
 ]
 target-version = "py310"
 
@@ -310,7 +311,10 @@ atomic = true
 line_length = 99
 remove_redundant_aliases = true
 src_paths = [
+  "docs",
   "src",
+  "tests",
+  "noxfile.py",
 ]
 py_version = 310
 
@@ -404,6 +408,10 @@ serialize = [
   "{major}.{minor}.{patch}",
 ]
 tag = false
+
+[[tool.bumpversion.files]]
+filename = "docs/source/conf.py"
+
 [[tool.bumpversion.files]]
 filename = "src/package_name_to_import_with/metadata.json"
 
@@ -448,7 +456,10 @@ ignore-init-method = true
 [tool.vulture]
 min_confidence = 100
 paths = [
+  "docs",
   "src",
+  "tests",
+  "noxfile.py",
 ]
 
 [tool.numpydoc_validation]

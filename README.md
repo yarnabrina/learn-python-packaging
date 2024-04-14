@@ -31,7 +31,7 @@
 - [x] ~~Hypotheses Testing~~
 - [x] ~~Pydantic Validation~~
 - [x] ~~Support Expressions~~
-- [x] ~~Bump Workflow~~
+- [ ] Bump Workflow
 
 ## Tools Used
 
