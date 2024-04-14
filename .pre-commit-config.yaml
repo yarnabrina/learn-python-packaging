@@ -41,7 +41,10 @@ repos:
     hooks:
       - id: autoflake
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -50,7 +53,7 @@ repos:
     hooks:
       - id: isort
         args:
-          - src
+          - .
         pass_filenames: false
         stages:
           - manual
@@ -61,7 +64,10 @@ repos:
         additional_dependencies:
           - .[jupyter]
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -75,14 +81,20 @@ repos:
           - high
           - --confidence-level
           - high
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/pycqa/flake8
     rev: 7.0.0
     hooks:
       - id: flake8
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
         stages:
           - manual
@@ -105,7 +117,7 @@ repos:
         args:
           - --disable
           - import-error
-          - src
+          - .
         pass_filenames: false
         stages:
           - manual
@@ -121,11 +133,11 @@ repos:
     hooks:
       - id: ruff
         args:
-          - src
+          - .
         pass_filenames: false
       - id: ruff-format
         args:
-          - src
+          - .
         pass_filenames: false
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.11
@@ -140,7 +152,10 @@ repos:
           - .[tomli]
         args:
           - --in-place
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/adamchainz/blacken-docs
     rev: 1.16.0
@@ -156,7 +171,10 @@ repos:
     hooks:
       - id: interrogate
         args:
+          - docs
           - src
+          - tests
+          - noxfile.py
         pass_filenames: false
   - repo: https://github.com/numpy/numpydoc
     rev: v1.7.0

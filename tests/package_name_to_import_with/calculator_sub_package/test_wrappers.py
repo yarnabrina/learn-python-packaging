@@ -50,7 +50,9 @@ def test_successful_operation(
     ],
 )
 def test_operation_failure(
-    first_input: typing.Any, operator: typing.Any, second_input: typing.Any  # noqa: ANN401
+    first_input: typing.Any,  # noqa: ANN401
+    operator: typing.Any,  # noqa: ANN401
+    second_input: typing.Any,  # noqa: ANN401
 ) -> None:
     """Check failure during calculations.
 

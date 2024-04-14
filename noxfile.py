@@ -1,4 +1,5 @@
 """Configure nox."""
+
 import functools
 import pathlib
 

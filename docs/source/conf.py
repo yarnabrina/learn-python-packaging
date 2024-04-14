@@ -1,4 +1,5 @@
 """Configure Sphinx documentation."""
+
 # pylint: disable=invalid-name
 project = "package-name-to-install-with"
 version = "0.0.5"
